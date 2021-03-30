@@ -16,6 +16,13 @@
         app:showAsAction="always"/>
 
     <item
+        android:id="@+id/action_graphics"
+        android:orderInCategory="100"
+        android:title="@string/action_graphics"
+        android:icon="@drawable/ic_baseline_image_aspect_ratio_24"
+        app:showAsAction="always"/>
+
+    <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
         android:title="@string/action_settings"
