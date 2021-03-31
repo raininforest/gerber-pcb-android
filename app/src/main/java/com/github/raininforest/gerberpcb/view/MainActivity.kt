@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
         initToolbar()
         if (savedInstanceState == null) {
-            openScreen(ScreenName.OPEN)
+            openScreen(ScreenName.LAYERS)
         }
     }
 
@@ -30,10 +30,6 @@ class MainActivity : AppCompatActivity() {
 
     private val menuItemListener: (MenuItem) -> Boolean = {
         when (it.itemId) {
-            R.id.action_open -> {
-                openScreen(ScreenName.OPEN)
-                true
-            }
             R.id.action_layers -> {
                 openScreen(ScreenName.LAYERS)
                 true
@@ -58,7 +54,6 @@ class MainActivity : AppCompatActivity() {
         if (currentScreen == screen) return
 
         val fragmentToSet: Fragment = when (screen) {
-            ScreenName.OPEN -> OpenFragment.newInstance()
             ScreenName.LAYERS -> LayersFragment.newInstance()
             ScreenName.GRAPHICS -> GraphicsFragment.newInstance()
             ScreenName.SETTINGS -> SettingsFragment()
