@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.github.raininforest.gerberpcb.viewmodel.LayersViewModel
 import com.github.raininforest.gerberpcb.databinding.LayersFragmentBinding
+import com.github.raininforest.gerberpcb.viewmodel.LayersScreenState
 
 class LayersFragment : Fragment() {
 
@@ -46,7 +47,21 @@ class LayersFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(LayersViewModel::class.java)
-        // TODO: Use the ViewModel
+        viewModel.getLiveData().observe(viewLifecycleOwner, { renderData(it) })
+    }
+
+    private fun renderData(screenState: LayersScreenState) {
+        when (screenState) {
+            LayersScreenState.Loading -> {
+                //TODO показать диалог загрузки
+            }
+            is LayersScreenState.Success -> {
+                //TODO сеттим в ресайклер.адаптер данные (список герберов)
+            }
+            is LayersScreenState.Error -> {
+
+            }
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
