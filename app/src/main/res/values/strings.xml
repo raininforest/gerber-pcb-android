@@ -19,4 +19,6 @@
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="action_graphics">Graphics</string>
+    <string name="add_gerber">Add Gerber</string>
+    <string name="clear">Clear</string>
 </resources>
