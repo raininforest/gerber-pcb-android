@@ -24,13 +24,13 @@
             android:textColor="@color/white"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/colorButton"
+            app:layout_constraintEnd_toStartOf="@id/itemColorButton"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="controller_soldermask_top.gbr" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/colorButton"
+            android:id="@+id/itemColorButton"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginRight="16dp"
