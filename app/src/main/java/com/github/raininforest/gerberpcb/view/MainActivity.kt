@@ -3,13 +3,18 @@ package com.github.raininforest.gerberpcb.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import androidx.fragment.app.Fragment
 import com.github.raininforest.gerberpcb.R
+import com.github.raininforest.gerberpcb.app.App
 import com.github.raininforest.gerberpcb.databinding.ActivityMainBinding
+import com.github.raininforest.gerberpcb.view.Screens.Graphics
+import com.github.raininforest.gerberpcb.view.Screens.Help
+import com.github.raininforest.gerberpcb.view.Screens.Layers
+import com.github.raininforest.gerberpcb.view.Screens.Settings
+import com.github.terrakok.cicerone.androidx.AppNavigator
 
 class MainActivity : AppCompatActivity() {
 
-    private var currentScreen: ScreenName = ScreenName.NULL
+    private val navigator = AppNavigator(this, R.id.mainContainer)
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,8 +24,18 @@ class MainActivity : AppCompatActivity() {
 
         initToolbar()
         if (savedInstanceState == null) {
-            openScreen(ScreenName.LAYERS)
+            App.router.navigateTo(Layers())
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        App.navigatorHolder.setNavigator(navigator)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        App.navigatorHolder.removeNavigator()
     }
 
     private fun initToolbar() {
@@ -31,39 +46,22 @@ class MainActivity : AppCompatActivity() {
     private val menuItemListener: (MenuItem) -> Boolean = {
         when (it.itemId) {
             R.id.action_layers -> {
-                openScreen(ScreenName.LAYERS)
+                App.router.navigateTo(Layers())
                 true
             }
             R.id.action_graphics -> {
-                openScreen(ScreenName.GRAPHICS)
+                App.router.navigateTo(Graphics())
                 true
             }
             R.id.action_settings -> {
-                openScreen(ScreenName.SETTINGS)
+                App.router.navigateTo(Settings())
                 true
             }
             R.id.action_help -> {
-                openScreen(ScreenName.HELP)
+                App.router.navigateTo(Help())
                 true
             }
             else -> false
         }
-    }
-
-    private fun openScreen(screen: ScreenName) {
-        if (currentScreen == screen) return
-
-        val fragmentToSet: Fragment = when (screen) {
-            ScreenName.LAYERS -> LayersFragment.newInstance()
-            ScreenName.GRAPHICS -> GraphicsFragment.newInstance()
-            ScreenName.SETTINGS -> SettingsFragment()
-            ScreenName.HELP -> HelpFragment()
-            else -> return
-        }
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.mainContainer, fragmentToSet)
-            .commit()
-        currentScreen = screen
     }
 }
