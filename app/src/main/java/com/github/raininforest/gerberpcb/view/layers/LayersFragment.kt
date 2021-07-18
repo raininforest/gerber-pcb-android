@@ -1,4 +1,4 @@
-package com.github.raininforest.gerberpcb.view
+package com.github.raininforest.gerberpcb.view.layers
 
 import android.content.Intent
 import android.net.Uri
@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.raininforest.gerberpcb.R
 import com.github.raininforest.gerberpcb.viewmodel.LayersViewModel
 import com.github.raininforest.gerberpcb.databinding.LayersFragmentBinding
+import com.github.raininforest.gerberpcb.view.showMsg
 import com.github.raininforest.gerberpcb.viewmodel.LayersScreenState
 
 class LayersFragment : Fragment() {

@@ -6,24 +6,24 @@
     app:startDestination="@id/layersFragment">
     <fragment
         android:id="@+id/layersFragment"
-        android:name="com.github.raininforest.gerberpcb.view.LayersFragment"
+        android:name="com.github.raininforest.gerberpcb.view.layers.LayersFragment"
         android:label="layers_fragment"
         tools:layout="@layout/layers_fragment" >
     </fragment>
     <fragment
         android:id="@+id/graphicsFragment"
-        android:name="com.github.raininforest.gerberpcb.view.GraphicsFragment"
+        android:name="com.github.raininforest.gerberpcb.view.graphics.GraphicsFragment"
         android:label="graphics_fragment"
         tools:layout="@layout/graphics_fragment" >
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.github.raininforest.gerberpcb.view.SettingsFragment"
+        android:name="com.github.raininforest.gerberpcb.view.settings.SettingsFragment"
         android:label="SettingsFragment" >
     </fragment>
     <fragment
         android:id="@+id/helpFragment"
-        android:name="com.github.raininforest.gerberpcb.view.HelpFragment"
+        android:name="com.github.raininforest.gerberpcb.view.help.HelpFragment"
         android:label="help_fragment"
         tools:layout="@layout/help_fragment" >
     </fragment>
