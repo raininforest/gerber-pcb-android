@@ -1,4 +1,4 @@
-package com.github.raininforest.gerberpcb.viewmodel
+package com.github.raininforest.gerberpcb.viewmodel.graphics
 
 import androidx.lifecycle.ViewModel
 

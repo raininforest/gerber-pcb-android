@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.github.raininforest.gerberpcb.R
-import com.github.raininforest.gerberpcb.viewmodel.GraphicsViewModel
+import com.github.raininforest.gerberpcb.viewmodel.graphics.GraphicsViewModel
 
 class GraphicsFragment : Fragment() {
 
