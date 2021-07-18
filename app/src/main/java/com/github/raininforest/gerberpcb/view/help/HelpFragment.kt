@@ -9,6 +9,9 @@ import android.view.ViewGroup
 import com.github.raininforest.gerberpcb.R
 import com.github.raininforest.gerberpcb.viewmodel.help.HelpViewModel
 
+/**
+ * Created by Sergey Velesko on 18.07.2021
+ */
 class HelpFragment : Fragment() {
 
     companion object {

@@ -6,7 +6,12 @@ import android.view.MenuItem
 import androidx.navigation.findNavController
 import com.github.raininforest.gerberpcb.R
 import com.github.raininforest.gerberpcb.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * Created by Sergey Velesko on 18.07.2021
+ */
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding

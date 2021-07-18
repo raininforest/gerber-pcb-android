@@ -2,36 +2,40 @@ package com.github.raininforest.gerberpcb.view.layers
 
 import android.content.Intent
 import android.net.Uri
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.raininforest.gerberpcb.R
 import com.github.raininforest.gerberpcb.viewmodel.layers.LayersViewModel
 import com.github.raininforest.gerberpcb.databinding.LayersFragmentBinding
 import com.github.raininforest.gerberpcb.view.showMsg
 import com.github.raininforest.gerberpcb.viewmodel.layers.LayersScreenState
+import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * Created by Sergey Velesko on 18.07.2021
+ */
+@AndroidEntryPoint
 class LayersFragment : Fragment() {
 
     companion object {
-        fun newInstance() = LayersFragment()
         private const val REQUEST_OPEN_FILE: Int = 1
     }
 
     private val listAdapter = GerberListAdapter()
-    private lateinit var viewModel: LayersViewModel
+    private val viewModel: LayersViewModel by viewModels()
     private var _binding: LayersFragmentBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = LayersFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -40,13 +44,14 @@ class LayersFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initButtons()
         initRecycler()
-        initViewModel()
+        observeLiveData()
     }
 
-    private fun initViewModel() {
-        viewModel = ViewModelProvider(this).get(LayersViewModel::class.java)
-        viewModel.getLiveData().observe(viewLifecycleOwner, { renderData(it) })
-        viewModel.getList()
+    private fun observeLiveData() {
+        viewModel.data().observe(
+            viewLifecycleOwner,
+            { screenState -> renderData(screenState) }
+        )
     }
 
     private fun initButtons() {
@@ -72,16 +77,22 @@ class LayersFragment : Fragment() {
 
     private fun renderData(screenState: LayersScreenState) {
         when (screenState) {
-            LayersScreenState.Loading -> {
-                //TODO показать диалог загрузки
+            is LayersScreenState.Loading -> {
+                screenState.progress.observe(viewLifecycleOwner) { value ->
+                    renderProgress(value)
+                }
             }
             is LayersScreenState.Success -> {
                 listAdapter.setList(screenState.gerberList)
             }
             is LayersScreenState.Error -> {
-                showMsg("Error!")
+                showMsg(screenState.error)
             }
         }
+    }
+
+    private fun renderProgress(value: String) {
+        //TODO
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -91,6 +102,11 @@ class LayersFragment : Fragment() {
             val uri: Uri = data?.data ?: Uri.EMPTY
             Toast.makeText(context, uri.toString(), Toast.LENGTH_LONG).show()
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

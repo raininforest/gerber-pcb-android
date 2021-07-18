@@ -1,10 +1,16 @@
 package com.github.raininforest.gerberpcb.model
 
+import io.reactivex.rxjava3.core.Observable
+
+/**
+ * Created by Sergey Velesko on 18.07.2021
+ */
 interface IDataService {
-    fun getList(): GerberList
-    fun addItem(gerberUri: String)
-    fun removeItem(gerberName: String)
-    fun setItemVisibility(visible: Boolean)
+    fun list(): Observable<List<GerberItemUi>>
+    fun addItem(filename: String)
+    fun removeItem(id: String)
+    fun changeItemVisibility(id: String, visibility: Boolean)
     fun clear()
-    fun removeListeners()
+
+    //TODO add graphics(): Observable<GraphicStream> ?
 }

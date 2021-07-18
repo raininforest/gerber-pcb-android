@@ -4,6 +4,9 @@ import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
+/**
+ * Created by Sergey Velesko on 18.07.2021
+ */
 class SpaceDecorator(private val space: Int): RecyclerView.ItemDecoration() {
     override fun getItemOffsets(
         outRect: Rect,

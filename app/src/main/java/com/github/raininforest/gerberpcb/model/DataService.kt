@@ -1,40 +1,36 @@
 package com.github.raininforest.gerberpcb.model
 
-class DataService : IDataService {
-    override fun getList(): GerberList {
-        return getTestData()
-    }
+import io.reactivex.rxjava3.core.Observable
+import javax.inject.Inject
 
-    override fun addItem(gerberUri: String) {
+/**
+ * Created by Sergey Velesko on 18.07.2021
+ */
+class DataService @Inject constructor() : IDataService {
+
+    //TODO
+    override fun list(): Observable<List<GerberItemUi>> =
+        Observable.just(
+            listOf(
+                GerberItemUi(),
+                GerberItemUi(),
+                GerberItemUi()
+            )
+        )
+
+    override fun addItem(filename: String) {
         TODO("Not yet implemented")
     }
 
-    override fun removeItem(gerberName: String) {
+    override fun removeItem(id: String) {
         TODO("Not yet implemented")
     }
 
-    override fun setItemVisibility(visible: Boolean) {
+    override fun changeItemVisibility(id: String, visibility: Boolean) {
         TODO("Not yet implemented")
     }
 
     override fun clear() {
         TODO("Not yet implemented")
     }
-
-    override fun removeListeners() {
-        TODO("Not yet implemented")
-    }
-
-    private fun getTestData() = GerberList().apply {
-        add(GerberItem("controller_top.gbr"))
-        add(GerberItem("controller_bottom.gbr"))
-        add(GerberItem("controller_topmask.gbr"))
-        add(GerberItem("controller_topsilk.gbr"))
-        add(GerberItem("controller_botmask.gbr"))
-        add(GerberItem("controller_botsilk.gbr"))
-        add(GerberItem("controller_topsilk.gbr"))
-        add(GerberItem("controller_botmask.gbr"))
-        add(GerberItem("controller_botsilk.gbr"))
-    }
-
 }

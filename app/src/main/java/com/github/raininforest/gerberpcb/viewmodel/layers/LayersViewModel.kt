@@ -4,39 +4,43 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.github.raininforest.gerberpcb.model.IDataService
-import com.github.raininforest.gerberpcb.model.DataService
+import dagger.hilt.android.lifecycle.HiltViewModel
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import javax.inject.Inject
 
-class LayersViewModel : ViewModel() {
-    private val liveData: MutableLiveData<LayersScreenState> = MutableLiveData()
-    private val IDataService: IDataService = DataService()
+/**
+ * Created by Sergey Velesko on 18.07.2021
+ */
+@HiltViewModel
+class LayersViewModel @Inject constructor(
+    private val dataService: IDataService
+) : ViewModel() {
 
-    fun getLiveData(): LiveData<LayersScreenState> {
-        return liveData
+    private val data: MutableLiveData<LayersScreenState> = MutableLiveData()
+    private val progressValue: MutableLiveData<String> = MutableLiveData()
+
+    fun data(): LiveData<LayersScreenState> {
+        dataService.list()
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+            { data.value = LayersScreenState.Success(it) },
+            { it.printStackTrace() }
+        )
+        return data
     }
 
-    fun getList() {
-        liveData.value = LayersScreenState.Success(IDataService.getList())
+    fun gerberAdded(filename: String) {
+        dataService.addItem(filename)
+        //TODO subscribe on progress and change livedata (progressValue) value to loading
     }
 
-    fun addItem(gerberUri: String) {
-        liveData.value = LayersScreenState.Loading
-        //TODO repository.add(gerberUri). должен вернуть новый увеличенный список в лайвдату
+    fun gerberRemoved(id: String) {
+        dataService.removeItem(id)
+        //TODO subscribe on completable, write log on error
     }
 
-    fun setItemVisibility(gerberName: String, visible: Boolean) {
-        //TODO repository.setVisible(gerberName)
-    }
-
-    fun removeItem(gerberName: String) {
-        //TODO repository.remove(gerberName). должен вернуть новый уменьшенный список в лайвдату
-    }
-
-    fun clearList() {
-        //TODO repository.clear(). должен вернуть пустоту
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        IDataService.removeListeners()
+    fun gerberVisibilityChanged(id: String, visibility: Boolean) {
+        dataService.changeItemVisibility(id, visibility)
+        //TODO subscribe on Completable?
     }
 }
