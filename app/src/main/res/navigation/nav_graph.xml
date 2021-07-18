@@ -9,58 +9,22 @@
         android:name="com.github.raininforest.gerberpcb.view.LayersFragment"
         android:label="layers_fragment"
         tools:layout="@layout/layers_fragment" >
-        <action
-            android:id="@+id/action_layersFragment_to_graphicsFragment"
-            app:destination="@id/graphicsFragment" />
-        <action
-            android:id="@+id/action_layersFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
-        <action
-            android:id="@+id/action_layersFragment_to_helpFragment"
-            app:destination="@id/helpFragment" />
     </fragment>
     <fragment
         android:id="@+id/graphicsFragment"
         android:name="com.github.raininforest.gerberpcb.view.GraphicsFragment"
         android:label="graphics_fragment"
         tools:layout="@layout/graphics_fragment" >
-        <action
-            android:id="@+id/action_graphicsFragment_to_layersFragment"
-            app:destination="@id/layersFragment" />
-        <action
-            android:id="@+id/action_graphicsFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
-        <action
-            android:id="@+id/action_graphicsFragment_to_helpFragment"
-            app:destination="@id/helpFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.github.raininforest.gerberpcb.view.SettingsFragment"
         android:label="SettingsFragment" >
-        <action
-            android:id="@+id/action_settingsFragment_to_helpFragment"
-            app:destination="@id/helpFragment" />
-        <action
-            android:id="@+id/action_settingsFragment_to_layersFragment"
-            app:destination="@id/layersFragment" />
-        <action
-            android:id="@+id/action_settingsFragment_to_graphicsFragment"
-            app:destination="@id/graphicsFragment" />
     </fragment>
     <fragment
         android:id="@+id/helpFragment"
         android:name="com.github.raininforest.gerberpcb.view.HelpFragment"
         android:label="help_fragment"
         tools:layout="@layout/help_fragment" >
-        <action
-            android:id="@+id/action_helpFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
-        <action
-            android:id="@+id/action_helpFragment_to_layersFragment"
-            app:destination="@id/layersFragment" />
-        <action
-            android:id="@+id/action_helpFragment_to_graphicsFragment"
-            app:destination="@id/graphicsFragment" />
     </fragment>
 </navigation>
