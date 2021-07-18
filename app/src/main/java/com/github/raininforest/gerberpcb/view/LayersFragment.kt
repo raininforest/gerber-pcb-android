@@ -49,7 +49,7 @@ class LayersFragment : Fragment() {
     }
 
     private fun initButtons() {
-        binding.addButton.setOnClickListener {
+        binding.fab.setOnClickListener {
             val intent = Intent(Intent.ACTION_GET_CONTENT)
             intent.type = "*/*"
             startActivityForResult(
