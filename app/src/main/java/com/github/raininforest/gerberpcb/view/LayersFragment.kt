@@ -9,6 +9,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.raininforest.gerberpcb.R
 import com.github.raininforest.gerberpcb.viewmodel.LayersViewModel
 import com.github.raininforest.gerberpcb.databinding.LayersFragmentBinding
 import com.github.raininforest.gerberpcb.viewmodel.LayersScreenState
@@ -20,6 +22,7 @@ class LayersFragment : Fragment() {
         private const val REQUEST_OPEN_FILE: Int = 1
     }
 
+    private val listAdapter = GerberListAdapter()
     private lateinit var viewModel: LayersViewModel
     private var _binding: LayersFragmentBinding? = null
     private val binding get() = _binding!!
@@ -34,6 +37,18 @@ class LayersFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initButtons()
+        initRecycler()
+        initViewModel()
+    }
+
+    private fun initViewModel() {
+        viewModel = ViewModelProvider(this).get(LayersViewModel::class.java)
+        viewModel.getLiveData().observe(viewLifecycleOwner, { renderData(it) })
+        viewModel.getList()
+    }
+
+    private fun initButtons() {
         binding.addButton.setOnClickListener {
             val intent = Intent(Intent.ACTION_GET_CONTENT)
             intent.type = "*/*"
@@ -44,10 +59,14 @@ class LayersFragment : Fragment() {
         }
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(LayersViewModel::class.java)
-        viewModel.getLiveData().observe(viewLifecycleOwner, { renderData(it) })
+    private fun initRecycler() {
+        binding.recyclerView.layoutManager = LinearLayoutManager(
+            context,
+            LinearLayoutManager.VERTICAL,
+            false
+        )
+        binding.recyclerView.addItemDecoration(SpaceDecorator(resources.getDimensionPixelSize(R.dimen.list_spacing)))
+        binding.recyclerView.adapter = listAdapter
     }
 
     private fun renderData(screenState: LayersScreenState) {
@@ -56,16 +75,17 @@ class LayersFragment : Fragment() {
                 //TODO показать диалог загрузки
             }
             is LayersScreenState.Success -> {
-                //TODO сеттим в ресайклер.адаптер данные (список герберов)
+                listAdapter.setList(screenState.gerberList)
             }
             is LayersScreenState.Error -> {
-
+                showMsg("Error!")
             }
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        //TODO
         if (requestCode == REQUEST_OPEN_FILE) {
             val uri: Uri = data?.data ?: Uri.EMPTY
             Toast.makeText(context, uri.toString(), Toast.LENGTH_LONG).show()
