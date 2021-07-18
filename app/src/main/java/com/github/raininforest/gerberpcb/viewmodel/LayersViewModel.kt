@@ -3,19 +3,19 @@ package com.github.raininforest.gerberpcb.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.github.raininforest.gerberpcb.model.IDataService
 import com.github.raininforest.gerberpcb.model.DataService
-import com.github.raininforest.gerberpcb.model.DataServiceImpl
 
 class LayersViewModel : ViewModel() {
     private val liveData: MutableLiveData<LayersScreenState> = MutableLiveData()
-    private val dataService: DataService = DataServiceImpl
+    private val IDataService: IDataService = DataService()
 
     fun getLiveData(): LiveData<LayersScreenState> {
         return liveData
     }
 
     fun getList() {
-        liveData.value = LayersScreenState.Success(dataService.getList())
+        liveData.value = LayersScreenState.Success(IDataService.getList())
     }
 
     fun addItem(gerberUri: String) {
@@ -37,6 +37,6 @@ class LayersViewModel : ViewModel() {
 
     override fun onCleared() {
         super.onCleared()
-        dataService.removeListeners()
+        IDataService.removeListeners()
     }
 }
