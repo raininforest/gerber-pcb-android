@@ -4,15 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.github.raininforest.gerberpcb.model.IDataService
-import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import javax.inject.Inject
 
 /**
  * Created by Sergey Velesko on 18.07.2021
  */
-@HiltViewModel
-class LayersViewModel @Inject constructor(
+class LayersViewModel (
     private val dataService: IDataService
 ) : ViewModel() {
 

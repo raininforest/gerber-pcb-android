@@ -1,8 +1,6 @@
 plugins {
     id("com.android.application")
     kotlin("android")
-    kotlin("kapt")
-    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -39,13 +37,12 @@ android {
 
 dependencies {
 
-    //rxjava
-    implementation("io.reactivex.rxjava3:rxandroid:3.0.0")
-    implementation("io.reactivex.rxjava3:rxjava:3.0.0")
+    //koin
+    implementation("io.insert-koin:koin-android:${Versions.koin}")
 
-    //hilt
-    implementation("com.google.dagger:hilt-android:2.37")
-    kapt("com.google.dagger:hilt-compiler:2.37")
+    //rxjava
+    implementation("io.reactivex.rxjava3:rxandroid:${Versions.rxjava}")
+    implementation("io.reactivex.rxjava3:rxjava:${Versions.rxjava}")
 
     implementation("androidx.core:core-ktx:1.6.0")
     implementation("androidx.appcompat:appcompat:1.3.1")

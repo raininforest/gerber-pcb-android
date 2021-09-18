@@ -1,12 +1,11 @@
 package com.github.raininforest.gerberpcb.model
 
 import io.reactivex.rxjava3.core.Observable
-import javax.inject.Inject
 
 /**
  * Created by Sergey Velesko on 18.07.2021
  */
-class DataService @Inject constructor() : IDataService {
+class DataService : IDataService {
 
     //TODO
     override fun list(): Observable<List<GerberItemUi>> =
