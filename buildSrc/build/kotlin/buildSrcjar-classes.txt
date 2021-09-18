@@ -1,1 +1,0 @@
-/home/sergey/AndroidStudioProjects/gerber-pcb-android/buildSrc/build/classes/kotlin/main/Versions.class
