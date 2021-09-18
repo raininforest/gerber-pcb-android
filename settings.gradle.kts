@@ -1,4 +1,5 @@
 include(":app")
 rootProject.name = "Gerber PCB"
-include(":filereader")
 include(":syntaxparser")
+include(":graphicsprocessor")
+include(":filereader")
