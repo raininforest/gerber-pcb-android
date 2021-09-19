@@ -1,4 +1,8 @@
 package com.github.raininforest.filereader
 
-class FileReader {
+/**
+ * Created by Sergey Velesko on 19.09.2021
+ */
+interface FileReader {
+    fun read(path: String): List<String>
 }
