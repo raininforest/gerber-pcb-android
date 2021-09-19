@@ -8,5 +8,4 @@ java {
 }
 dependencies {
     implementation("junit:junit:${Versions.junit}")
-    implementation(project(mapOf("path" to ":core")))
 }
