@@ -1,4 +1,4 @@
-package com.github.raininforest.gerberpcb.view.settings
+package com.github.raininforest.gerberpcb.ui.settings
 
 import android.os.Bundle
 import androidx.preference.PreferenceFragmentCompat

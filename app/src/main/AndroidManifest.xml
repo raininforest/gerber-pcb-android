@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GerberPCB"
         android:name=".app.GerberReaderApp">
-        <activity android:name=".view.activity.MainActivity">
+        <activity android:name="com.github.raininforest.gerberpcb.ui.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,4 +1,4 @@
-package com.github.raininforest.gerberpcb.view.activity
+package com.github.raininforest.gerberpcb.ui.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

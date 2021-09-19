@@ -1,10 +1,10 @@
-package com.github.raininforest.gerberpcb.viewmodel.help
+package com.github.raininforest.gerberpcb.ui.graphics
 
 import androidx.lifecycle.ViewModel
 
 /**
  * Created by Sergey Velesko on 18.07.2021
  */
-class HelpViewModel : ViewModel() {
+class GraphicsViewModel : ViewModel() {
     // TODO: Implement the ViewModel
 }

@@ -1,4 +1,4 @@
-package com.github.raininforest.gerberpcb.view
+package com.github.raininforest.gerberpcb.ui
 
 import android.widget.Toast
 import androidx.fragment.app.Fragment

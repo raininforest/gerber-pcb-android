@@ -1,4 +1,4 @@
-package com.github.raininforest.gerberpcb.view.layers
+package com.github.raininforest.gerberpcb.ui.layers
 
 import android.graphics.Rect
 import android.view.View

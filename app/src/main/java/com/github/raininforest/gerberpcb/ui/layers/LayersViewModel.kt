@@ -1,4 +1,4 @@
-package com.github.raininforest.gerberpcb.viewmodel.layers
+package com.github.raininforest.gerberpcb.ui.layers
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

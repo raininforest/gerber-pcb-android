@@ -1,4 +1,4 @@
-package com.github.raininforest.gerberpcb.view.graphics
+package com.github.raininforest.gerberpcb.ui.help
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -7,29 +7,28 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.github.raininforest.gerberpcb.R
-import com.github.raininforest.gerberpcb.viewmodel.graphics.GraphicsViewModel
 
 /**
  * Created by Sergey Velesko on 18.07.2021
  */
-class GraphicsFragment : Fragment() {
+class HelpFragment : Fragment() {
 
     companion object {
-        fun newInstance() = GraphicsFragment()
+        fun newInstance() = HelpFragment()
     }
 
-    private lateinit var viewModel: GraphicsViewModel
+    private lateinit var viewModel: HelpViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.graphics_fragment, container, false)
+        return inflater.inflate(R.layout.help_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(GraphicsViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(HelpViewModel::class.java)
         // TODO: Use the ViewModel
     }
 
