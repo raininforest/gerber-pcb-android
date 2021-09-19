@@ -1,11 +1,13 @@
 package com.github.raininforest.gerberpcb.ui.layers
 
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,6 +29,16 @@ class LayersFragment : Fragment() {
     private val viewModel: LayersViewModel by viewModels()
     private var _binding: LayersFragmentBinding? = null
     private val binding get() = _binding!!
+
+    private val openFileResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val data: Intent? = result.data
+            val uri: Uri = data?.data ?: Uri.EMPTY
+            //TODO pass uri to ViewModel
+            Timber.d("File opened: ${uri.path}")
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,12 +64,8 @@ class LayersFragment : Fragment() {
 
     private fun initButtons() {
         binding.fab.setOnClickListener {
-            val intent = Intent(Intent.ACTION_GET_CONTENT)
-            intent.type = "*/*"
-            startActivityForResult(
-                Intent.createChooser(intent, "messageTitle"),
-                REQUEST_OPEN_FILE
-            )
+            val intent = Intent(Intent.ACTION_GET_CONTENT).apply { type = "*/*" }
+            openFileResult.launch(intent)
         }
     }
 
@@ -89,14 +97,6 @@ class LayersFragment : Fragment() {
 
     private fun renderProgress(value: String) {
         //TODO
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        //TODO
-        if (requestCode == REQUEST_OPEN_FILE) {
-            val uri: Uri = data?.data ?: Uri.EMPTY
-        }
     }
 
     override fun onDestroyView() {
