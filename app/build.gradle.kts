@@ -36,6 +36,9 @@ android {
 
 dependencies {
 
+    //timber
+    implementation("com.jakewharton.timber:timber:5.0.1")
+
     //modules
     implementation(project(mapOf("path" to ":gerberfilereader")))
 

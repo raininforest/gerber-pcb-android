@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.raininforest.gerberpcb.R
 import com.github.raininforest.gerberpcb.databinding.LayersFragmentBinding
 import com.github.raininforest.gerberpcb.ui.showMsg
+import timber.log.Timber
 
 /**
  * Created by Sergey Velesko on 18.07.2021
