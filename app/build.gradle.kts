@@ -39,6 +39,9 @@ dependencies {
     //timber
     implementation("com.jakewharton.timber:timber:5.0.1")
 
+    //ViewBindingPropertyDelegate
+    implementation("com.github.kirich1409:viewbindingpropertydelegate-noreflection:1.5.0-beta01")
+
     //modules
     implementation(project(mapOf("path" to ":gerberfilereader")))
 
