@@ -9,8 +9,8 @@ import com.github.raininforest.core.Aperture
  */
 interface GraphicsState {
     //TODO
-    var coordinateFormat: CoordinateFormat
-    var unit: Unit
+    val coordinateFormat: CoordinateFormat
+    val unit: Unit
 
     var currentPoint: Pair<Double, Double>
     var currentAperture: Aperture
