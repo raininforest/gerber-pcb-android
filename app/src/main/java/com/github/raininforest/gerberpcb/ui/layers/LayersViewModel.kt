@@ -3,15 +3,16 @@ package com.github.raininforest.gerberpcb.ui.layers
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.github.raininforest.gerberpcb.model.DataService
 import com.github.raininforest.gerberpcb.model.IDataService
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 
 /**
  * Created by Sergey Velesko on 18.07.2021
  */
-class LayersViewModel (
-    private val dataService: IDataService
-) : ViewModel() {
+class LayersViewModel : ViewModel() {
+
+    private val dataService = DataService()
 
     private val data: MutableLiveData<LayersScreenState> = MutableLiveData()
     private val progressValue: MutableLiveData<String> = MutableLiveData()
@@ -20,9 +21,9 @@ class LayersViewModel (
         dataService.list()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
-            { data.value = LayersScreenState.Success(it) },
-            { it.printStackTrace() }
-        )
+                { data.value = LayersScreenState.Success(it) },
+                { it.printStackTrace() }
+            )
         return data
     }
 
