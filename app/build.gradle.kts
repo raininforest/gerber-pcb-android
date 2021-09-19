@@ -36,6 +36,9 @@ android {
 
 dependencies {
 
+    //modules
+    implementation(project(mapOf("path" to ":gerberfilereader")))
+
     //koin
     implementation("io.insert-koin:koin-android:${Versions.koin}")
 
