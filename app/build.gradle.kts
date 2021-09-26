@@ -18,7 +18,10 @@ android {
 
     buildTypes {
         getByName("release") {
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
 
@@ -43,7 +46,8 @@ dependencies {
     implementation("com.github.kirich1409:viewbindingpropertydelegate-noreflection:1.5.0-beta01")
 
     //modules
-    implementation(project(mapOf("path" to ":gerberfilereader")))
+    implementation(project(":gerberfilereader"))
+    implementation(project(":syntaxparser"))
 
     //koin
     implementation("io.insert-koin:koin-android:${Versions.koin}")

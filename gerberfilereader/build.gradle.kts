@@ -34,6 +34,10 @@ dependencies {
     implementation("androidx.core:core-ktx:1.6.0")
     implementation("androidx.appcompat:appcompat:1.3.1")
     implementation("com.google.android.material:material:1.4.0")
+
+    //tests
+    testImplementation("org.robolectric:robolectric:4.6.1")
+    testImplementation("io.mockk:mockk:1.11.0")
     testImplementation("junit:junit:${Versions.junit}")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
