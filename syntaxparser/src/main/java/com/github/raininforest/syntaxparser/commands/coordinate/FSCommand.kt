@@ -14,7 +14,7 @@ import java.util.regex.Pattern
  */
 data class FSCommand(
     val numOfInteger: Int,
-    val nubOfDecimal: Int,
+    val numOfDecimal: Int,
     override val lineNumber: Int
 ) : GerberCommand {
 
@@ -35,7 +35,7 @@ data class FSCommand(
                     val decimalCount = matcher.group(2).toInt()
                     return FSCommand(
                         numOfInteger = integerCount,
-                        nubOfDecimal = decimalCount,
+                        numOfDecimal = decimalCount,
                         lineNumber = lineIndexHandler.index()
                     )
                 } else {
