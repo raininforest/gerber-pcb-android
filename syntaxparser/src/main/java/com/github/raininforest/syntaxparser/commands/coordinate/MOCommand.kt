@@ -18,9 +18,7 @@ class MOCommand(
     override val lineNumber: Int
 ) : GerberCommand {
 
-    override fun perform(processor: GraphicsProcessor) {
-        //ignore
-    }
+    override fun perform(processor: GraphicsProcessor) {}
 
     companion object : Parsable {
 
