@@ -30,13 +30,13 @@ class MOCommandTest {
 
     @Test
     fun `ok IN test`() {
-        val listOfCommandsWithMOIN = listOf(
+        val listOfCommands = listOf(
             "%G04 34534354",
             "%MOIN*%",
             "%FSLAX24Y24*%"
         )
-        val indexHandler = LineIndexHandler(5).apply { increment() }
-        val command = MOCommand.parse(listOfCommandsWithMOIN, indexHandler) as MOCommand
+        val indexHandler = LineIndexHandler(listOfCommands.size - 1).apply { increment() }
+        val command = MOCommand.parse(listOfCommands, indexHandler) as MOCommand
 
         Assert.assertEquals(command.lineNumber, 1)
         Assert.assertEquals(command.units, Units.IN)
@@ -49,7 +49,7 @@ class MOCommandTest {
             "@MOINCH%*",
             "fdlkgsjdlksdj"
         )
-        val indexHandler = LineIndexHandler(5).apply { increment() }
+        val indexHandler = LineIndexHandler(listOfCommands.size - 1).apply { increment() }
         FSCommand.parse(listOfCommands, indexHandler) as FSCommand
     }
 }

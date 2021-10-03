@@ -20,7 +20,7 @@ class FSCommandTest {
             "%FSLAX24Y24*%",
             "fdlkgsjdlksdj"
         )
-        val indexHandler = LineIndexHandler(5).apply { increment() }
+        val indexHandler = LineIndexHandler(listOfCommands.size - 1).apply { increment() }
         val command = FSCommand.parse(listOfCommands, indexHandler) as FSCommand
 
         assertEquals(command.lineNumber, 1)
@@ -35,7 +35,7 @@ class FSCommandTest {
             "SLAX24Y24*%",
             "fdlkgsjdlksdj"
         )
-        val indexHandler = LineIndexHandler(5).apply { increment() }
+        val indexHandler = LineIndexHandler(listOfCommands.size - 1).apply { increment() }
         FSCommand.parse(listOfCommands, indexHandler) as FSCommand
     }
 
@@ -46,7 +46,7 @@ class FSCommandTest {
             "%FSLAX2.34Y24*%",
             "fdlkgsjdlksdj"
         )
-        val indexHandler = LineIndexHandler(5).apply { increment() }
+        val indexHandler = LineIndexHandler(listOfCommands.size - 1).apply { increment() }
         FSCommand.parse(listOfCommands, indexHandler) as FSCommand
     }
 }
