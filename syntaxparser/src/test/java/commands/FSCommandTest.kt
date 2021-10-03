@@ -36,7 +36,7 @@ class FSCommandTest {
             "fdlkgsjdlksdj"
         )
         val indexHandler = LineIndexHandler(5).apply { increment() }
-        val command = FSCommand.parse(listOfCommands, indexHandler) as FSCommand
+        FSCommand.parse(listOfCommands, indexHandler) as FSCommand
     }
 
     @Test(expected = WrongCommandFormatException::class)
@@ -47,6 +47,6 @@ class FSCommandTest {
             "fdlkgsjdlksdj"
         )
         val indexHandler = LineIndexHandler(5).apply { increment() }
-        val command = FSCommand.parse(listOfCommands, indexHandler) as FSCommand
+        FSCommand.parse(listOfCommands, indexHandler) as FSCommand
     }
 }
