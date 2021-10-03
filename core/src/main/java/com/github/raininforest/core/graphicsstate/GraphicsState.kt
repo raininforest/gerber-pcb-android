@@ -1,7 +1,7 @@
 package com.github.raininforest.core.graphicsstate
 
 import com.github.raininforest.core.graphicsstate.enums.*
-import com.github.raininforest.core.graphicsstate.enums.Unit
+import com.github.raininforest.core.graphicsstate.enums.Units
 import com.github.raininforest.core.Aperture
 
 /**
@@ -10,7 +10,7 @@ import com.github.raininforest.core.Aperture
 interface GraphicsState {
     //TODO
     val coordinateFormat: CoordinateFormat
-    val unit: Unit
+    val units: Units
 
     var currentPoint: Pair<Double, Double>
     var currentAperture: Aperture
