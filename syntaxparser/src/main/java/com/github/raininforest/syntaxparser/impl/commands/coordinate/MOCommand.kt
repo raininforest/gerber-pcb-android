@@ -38,10 +38,7 @@ class MOCommand(
                         lineNumber = lineIndexHandler.lineNumber
                     )
                 } else {
-                    throw WrongCommandFormatException(
-                        line = lineIndexHandler.lineNumber,
-                        command = MOCommand::class.java.simpleName
-                    )
+                    throw WrongCommandFormatException(line = lineIndexHandler.lineNumber)
                 }
             } catch (e: Throwable) {
                 throw e

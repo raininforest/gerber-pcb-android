@@ -32,10 +32,7 @@ data class G36Command(override val lineNumber: Int) : GerberCommand {
                 if (matcher.find()) {
                     return G36Command(lineNumber = lineIndexHandler.lineNumber)
                 } else {
-                    throw WrongCommandFormatException(
-                        line = lineIndexHandler.lineNumber,
-                        command = G36Command::class.java.simpleName
-                    )
+                    throw WrongCommandFormatException(line = lineIndexHandler.lineNumber)
                 }
             } catch (e: Throwable) {
                 throw e

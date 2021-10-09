@@ -31,10 +31,7 @@ data class M02Command(override val lineNumber: Int) : GerberCommand {
                 if (matcher.find()) {
                     return M02Command(lineNumber = lineIndexHandler.lineNumber)
                 } else {
-                    throw WrongCommandFormatException(
-                        line = lineIndexHandler.lineNumber,
-                        command = M02Command::class.java.simpleName
-                    )
+                    throw WrongCommandFormatException(line = lineIndexHandler.lineNumber)
                 }
             } catch (e: Throwable) {
                 throw e
