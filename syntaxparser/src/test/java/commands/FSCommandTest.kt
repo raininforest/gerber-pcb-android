@@ -1,8 +1,8 @@
 package commands
 
-import com.github.raininforest.syntaxparser.LineIndexHandler
-import com.github.raininforest.syntaxparser.commands.coordinate.FSCommand
-import com.github.raininforest.syntaxparser.exceptions.WrongCommandFormatException
+import com.github.raininforest.syntaxparser.impl.LineIndexHandler
+import com.github.raininforest.syntaxparser.impl.commands.coordinate.FSCommand
+import com.github.raininforest.syntaxparser.impl.exceptions.WrongCommandFormatException
 import org.junit.Assert.assertEquals
 import org.junit.Test
 

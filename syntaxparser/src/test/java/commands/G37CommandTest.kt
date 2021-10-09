@@ -1,10 +1,10 @@
 package commands
 
-import com.github.raininforest.core.GraphicsProcessor
-import com.github.raininforest.core.graphicsstate.enums.RegionMode
-import com.github.raininforest.syntaxparser.LineIndexHandler
-import com.github.raininforest.syntaxparser.commands.regionstate.G37Command
-import com.github.raininforest.syntaxparser.exceptions.WrongCommandFormatException
+import com.github.raininforest.syntaxparser.api.GraphicsProcessor
+import com.github.raininforest.syntaxparser.api.graphicsstate.enums.RegionMode
+import com.github.raininforest.syntaxparser.impl.LineIndexHandler
+import com.github.raininforest.syntaxparser.impl.commands.regionstate.G37Command
+import com.github.raininforest.syntaxparser.impl.exceptions.WrongCommandFormatException
 import io.mockk.mockk
 import io.mockk.verify
 import org.junit.Assert

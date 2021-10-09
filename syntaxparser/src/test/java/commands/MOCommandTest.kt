@@ -1,10 +1,10 @@
 package commands
 
-import com.github.raininforest.core.graphicsstate.enums.Units
-import com.github.raininforest.syntaxparser.LineIndexHandler
-import com.github.raininforest.syntaxparser.commands.coordinate.FSCommand
-import com.github.raininforest.syntaxparser.commands.coordinate.MOCommand
-import com.github.raininforest.syntaxparser.exceptions.WrongCommandFormatException
+import com.github.raininforest.syntaxparser.api.graphicsstate.enums.Units
+import com.github.raininforest.syntaxparser.impl.LineIndexHandler
+import com.github.raininforest.syntaxparser.impl.commands.coordinate.FSCommand
+import com.github.raininforest.syntaxparser.impl.commands.coordinate.MOCommand
+import com.github.raininforest.syntaxparser.impl.exceptions.WrongCommandFormatException
 import org.junit.Assert
 import org.junit.Test
 

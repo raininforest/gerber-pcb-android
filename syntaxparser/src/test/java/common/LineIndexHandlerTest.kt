@@ -1,6 +1,6 @@
 package common
 
-import com.github.raininforest.syntaxparser.LineIndexHandler
+import com.github.raininforest.syntaxparser.impl.LineIndexHandler
 import org.junit.Assert
 import org.junit.Test
 
