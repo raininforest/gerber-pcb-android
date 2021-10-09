@@ -4,7 +4,7 @@ import com.github.raininforest.syntaxparser.api.Aperture
 import com.github.raininforest.syntaxparser.api.GraphicsProcessor
 import com.github.raininforest.syntaxparser.api.dictionary.ApertureDictionary
 import com.github.raininforest.syntaxparser.impl.LineIndexHandler
-import com.github.raininforest.syntaxparser.impl.commands.DnnCommand
+import com.github.raininforest.syntaxparser.impl.commands.aperturedefinition.DnnCommand
 import com.github.raininforest.syntaxparser.impl.exceptions.WrongCommandFormatException
 import io.mockk.every
 import io.mockk.mockk

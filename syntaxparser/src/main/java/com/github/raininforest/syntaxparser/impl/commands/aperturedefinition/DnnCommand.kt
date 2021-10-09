@@ -1,4 +1,4 @@
-package com.github.raininforest.syntaxparser.impl.commands
+package com.github.raininforest.syntaxparser.impl.commands.aperturedefinition
 
 import com.github.raininforest.syntaxparser.api.GerberCommand
 import com.github.raininforest.syntaxparser.api.GraphicsProcessor
@@ -25,7 +25,7 @@ data class DnnCommand(
 
     internal companion object : Parsable {
 
-        private val DNN_PATTERN = Pattern.compile("^D([1-9][0-9]+)");
+        private val DNN_PATTERN by lazy { Pattern.compile("^D([1-9][0-9]+)") }
 
         override fun parse(
             stringList: List<String>,
