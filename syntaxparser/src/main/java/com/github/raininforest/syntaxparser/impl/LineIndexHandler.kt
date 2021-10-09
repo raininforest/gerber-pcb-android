@@ -15,19 +15,21 @@ internal class LineIndexHandler(private val maxIndex: Int) {
         }
     }
 
-    private var lineNumber: Int = 0
+    private var _lineNumber: Int = 0
 
-    fun index() = lineNumber
+    var lineNumber = _lineNumber
+        private set
+        get() = _lineNumber
 
     fun increment() {
-        if (lineNumber < maxIndex) {
-            lineNumber++
+        if (_lineNumber < maxIndex) {
+            _lineNumber++
         } else {
             throw IndexOutOfBoundsException("Wrong line index! Index must be < list size")
         }
     }
 
     fun reset() {
-        lineNumber = 0
+        _lineNumber = 0
     }
 }

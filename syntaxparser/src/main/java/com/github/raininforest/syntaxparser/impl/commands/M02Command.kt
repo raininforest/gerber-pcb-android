@@ -26,13 +26,13 @@ data class M02Command(override val lineNumber: Int) : GerberCommand {
             stringList: List<String>,
             lineIndexHandler: LineIndexHandler
         ): GerberCommand {
-            val matcher = M02_PATTERN.matcher(stringList[lineIndexHandler.index()])
+            val matcher = M02_PATTERN.matcher(stringList[lineIndexHandler.lineNumber])
             try {
                 if (matcher.find()) {
-                    return M02Command(lineNumber = lineIndexHandler.index())
+                    return M02Command(lineNumber = lineIndexHandler.lineNumber)
                 } else {
                     throw WrongCommandFormatException(
-                        line = lineIndexHandler.index(),
+                        line = lineIndexHandler.lineNumber,
                         command = M02Command::class.java.simpleName
                     )
                 }

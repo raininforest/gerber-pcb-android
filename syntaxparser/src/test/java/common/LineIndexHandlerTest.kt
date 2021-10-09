@@ -17,7 +17,7 @@ class LineIndexHandlerTest {
         for (i in 0 until maxIndex) {
             indexHandler.increment()
         }
-        Assert.assertEquals(indexHandler.index(), maxIndex)
+        Assert.assertEquals(indexHandler.lineNumber, maxIndex)
     }
 
     @Test(expected = IndexOutOfBoundsException::class)
@@ -37,7 +37,7 @@ class LineIndexHandlerTest {
             indexHandler.increment()
         }
         indexHandler.reset()
-        Assert.assertEquals(indexHandler.index(), 0)
+        Assert.assertEquals(indexHandler.lineNumber, 0)
     }
 
     @Test(expected = IllegalStateException::class)

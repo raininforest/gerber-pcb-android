@@ -28,18 +28,18 @@ class MOCommand(
             stringList: List<String>,
             lineIndexHandler: LineIndexHandler
         ): GerberCommand {
-            val matcher = MO_PATTERN.matcher(stringList[lineIndexHandler.index()])
+            val matcher = MO_PATTERN.matcher(stringList[lineIndexHandler.lineNumber])
             try {
                 if (matcher.find()) {
                     val unitGroup = matcher.group(1)
                     val units = if (unitGroup.equals("MM")) Units.MM else Units.IN
                     return MOCommand(
                         units = units,
-                        lineNumber = lineIndexHandler.index()
+                        lineNumber = lineIndexHandler.lineNumber
                     )
                 } else {
                     throw WrongCommandFormatException(
-                        line = lineIndexHandler.index(),
+                        line = lineIndexHandler.lineNumber,
                         command = MOCommand::class.java.simpleName
                     )
                 }

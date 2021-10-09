@@ -28,7 +28,7 @@ data class FSCommand(
             stringList: List<String>,
             lineIndexHandler: LineIndexHandler
         ): GerberCommand {
-            val matcher = FS_PATTERN.matcher(stringList[lineIndexHandler.index()])
+            val matcher = FS_PATTERN.matcher(stringList[lineIndexHandler.lineNumber])
             try {
                 if (matcher.find()) {
                     val integerCount = matcher.group(1).toInt()
@@ -36,11 +36,11 @@ data class FSCommand(
                     return FSCommand(
                         numOfInteger = integerCount,
                         numOfDecimal = decimalCount,
-                        lineNumber = lineIndexHandler.index()
+                        lineNumber = lineIndexHandler.lineNumber
                     )
                 } else {
                     throw WrongCommandFormatException(
-                        line = lineIndexHandler.index(),
+                        line = lineIndexHandler.lineNumber,
                         command = FSCommand::class.java.simpleName
                     )
                 }
