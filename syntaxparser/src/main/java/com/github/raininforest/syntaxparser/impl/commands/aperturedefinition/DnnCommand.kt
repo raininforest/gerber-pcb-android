@@ -3,7 +3,7 @@ package com.github.raininforest.syntaxparser.impl.commands.aperturedefinition
 import com.github.raininforest.syntaxparser.api.GerberCommand
 import com.github.raininforest.syntaxparser.api.GraphicsProcessor
 import com.github.raininforest.syntaxparser.impl.LineIndexHandler
-import com.github.raininforest.syntaxparser.impl.Parsable
+import com.github.raininforest.syntaxparser.impl.MultiStringParsable
 import com.github.raininforest.syntaxparser.impl.exceptions.WrongCommandFormatException
 import java.util.regex.Pattern
 
@@ -23,9 +23,9 @@ data class DnnCommand(
         }
     }
 
-    internal companion object : Parsable {
+    internal companion object : MultiStringParsable {
 
-        private val DNN_PATTERN by lazy { Pattern.compile("^D([1-9][0-9]+)") }
+        val DNN_PATTERN: Pattern by lazy { Pattern.compile("^D([1-9][0-9]+)") }
 
         override fun parse(
             stringList: List<String>,

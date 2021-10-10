@@ -3,7 +3,7 @@ package com.github.raininforest.syntaxparser.impl.commands.coordinate
 import com.github.raininforest.syntaxparser.api.GerberCommand
 import com.github.raininforest.syntaxparser.api.GraphicsProcessor
 import com.github.raininforest.syntaxparser.impl.LineIndexHandler
-import com.github.raininforest.syntaxparser.impl.Parsable
+import com.github.raininforest.syntaxparser.impl.MultiStringParsable
 import com.github.raininforest.syntaxparser.impl.exceptions.WrongCommandFormatException
 import java.util.regex.Pattern
 
@@ -20,7 +20,7 @@ data class FSCommand(
 
     override fun perform(processor: GraphicsProcessor) {}
 
-    internal companion object : Parsable {
+    internal companion object : MultiStringParsable {
 
         private val FS_PATTERN by lazy { Pattern.compile("^%FSLAX(\\d)(\\d)Y\\d+\\*%") }
 

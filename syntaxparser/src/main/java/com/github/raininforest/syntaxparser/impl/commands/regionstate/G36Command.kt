@@ -4,7 +4,7 @@ import com.github.raininforest.syntaxparser.api.GerberCommand
 import com.github.raininforest.syntaxparser.api.GraphicsProcessor
 import com.github.raininforest.syntaxparser.api.graphicsstate.enums.RegionMode
 import com.github.raininforest.syntaxparser.impl.LineIndexHandler
-import com.github.raininforest.syntaxparser.impl.Parsable
+import com.github.raininforest.syntaxparser.impl.MultiStringParsable
 import com.github.raininforest.syntaxparser.impl.exceptions.WrongCommandFormatException
 import java.util.regex.Pattern
 
@@ -19,7 +19,7 @@ data class G36Command(override val lineNumber: Int) : GerberCommand {
         processor.graphicsState.regionMode = RegionMode.INSIDE_REGION
     }
 
-    internal companion object : Parsable {
+    internal companion object : MultiStringParsable {
 
         private val G36_PATTERN by lazy { Pattern.compile("^G36\\*") }
 
