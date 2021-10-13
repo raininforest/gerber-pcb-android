@@ -1,9 +1,13 @@
 package commands
 
+import com.github.raininforest.syntaxparser.api.GerberCommand
+import com.github.raininforest.syntaxparser.api.GraphicsProcessor
 import com.github.raininforest.syntaxparser.api.graphicsstate.enums.Polarity
 import com.github.raininforest.syntaxparser.impl.LineIndexHandler
 import com.github.raininforest.syntaxparser.impl.commands.aperturetransformation.LPCommand
 import com.github.raininforest.syntaxparser.impl.exceptions.WrongCommandFormatException
+import io.mockk.mockk
+import io.mockk.verify
 import org.junit.Assert
 import org.junit.Test
 
@@ -21,7 +25,6 @@ class LPCommandTest {
         "LP54*%",
         "fdlkgsjdlksdj"
     )
-
 
     @Test
     fun `ok dark polarity test`() {
@@ -58,5 +61,23 @@ class LPCommandTest {
             }
 
         LPCommand.parse(listOfCommands, indexHandler)
+    }
+
+    @Test
+    fun `perform test polarity dark`() {
+        val command: GerberCommand = LPCommand(Polarity.DARK, 546)
+        val processor = mockk<GraphicsProcessor>(relaxed = true)
+        command.perform(processor)
+
+        verify { processor.graphicsState.polarity = Polarity.DARK }
+    }
+
+    @Test
+    fun `perform test polarity clear`() {
+        val command: GerberCommand = LPCommand(Polarity.CLEAR, 546)
+        val processor = mockk<GraphicsProcessor>(relaxed = true)
+        command.perform(processor)
+
+        verify { processor.graphicsState.polarity = Polarity.CLEAR }
     }
 }
