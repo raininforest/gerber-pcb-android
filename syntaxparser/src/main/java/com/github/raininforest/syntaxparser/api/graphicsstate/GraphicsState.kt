@@ -8,7 +8,7 @@ import com.github.raininforest.syntaxparser.api.graphicsstate.enums.*
  * Created by Sergey Velesko on 19.09.2021
  */
 interface GraphicsState {
-    //TODO
+
     val coordinateFormat: CoordinateFormat
     val units: Units
 
@@ -18,8 +18,8 @@ interface GraphicsState {
 
     var polarity: Polarity
     var mirroring: Mirroring
-    var rotation: Rotation
-    var scaling: Scaling
+    var rotation: Double
+    var scaling: Double
 
     var regionMode: RegionMode
 }
