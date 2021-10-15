@@ -10,10 +10,30 @@ import java.lang.StringBuilder
  */
 
 /**
+ * True if end of file command
+ */
+internal fun String.detectEndOfFile(): Boolean = this.contains("M02")
+
+/**
+ * True if command is comment G04
+ */
+internal fun String.detectComment(): Boolean = this.startsWith("G04")
+
+/**
+ * True if command is extended gerber command
+ */
+internal fun String.detectExtendedCommand(): Boolean = this.startsWith("%")
+
+/**
  * True if command is D01, D02, D03 or Dnn
  */
 internal fun String.detectDCommand(): Boolean =
     this.contains("X") || this.contains("Y") || this.contains("D")
+
+/**
+ * True if contains G
+ */
+internal fun String.detectGCommand(): Boolean = this.contains("G")
 
 /**
  * Detects Dnn command
