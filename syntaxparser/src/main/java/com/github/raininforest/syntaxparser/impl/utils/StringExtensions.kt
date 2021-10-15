@@ -12,28 +12,28 @@ import java.lang.StringBuilder
 /**
  * True if command is D01, D02, D03 or Dnn
  */
-fun String.detectDCommand(): Boolean =
+internal fun String.detectDCommand(): Boolean =
     this.contains("X") || this.contains("Y") || this.contains("D")
 
 /**
  * Detects Dnn command
  */
-fun String.isDnn(): Boolean = DnnCommand.DNN_PATTERN.matcher(this).find()
+internal fun String.isDnn(): Boolean = DnnCommand.DNN_PATTERN.matcher(this).find()
 
 /**
  * Detects D01 command in string, that has been already defined as DCommand string.
  */
-fun String.isDCodeD01(): Boolean = this.contains("D01*") || this.contains("D1*")
+internal fun String.isDCodeD01(): Boolean = this.contains("D01*") || this.contains("D1*")
 
 /**
  * Detects D02 command in string, that has been already defined as DCommand string.
  */
-fun String.isDCodeD02(): Boolean = this.contains("D02*") || this.contains("D2*")
+internal fun String.isDCodeD02(): Boolean = this.contains("D02*") || this.contains("D2*")
 
 /**
  * Detects D03 command in string, that has been already defined as DCommand string.
  */
-fun String.isDCodeD03(): Boolean = this.contains("D03*") || this.contains("D3*")
+internal fun String.isDCodeD03(): Boolean = this.contains("D03*") || this.contains("D3*")
 
 /**
  * Parses string value of coordinate to double
@@ -43,7 +43,7 @@ fun String.isDCodeD03(): Boolean = this.contains("D03*") || this.contains("D3*")
  *
  * @return [Double] result
  */
-fun String.fromCoordinateToDouble(numOfInt: Int, numOfDec: Int): Double {
+internal fun String.fromCoordinateToDouble(numOfInt: Int, numOfDec: Int): Double {
     val valueBuilder = StringBuilder(this)
     var sign = 0 // count of position for sign (can be 0 or 1)
     if ((valueBuilder[0] == '-') || (valueBuilder[0] == '+')) {
