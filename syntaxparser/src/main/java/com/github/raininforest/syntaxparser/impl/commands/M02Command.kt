@@ -2,7 +2,7 @@ package com.github.raininforest.syntaxparser.impl.commands
 
 import com.github.raininforest.syntaxparser.api.GerberCommand
 import com.github.raininforest.syntaxparser.api.GraphicsProcessor
-import com.github.raininforest.syntaxparser.impl.LineIndexHandler
+import com.github.raininforest.syntaxparser.impl.LineNumberHandler
 import com.github.raininforest.syntaxparser.impl.MultiStringParsable
 import com.github.raininforest.syntaxparser.impl.exceptions.WrongCommandFormatException
 import java.util.regex.Pattern
@@ -24,14 +24,14 @@ data class M02Command(override val lineNumber: Int) : GerberCommand {
 
         override fun parse(
             stringList: List<String>,
-            lineIndexHandler: LineIndexHandler
+            lineNumberHandler: LineNumberHandler
         ): GerberCommand {
-            val matcher = M02_PATTERN.matcher(stringList[lineIndexHandler.lineNumber])
+            val matcher = M02_PATTERN.matcher(stringList[lineNumberHandler.lineNumber])
             try {
                 if (matcher.find()) {
-                    return M02Command(lineNumber = lineIndexHandler.lineNumber)
+                    return M02Command(lineNumber = lineNumberHandler.lineNumber)
                 } else {
-                    throw WrongCommandFormatException(line = lineIndexHandler.lineNumber)
+                    throw WrongCommandFormatException(line = lineNumberHandler.lineNumber)
                 }
             } catch (e: Throwable) {
                 throw e

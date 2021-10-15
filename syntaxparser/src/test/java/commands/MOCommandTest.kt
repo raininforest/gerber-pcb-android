@@ -1,7 +1,7 @@
 package commands
 
 import com.github.raininforest.syntaxparser.api.graphicsstate.enums.Units
-import com.github.raininforest.syntaxparser.impl.LineIndexHandler
+import com.github.raininforest.syntaxparser.impl.LineNumberHandler
 import com.github.raininforest.syntaxparser.impl.commands.coordinate.FSCommand
 import com.github.raininforest.syntaxparser.impl.commands.coordinate.MOCommand
 import com.github.raininforest.syntaxparser.impl.exceptions.WrongCommandFormatException
@@ -21,7 +21,7 @@ class MOCommandTest {
             "%MOMM*%",
             "%FSLAX24Y24*%"
         )
-        val indexHandler = LineIndexHandler(5).apply { increment() }
+        val indexHandler = LineNumberHandler(5).apply { increment() }
         val command = MOCommand.parse(listOfCommandsWithMOMM, indexHandler) as MOCommand
 
         Assert.assertEquals(command.lineNumber, 1)
@@ -35,7 +35,7 @@ class MOCommandTest {
             "%MOIN*%",
             "%FSLAX24Y24*%"
         )
-        val indexHandler = LineIndexHandler(listOfCommands.size - 1).apply { increment() }
+        val indexHandler = LineNumberHandler(listOfCommands.size - 1).apply { increment() }
         val command = MOCommand.parse(listOfCommands, indexHandler) as MOCommand
 
         Assert.assertEquals(command.lineNumber, 1)
@@ -49,7 +49,7 @@ class MOCommandTest {
             "@MOINCH%*",
             "fdlkgsjdlksdj"
         )
-        val indexHandler = LineIndexHandler(listOfCommands.size - 1).apply { increment() }
+        val indexHandler = LineNumberHandler(listOfCommands.size - 1).apply { increment() }
         FSCommand.parse(listOfCommands, indexHandler) as FSCommand
     }
 }

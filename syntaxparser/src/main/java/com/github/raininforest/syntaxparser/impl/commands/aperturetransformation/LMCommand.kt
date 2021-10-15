@@ -3,7 +3,7 @@ package com.github.raininforest.syntaxparser.impl.commands.aperturetransformatio
 import com.github.raininforest.syntaxparser.api.GerberCommand
 import com.github.raininforest.syntaxparser.api.GraphicsProcessor
 import com.github.raininforest.syntaxparser.api.graphicsstate.enums.Mirroring
-import com.github.raininforest.syntaxparser.impl.LineIndexHandler
+import com.github.raininforest.syntaxparser.impl.LineNumberHandler
 import com.github.raininforest.syntaxparser.impl.MultiStringParsable
 import com.github.raininforest.syntaxparser.impl.exceptions.WrongCommandFormatException
 import java.util.regex.Pattern
@@ -28,9 +28,9 @@ data class LMCommand(
 
         override fun parse(
             stringList: List<String>,
-            lineIndexHandler: LineIndexHandler
+            lineNumberHandler: LineNumberHandler
         ): GerberCommand {
-            val matcher = LM_PATTERN.matcher(stringList[lineIndexHandler.lineNumber])
+            val matcher = LM_PATTERN.matcher(stringList[lineNumberHandler.lineNumber])
             try {
                 if (matcher.find()) {
                     val mirroring = when (matcher.group(1)) {
@@ -38,14 +38,14 @@ data class LMCommand(
                         "Y" -> Mirroring.Y
                         "X" -> Mirroring.X
                         "N" -> Mirroring.N
-                        else -> throw WrongCommandFormatException(line = lineIndexHandler.lineNumber)
+                        else -> throw WrongCommandFormatException(line = lineNumberHandler.lineNumber)
                     }
                     return LMCommand(
-                        lineNumber = lineIndexHandler.lineNumber,
+                        lineNumber = lineNumberHandler.lineNumber,
                         mirroring = mirroring
                     )
                 } else {
-                    throw WrongCommandFormatException(line = lineIndexHandler.lineNumber)
+                    throw WrongCommandFormatException(line = lineNumberHandler.lineNumber)
                 }
             } catch (e: Throwable) {
                 throw e

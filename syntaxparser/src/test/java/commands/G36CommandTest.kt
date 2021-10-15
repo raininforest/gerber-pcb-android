@@ -2,7 +2,7 @@ package commands
 
 import com.github.raininforest.syntaxparser.api.GraphicsProcessor
 import com.github.raininforest.syntaxparser.api.graphicsstate.enums.RegionMode
-import com.github.raininforest.syntaxparser.impl.LineIndexHandler
+import com.github.raininforest.syntaxparser.impl.LineNumberHandler
 import com.github.raininforest.syntaxparser.impl.commands.regionstate.G36Command
 import com.github.raininforest.syntaxparser.impl.exceptions.WrongCommandFormatException
 import io.mockk.mockk
@@ -24,7 +24,7 @@ class G36CommandTest {
             "M02*",
             "G37"
         )
-        val indexHandler = LineIndexHandler(listOfCommands.size - 1).apply { increment() }
+        val indexHandler = LineNumberHandler(listOfCommands.size - 1).apply { increment() }
         val command = G36Command.parse(listOfCommands, indexHandler) as G36Command
 
         Assert.assertEquals(command.lineNumber, 1)
@@ -47,7 +47,7 @@ class G36CommandTest {
             "M02*",
             "G37"
         )
-        val indexHandler = LineIndexHandler(listOfCommands.size - 1).apply { increment() }
+        val indexHandler = LineNumberHandler(listOfCommands.size - 1).apply { increment() }
         G36Command.parse(listOfCommands, indexHandler) as G36Command
     }
 }

@@ -2,7 +2,7 @@ package com.github.raininforest.syntaxparser.impl.commands.coordinate
 
 import com.github.raininforest.syntaxparser.api.GerberCommand
 import com.github.raininforest.syntaxparser.api.GraphicsProcessor
-import com.github.raininforest.syntaxparser.impl.LineIndexHandler
+import com.github.raininforest.syntaxparser.impl.LineNumberHandler
 import com.github.raininforest.syntaxparser.impl.MultiStringParsable
 import com.github.raininforest.syntaxparser.impl.exceptions.WrongCommandFormatException
 import java.util.regex.Pattern
@@ -22,13 +22,14 @@ data class FSCommand(
 
     internal companion object : MultiStringParsable {
 
-        private val FS_PATTERN by lazy { Pattern.compile("^%FSLAX(\\d)(\\d)Y\\d+\\*%") }
+        @JvmStatic
+        val FS_PATTERN: Pattern by lazy { Pattern.compile("^%FSLAX(\\d)(\\d)Y\\d+\\*%") }
 
         override fun parse(
             stringList: List<String>,
-            lineIndexHandler: LineIndexHandler
+            lineNumberHandler: LineNumberHandler
         ): GerberCommand {
-            val matcher = FS_PATTERN.matcher(stringList[lineIndexHandler.lineNumber])
+            val matcher = FS_PATTERN.matcher(stringList[lineNumberHandler.lineNumber])
             try {
                 if (matcher.find()) {
                     val integerCount = matcher.group(1).toInt()
@@ -36,10 +37,10 @@ data class FSCommand(
                     return FSCommand(
                         numOfInteger = integerCount,
                         numOfDecimal = decimalCount,
-                        lineNumber = lineIndexHandler.lineNumber
+                        lineNumber = lineNumberHandler.lineNumber
                     )
                 } else {
-                    throw WrongCommandFormatException(line = lineIndexHandler.lineNumber)
+                    throw WrongCommandFormatException(line = lineNumberHandler.lineNumber)
                 }
             } catch (e: Throwable) {
                 throw e

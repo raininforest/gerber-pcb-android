@@ -1,7 +1,7 @@
 package commands
 
 import com.github.raininforest.syntaxparser.api.GraphicsProcessor
-import com.github.raininforest.syntaxparser.impl.LineIndexHandler
+import com.github.raininforest.syntaxparser.impl.LineNumberHandler
 import com.github.raininforest.syntaxparser.impl.commands.M02Command
 import com.github.raininforest.syntaxparser.impl.exceptions.WrongCommandFormatException
 import io.mockk.mockk
@@ -23,7 +23,7 @@ class M02CommandTest {
             "%FSLAX24Y24*%",
             "M02*"
         )
-        val indexHandler = LineIndexHandler(listOfCommands.size - 1)
+        val indexHandler = LineNumberHandler(listOfCommands.size - 1)
             .apply {
                 increment()
                 increment()
@@ -40,7 +40,7 @@ class M02CommandTest {
             "%FSLAX2.34Y24*%",
             "fdlkgsjdlksdj"
         )
-        val indexHandler = LineIndexHandler(listOfCommands.size - 1).apply { increment() }
+        val indexHandler = LineNumberHandler(listOfCommands.size - 1).apply { increment() }
         M02Command.parse(listOfCommands, indexHandler) as M02Command
     }
 

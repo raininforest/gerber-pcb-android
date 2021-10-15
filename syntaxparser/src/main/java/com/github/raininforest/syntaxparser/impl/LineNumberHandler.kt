@@ -4,7 +4,7 @@ package com.github.raininforest.syntaxparser.impl
 /**
  * Created by Sergey Velesko on 26.09.2021
  */
-internal class LineIndexHandler(private val maxIndex: Int) {
+internal class LineNumberHandler(val maxIndex: Int) {
 
     init {
         if (maxIndex < 0) {

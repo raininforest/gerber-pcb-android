@@ -3,7 +3,7 @@ package com.github.raininforest.syntaxparser.impl.commands.coordinate
 import com.github.raininforest.syntaxparser.api.GerberCommand
 import com.github.raininforest.syntaxparser.api.GraphicsProcessor
 import com.github.raininforest.syntaxparser.api.graphicsstate.enums.Units
-import com.github.raininforest.syntaxparser.impl.LineIndexHandler
+import com.github.raininforest.syntaxparser.impl.LineNumberHandler
 import com.github.raininforest.syntaxparser.impl.MultiStringParsable
 import com.github.raininforest.syntaxparser.impl.exceptions.WrongCommandFormatException
 import java.util.regex.Pattern
@@ -22,23 +22,24 @@ class MOCommand(
 
     internal companion object : MultiStringParsable {
 
-        private val MO_PATTERN by lazy { Pattern.compile("^%MO(MM|IN)\\*%") }
+        @JvmStatic
+        val MO_PATTERN: Pattern by lazy { Pattern.compile("^%MO(MM|IN)\\*%") }
 
         override fun parse(
             stringList: List<String>,
-            lineIndexHandler: LineIndexHandler
+            lineNumberHandler: LineNumberHandler
         ): GerberCommand {
-            val matcher = MO_PATTERN.matcher(stringList[lineIndexHandler.lineNumber])
+            val matcher = MO_PATTERN.matcher(stringList[lineNumberHandler.lineNumber])
             try {
                 if (matcher.find()) {
                     val unitGroup = matcher.group(1)
                     val units = if (unitGroup.equals("MM")) Units.MM else Units.IN
                     return MOCommand(
                         units = units,
-                        lineNumber = lineIndexHandler.lineNumber
+                        lineNumber = lineNumberHandler.lineNumber
                     )
                 } else {
-                    throw WrongCommandFormatException(line = lineIndexHandler.lineNumber)
+                    throw WrongCommandFormatException(line = lineNumberHandler.lineNumber)
                 }
             } catch (e: Throwable) {
                 throw e

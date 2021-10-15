@@ -1,6 +1,6 @@
 package commands
 
-import com.github.raininforest.syntaxparser.impl.LineIndexHandler
+import com.github.raininforest.syntaxparser.impl.LineNumberHandler
 import com.github.raininforest.syntaxparser.impl.commands.coordinate.FSCommand
 import com.github.raininforest.syntaxparser.impl.exceptions.WrongCommandFormatException
 import org.junit.Assert.assertEquals
@@ -20,7 +20,7 @@ class FSCommandTest {
             "%FSLAX24Y24*%",
             "fdlkgsjdlksdj"
         )
-        val indexHandler = LineIndexHandler(listOfCommands.size - 1).apply { increment() }
+        val indexHandler = LineNumberHandler(listOfCommands.size - 1).apply { increment() }
         val command = FSCommand.parse(listOfCommands, indexHandler) as FSCommand
 
         assertEquals(command.lineNumber, 1)
@@ -35,7 +35,7 @@ class FSCommandTest {
             "SLAX24Y24*%",
             "fdlkgsjdlksdj"
         )
-        val indexHandler = LineIndexHandler(listOfCommands.size - 1).apply { increment() }
+        val indexHandler = LineNumberHandler(listOfCommands.size - 1).apply { increment() }
         FSCommand.parse(listOfCommands, indexHandler) as FSCommand
     }
 
@@ -46,7 +46,7 @@ class FSCommandTest {
             "%FSLAX2.34Y24*%",
             "fdlkgsjdlksdj"
         )
-        val indexHandler = LineIndexHandler(listOfCommands.size - 1).apply { increment() }
+        val indexHandler = LineNumberHandler(listOfCommands.size - 1).apply { increment() }
         FSCommand.parse(listOfCommands, indexHandler) as FSCommand
     }
 }

@@ -3,7 +3,7 @@ package com.github.raininforest.syntaxparser.impl.commands.aperturetransformatio
 import com.github.raininforest.syntaxparser.api.GerberCommand
 import com.github.raininforest.syntaxparser.api.GraphicsProcessor
 import com.github.raininforest.syntaxparser.api.graphicsstate.enums.Polarity
-import com.github.raininforest.syntaxparser.impl.LineIndexHandler
+import com.github.raininforest.syntaxparser.impl.LineNumberHandler
 import com.github.raininforest.syntaxparser.impl.MultiStringParsable
 import com.github.raininforest.syntaxparser.impl.exceptions.WrongCommandFormatException
 import java.util.regex.Pattern
@@ -28,19 +28,19 @@ data class LPCommand(
 
         override fun parse(
             stringList: List<String>,
-            lineIndexHandler: LineIndexHandler
+            lineNumberHandler: LineNumberHandler
         ): GerberCommand {
-            val matcher = LP_PATTERN.matcher(stringList[lineIndexHandler.lineNumber])
+            val matcher = LP_PATTERN.matcher(stringList[lineNumberHandler.lineNumber])
             try {
                 if (matcher.find()) {
                     val polarity = when (matcher.group(1)) {
                         "C" -> Polarity.CLEAR
                         "D" -> Polarity.DARK
-                        else -> throw WrongCommandFormatException(line = lineIndexHandler.lineNumber)
+                        else -> throw WrongCommandFormatException(line = lineNumberHandler.lineNumber)
                     }
-                    return LPCommand(lineNumber = lineIndexHandler.lineNumber, polarity = polarity)
+                    return LPCommand(lineNumber = lineNumberHandler.lineNumber, polarity = polarity)
                 } else {
-                    throw WrongCommandFormatException(line = lineIndexHandler.lineNumber)
+                    throw WrongCommandFormatException(line = lineNumberHandler.lineNumber)
                 }
             } catch (e: Throwable) {
                 throw e

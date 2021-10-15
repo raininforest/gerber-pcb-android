@@ -3,7 +3,7 @@ package commands
 import com.github.raininforest.syntaxparser.api.GerberCommand
 import com.github.raininforest.syntaxparser.api.GraphicsProcessor
 import com.github.raininforest.syntaxparser.api.graphicsstate.enums.Mirroring
-import com.github.raininforest.syntaxparser.impl.LineIndexHandler
+import com.github.raininforest.syntaxparser.impl.LineNumberHandler
 import com.github.raininforest.syntaxparser.impl.commands.aperturetransformation.LMCommand
 import com.github.raininforest.syntaxparser.impl.commands.aperturetransformation.LPCommand
 import com.github.raininforest.syntaxparser.impl.exceptions.WrongCommandFormatException
@@ -29,7 +29,7 @@ class LMCommandTest {
 
     @Test
     fun `N mirroring test`() {
-        val indexHandler = LineIndexHandler(listOfCommands.size - 1)
+        val indexHandler = LineNumberHandler(listOfCommands.size - 1)
             .apply { increment() }
 
         val command = LMCommand.parse(listOfCommands, indexHandler) as LMCommand
@@ -40,7 +40,7 @@ class LMCommandTest {
 
     @Test
     fun `X mirroring test`() {
-        val indexHandler = LineIndexHandler(listOfCommands.size - 1)
+        val indexHandler = LineNumberHandler(listOfCommands.size - 1)
             .apply {
                 increment()
                 increment()
@@ -54,7 +54,7 @@ class LMCommandTest {
 
     @Test
     fun `Y mirroring test`() {
-        val indexHandler = LineIndexHandler(listOfCommands.size - 1)
+        val indexHandler = LineNumberHandler(listOfCommands.size - 1)
             .apply {
                 increment()
                 increment()
@@ -69,7 +69,7 @@ class LMCommandTest {
 
     @Test
     fun `XY mirroring test`() {
-        val indexHandler = LineIndexHandler(listOfCommands.size - 1)
+        val indexHandler = LineNumberHandler(listOfCommands.size - 1)
             .apply {
                 increment()
                 increment()
@@ -86,7 +86,7 @@ class LMCommandTest {
 
     @Test(expected = WrongCommandFormatException::class)
     fun `wrong format test`() {
-        val indexHandler = LineIndexHandler(listOfCommands.size - 1)
+        val indexHandler = LineNumberHandler(listOfCommands.size - 1)
             .apply {
                 increment()
                 increment()

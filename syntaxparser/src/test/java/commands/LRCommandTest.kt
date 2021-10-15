@@ -2,7 +2,7 @@ package commands
 
 import com.github.raininforest.syntaxparser.api.GerberCommand
 import com.github.raininforest.syntaxparser.api.GraphicsProcessor
-import com.github.raininforest.syntaxparser.impl.LineIndexHandler
+import com.github.raininforest.syntaxparser.impl.LineNumberHandler
 import com.github.raininforest.syntaxparser.impl.commands.aperturetransformation.LRCommand
 import com.github.raininforest.syntaxparser.impl.commands.aperturetransformation.LSCommand
 import com.github.raininforest.syntaxparser.impl.exceptions.WrongCommandFormatException
@@ -28,7 +28,7 @@ class LRCommandTest {
 
     @Test
     fun `decimal less than 1 test`() {
-        val indexHandler = LineIndexHandler(listOfCommands.size - 1)
+        val indexHandler = LineNumberHandler(listOfCommands.size - 1)
             .apply { increment() }
 
         val command = LRCommand.parse(listOfCommands, indexHandler) as LRCommand
@@ -39,7 +39,7 @@ class LRCommandTest {
 
     @Test
     fun `decimal more than 1 test`() {
-        val indexHandler = LineIndexHandler(listOfCommands.size - 1)
+        val indexHandler = LineNumberHandler(listOfCommands.size - 1)
             .apply {
                 increment()
                 increment()
@@ -53,7 +53,7 @@ class LRCommandTest {
 
     @Test
     fun `negative decimal test`() {
-        val indexHandler = LineIndexHandler(listOfCommands.size - 1)
+        val indexHandler = LineNumberHandler(listOfCommands.size - 1)
             .apply {
                 increment()
                 increment()
@@ -68,7 +68,7 @@ class LRCommandTest {
 
     @Test(expected = WrongCommandFormatException::class)
     fun `wrong format when negative scale`() {
-        val indexHandler = LineIndexHandler(listOfCommands.size - 1)
+        val indexHandler = LineNumberHandler(listOfCommands.size - 1)
             .apply {
                 increment()
                 increment()

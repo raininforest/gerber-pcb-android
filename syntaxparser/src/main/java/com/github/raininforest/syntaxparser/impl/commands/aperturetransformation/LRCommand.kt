@@ -2,7 +2,7 @@ package com.github.raininforest.syntaxparser.impl.commands.aperturetransformatio
 
 import com.github.raininforest.syntaxparser.api.GerberCommand
 import com.github.raininforest.syntaxparser.api.GraphicsProcessor
-import com.github.raininforest.syntaxparser.impl.LineIndexHandler
+import com.github.raininforest.syntaxparser.impl.LineNumberHandler
 import com.github.raininforest.syntaxparser.impl.MultiStringParsable
 import com.github.raininforest.syntaxparser.impl.exceptions.WrongCommandFormatException
 import java.util.regex.Pattern
@@ -25,18 +25,18 @@ data class LRCommand(
 
         override fun parse(
             stringList: List<String>,
-            lineIndexHandler: LineIndexHandler
+            lineNumberHandler: LineNumberHandler
         ): GerberCommand {
-            val matcher = LR_PATTERN.matcher(stringList[lineIndexHandler.lineNumber])
+            val matcher = LR_PATTERN.matcher(stringList[lineNumberHandler.lineNumber])
             try {
                 if (matcher.find()) {
                     val rotationAngle = matcher.group(1).toDouble()
                     return LRCommand(
-                        lineNumber = lineIndexHandler.lineNumber,
+                        lineNumber = lineNumberHandler.lineNumber,
                         rotation = rotationAngle
                     )
                 } else {
-                    throw WrongCommandFormatException(line = lineIndexHandler.lineNumber)
+                    throw WrongCommandFormatException(line = lineNumberHandler.lineNumber)
                 }
             } catch (e: Throwable) {
                 throw e

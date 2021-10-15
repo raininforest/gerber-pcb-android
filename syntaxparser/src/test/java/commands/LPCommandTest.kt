@@ -3,7 +3,7 @@ package commands
 import com.github.raininforest.syntaxparser.api.GerberCommand
 import com.github.raininforest.syntaxparser.api.GraphicsProcessor
 import com.github.raininforest.syntaxparser.api.graphicsstate.enums.Polarity
-import com.github.raininforest.syntaxparser.impl.LineIndexHandler
+import com.github.raininforest.syntaxparser.impl.LineNumberHandler
 import com.github.raininforest.syntaxparser.impl.commands.aperturetransformation.LPCommand
 import com.github.raininforest.syntaxparser.impl.exceptions.WrongCommandFormatException
 import io.mockk.mockk
@@ -28,7 +28,7 @@ class LPCommandTest {
 
     @Test
     fun `ok dark polarity test`() {
-        val indexHandler = LineIndexHandler(listOfCommands.size - 1)
+        val indexHandler = LineNumberHandler(listOfCommands.size - 1)
             .apply { increment() }
 
         val command = LPCommand.parse(listOfCommands, indexHandler) as LPCommand
@@ -39,7 +39,7 @@ class LPCommandTest {
 
     @Test
     fun `ok clear polarity test`() {
-        val indexHandler = LineIndexHandler(listOfCommands.size - 1)
+        val indexHandler = LineNumberHandler(listOfCommands.size - 1)
             .apply {
                 increment()
                 increment()
@@ -53,7 +53,7 @@ class LPCommandTest {
 
     @Test(expected = WrongCommandFormatException::class)
     fun `wrong format test`() {
-        val indexHandler = LineIndexHandler(listOfCommands.size - 1)
+        val indexHandler = LineNumberHandler(listOfCommands.size - 1)
             .apply {
                 increment()
                 increment()

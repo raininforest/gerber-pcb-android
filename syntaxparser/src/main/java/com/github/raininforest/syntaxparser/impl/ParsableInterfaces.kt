@@ -10,14 +10,14 @@ import com.github.raininforest.syntaxparser.api.GerberCommand
 internal interface MultiStringParsable {
     fun parse(
         stringList: List<String>,
-        lineIndexHandler: LineIndexHandler,
+        lineNumberHandler: LineNumberHandler,
     ): GerberCommand
 }
 
 internal interface CoordinateDataParsable {
     fun parse(
         stringList: List<String>,
-        lineIndexHandler: LineIndexHandler,
+        lineNumberHandler: LineNumberHandler,
         numOfInt: Int,
         numOfDec: Int
     ): GerberCommand

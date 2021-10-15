@@ -1,7 +1,7 @@
 package commands
 
 import com.github.raininforest.syntaxparser.api.GraphicsProcessor
-import com.github.raininforest.syntaxparser.impl.LineIndexHandler
+import com.github.raininforest.syntaxparser.impl.LineNumberHandler
 import com.github.raininforest.syntaxparser.impl.commands.operations.D03Command
 import io.mockk.every
 import io.mockk.mockk
@@ -50,7 +50,7 @@ class D03CommandTest(
             line,
             "fdlkgsjdlksdj"
         )
-        val indexHandler = LineIndexHandler(listOfCommands.size - 1).apply { increment() }
+        val indexHandler = LineNumberHandler(listOfCommands.size - 1).apply { increment() }
         val command =
             D03Command.parse(listOfCommands, indexHandler, numOfInt, numOfDec) as D03Command
 
