@@ -4,6 +4,7 @@ import com.github.raininforest.syntaxparser.api.GerberCommand
 import com.github.raininforest.syntaxparser.api.GraphicsProcessor
 import com.github.raininforest.syntaxparser.impl.LineNumberHandler
 import com.github.raininforest.syntaxparser.impl.MultiStringParsable
+import com.github.raininforest.syntaxparser.impl.SingleStringParsable
 import com.github.raininforest.syntaxparser.impl.exceptions.WrongCommandFormatException
 import java.util.regex.Pattern
 
@@ -23,24 +24,24 @@ data class DnnCommand(
         }
     }
 
-    internal companion object : MultiStringParsable {
+    internal companion object : SingleStringParsable {
 
         val DNN_PATTERN: Pattern by lazy { Pattern.compile("^D([1-9][0-9]+)") }
 
         override fun parse(
-            stringList: List<String>,
-            lineNumberHandler: LineNumberHandler
+            currentString: String,
+            lineNumber: Int
         ): GerberCommand {
-            val matcher = DNN_PATTERN.matcher(stringList[lineNumberHandler.lineNumber])
+            val matcher = DNN_PATTERN.matcher(currentString)
             try {
                 if (matcher.find()) {
                     val apertureInt = matcher.group(1)
                     return DnnCommand(
                         apertureNumber = apertureInt,
-                        lineNumber = lineNumberHandler.lineNumber
+                        lineNumber = lineNumber
                     )
                 } else {
-                    throw WrongCommandFormatException(line = lineNumberHandler.lineNumber)
+                    throw WrongCommandFormatException(line = lineNumber)
                 }
             } catch (e: Throwable) {
                 throw e

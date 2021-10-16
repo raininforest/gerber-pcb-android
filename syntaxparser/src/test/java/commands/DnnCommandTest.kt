@@ -21,15 +21,11 @@ import org.junit.Test
 class DnnCommandTest {
     @Test
     fun `ok format test`() {
-        val listOfCommands = listOf(
-            "34534354",
-            "D10*",
-            "fdlkgsjdlksdj"
-        )
-        val indexHandler = LineNumberHandler(listOfCommands.size - 1).apply { increment() }
-        val command = DnnCommand.parse(listOfCommands, indexHandler) as DnnCommand
+        val line = "D10*"
+        val lineNumber = 2
+        val command = DnnCommand.parse(line, lineNumber) as DnnCommand
 
-        Assert.assertEquals(command.lineNumber, 1)
+        Assert.assertEquals(command.lineNumber, lineNumber)
         Assert.assertEquals(command.apertureNumber, "10")
     }
 
@@ -54,23 +50,15 @@ class DnnCommandTest {
 
     @Test(expected = WrongCommandFormatException::class)
     fun `wrong format test 1`() {
-        val listOfCommands = listOf(
-            "34534354*",
-            "Dnn*",
-            "fdlkgsjdlksdj*"
-        )
-        val indexHandler = LineNumberHandler(listOfCommands.size - 1).apply { increment() }
-        DnnCommand.parse(listOfCommands, indexHandler) as DnnCommand
+        val line = "Dnn*"
+        val lineNumber = 12
+        DnnCommand.parse(line, lineNumber) as DnnCommand
     }
 
     @Test(expected = WrongCommandFormatException::class)
     fun `wrong format test 2`() {
-        val listOfCommands = listOf(
-            "34534354*",
-            "D09*",
-            "fdlkgsjdlksdj*"
-        )
-        val indexHandler = LineNumberHandler(listOfCommands.size - 1).apply { increment() }
-        DnnCommand.parse(listOfCommands, indexHandler) as DnnCommand
+        val line = "D09*"
+        val lineNumber = 12
+        DnnCommand.parse(line, lineNumber) as DnnCommand
     }
 }
