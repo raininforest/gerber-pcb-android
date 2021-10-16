@@ -27,7 +27,20 @@ interface GraphicsProcessor {
         sweepAngle: Double
     )
 
+    fun lineTo(x: Double, y: Double)
+
+    fun arcTo(
+        left: Double,
+        top: Double,
+        right: Double,
+        bottom: Double,
+        startAngle: Double,
+        sweepAngle: Double
+    )
+
     fun flash(x: Double, y: Double)
+
+    fun closeContourAndStartNewOne()
 
     fun finishDrawing()
 }
