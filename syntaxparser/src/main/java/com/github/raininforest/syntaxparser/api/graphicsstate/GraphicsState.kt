@@ -2,6 +2,7 @@ package com.github.raininforest.syntaxparser.api.graphicsstate
 
 import com.github.raininforest.syntaxparser.api.graphicsstate.enums.Units
 import com.github.raininforest.syntaxparser.api.Aperture
+import com.github.raininforest.syntaxparser.api.PointD
 import com.github.raininforest.syntaxparser.api.graphicsstate.enums.*
 
 /**
@@ -12,7 +13,7 @@ interface GraphicsState {
     val coordinateFormat: CoordinateFormat
     val units: Units
 
-    var currentPoint: Pair<Double, Double>
+    var currentPoint: PointD
     var currentAperture: Aperture
     var interpolationState: InterpolationState
 

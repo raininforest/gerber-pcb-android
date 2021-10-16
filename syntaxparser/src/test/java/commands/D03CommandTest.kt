@@ -1,6 +1,8 @@
 package commands
 
 import com.github.raininforest.syntaxparser.api.GraphicsProcessor
+import com.github.raininforest.syntaxparser.api.PointD
+import com.github.raininforest.syntaxparser.api.graphicsstate.CoordinateFormat
 import com.github.raininforest.syntaxparser.impl.LineNumberHandler
 import com.github.raininforest.syntaxparser.impl.commands.operations.D03Command
 import io.mockk.every
@@ -29,30 +31,24 @@ class D03CommandTest(
         val command = D03Command(xVal, yVal, 43)
         val graphicsProcessor = mockk<GraphicsProcessor>(relaxed = true)
 
-        every { graphicsProcessor.graphicsState.currentPoint.first } returns currentVal
-        every { graphicsProcessor.graphicsState.currentPoint.second } returns currentVal
+        every { graphicsProcessor.graphicsState.currentPoint.x } returns currentVal
+        every { graphicsProcessor.graphicsState.currentPoint.y } returns currentVal
 
         command.perform(graphicsProcessor)
 
         verify { graphicsProcessor.flash(x = xVal ?: currentVal, y = yVal ?: currentVal) }
         verify {
             graphicsProcessor.graphicsState.currentPoint =
-                Pair(xVal ?: currentVal, yVal ?: currentVal)
+                PointD(xVal ?: currentVal, yVal ?: currentVal)
         }
     }
 
     @Test
     fun `coordinate parse test`() {
-        val numOfInt = 2
-        val numOfDec = 4
-        val listOfCommands = listOf(
-            "34534354",
-            line,
-            "fdlkgsjdlksdj"
-        )
-        val indexHandler = LineNumberHandler(listOfCommands.size - 1).apply { increment() }
+        val coordinateFormat = CoordinateFormat(2, 4)
+
         val command =
-            D03Command.parse(listOfCommands, indexHandler, numOfInt, numOfDec) as D03Command
+            D03Command.parse(line, 34, coordinateFormat) as D03Command
 
         Assert.assertEquals(command.x, xVal)
         Assert.assertEquals(command.y, yVal)

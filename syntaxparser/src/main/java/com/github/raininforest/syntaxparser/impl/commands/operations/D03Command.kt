@@ -2,6 +2,7 @@ package com.github.raininforest.syntaxparser.impl.commands.operations
 
 import com.github.raininforest.syntaxparser.api.GerberCommand
 import com.github.raininforest.syntaxparser.api.GraphicsProcessor
+import com.github.raininforest.syntaxparser.api.graphicsstate.CoordinateFormat
 import com.github.raininforest.syntaxparser.impl.CoordinateDataParsable
 import com.github.raininforest.syntaxparser.impl.LineNumberHandler
 
@@ -18,8 +19,8 @@ class D03Command(
 
     override fun perform(processor: GraphicsProcessor) {
         processor.flash(
-            x ?: processor.graphicsState.currentPoint.first,
-            y ?: processor.graphicsState.currentPoint.second
+            x ?: processor.graphicsState.currentPoint.x,
+            y ?: processor.graphicsState.currentPoint.y
         )
         updateCurrentPoint(processor, x, y)
     }
