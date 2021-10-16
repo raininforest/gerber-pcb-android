@@ -5,5 +5,5 @@ package com.github.raininforest.syntaxparser.api.graphicsstate.enums
  */
 enum class RegionMode {
     NO_REGION,
-    INSIDE_REGION,
+    REGION,
 }
