@@ -21,6 +21,4 @@ interface GraphicsState {
     var mirroring: Mirroring
     var rotation: Double
     var scaling: Double
-
-    var regionMode: RegionMode
 }
