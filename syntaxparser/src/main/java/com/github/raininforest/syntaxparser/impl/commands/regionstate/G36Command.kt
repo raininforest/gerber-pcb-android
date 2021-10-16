@@ -16,27 +16,6 @@ import java.util.regex.Pattern
 data class G36Command(override val lineNumber: Int) : GerberCommand {
 
     override fun perform(processor: GraphicsProcessor) {
-        processor.graphicsState.regionMode = RegionMode.INSIDE_REGION
-    }
-
-    internal companion object : MultiStringParsable {
-
-        private val G36_PATTERN by lazy { Pattern.compile("^G36\\*") }
-
-        override fun parse(
-            stringList: List<String>,
-            lineNumberHandler: LineNumberHandler
-        ): GerberCommand {
-            val matcher = G36_PATTERN.matcher(stringList[lineNumberHandler.lineNumber])
-            try {
-                if (matcher.find()) {
-                    return G36Command(lineNumber = lineNumberHandler.lineNumber)
-                } else {
-                    throw WrongCommandFormatException(line = lineNumberHandler.lineNumber)
-                }
-            } catch (e: Throwable) {
-                throw e
-            }
-        }
+        processor.regionMode = RegionMode.REGION
     }
 }
