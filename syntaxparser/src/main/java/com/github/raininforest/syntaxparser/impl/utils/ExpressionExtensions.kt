@@ -45,8 +45,9 @@ internal fun String.parseToExpression(): MacroExpression {
                 (currentChar == ')')
         val isPreviousSymbolOperator =
             charIndex > 0 && (expressionItems.last() is MacroExpressionOperator)
+        val isPreviousSymbolNotClosingPar = charIndex > 0 && this[charIndex-1] != ')'
         val isItUnaryOperator = (currentChar == '-' || currentChar == '+') &&
-                (charIndex == 0 || isPreviousSymbolOperator)
+                (charIndex == 0 || (isPreviousSymbolOperator && isPreviousSymbolNotClosingPar))
 
         when {
             isNumberBegins -> {
