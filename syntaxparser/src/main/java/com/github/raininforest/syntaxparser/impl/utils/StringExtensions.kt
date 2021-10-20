@@ -10,6 +10,11 @@ import java.lang.StringBuilder
  */
 
 /**
+ * True if string ends with %*
+ */
+internal fun StringBuilder.isNotOneLineAMCommand(): Boolean = !endsWith("%*")
+
+/**
  * True if end of file command
  */
 internal fun String.detectEndOfFile(): Boolean = this.contains("M02")
