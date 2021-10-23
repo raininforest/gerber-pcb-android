@@ -11,8 +11,8 @@ import java.util.regex.Pattern
  * Created by Sergey Velesko on 14.10.2021
  */
 data class LRCommand(
-    override val lineNumber: Int,
-    val rotation: Double
+    val rotation: Double,
+    override val lineNumber: Int
 ) : GerberCommand {
 
     override fun perform(processor: GraphicsProcessor) {

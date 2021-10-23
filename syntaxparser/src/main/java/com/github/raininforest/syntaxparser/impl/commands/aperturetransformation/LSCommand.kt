@@ -13,8 +13,8 @@ import java.util.regex.Pattern
  * Created by Sergey Velesko on 14.10.2021
  */
 data class LSCommand(
-    override val lineNumber: Int,
-    val scaling: Double
+    val scaling: Double,
+    override val lineNumber: Int
 ) : GerberCommand {
 
     override fun perform(processor: GraphicsProcessor) {
