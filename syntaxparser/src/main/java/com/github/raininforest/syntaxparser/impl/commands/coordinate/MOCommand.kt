@@ -13,7 +13,7 @@ import java.util.regex.Pattern
  *
  * Created by Sergey Velesko on 03.10.2021
  */
-class MOCommand(
+data class MOCommand(
     val units: Units,
     override val lineNumber: Int
 ) : GerberCommand {
