@@ -4,14 +4,15 @@ import com.github.raininforest.syntaxparser.api.Aperture
 import com.github.raininforest.syntaxparser.api.GraphicsProcessor
 
 /**
- * Standard circle [Aperture]
+ * Standard obround [Aperture]
  *
  * Created by Sergey Velesko on 16.10.2021
  */
-data class CircleAperture(
+data class ObroundAperture(
     override val apertureId: String,
-    val diameter: Double,
-    val holeDiameter: Double
+    val xSize: Double,
+    val ySize: Double,
+    val holeDiameter: Double,
 ) : Aperture {
 
     override fun flash(processor: GraphicsProcessor) {
@@ -20,11 +21,13 @@ data class CircleAperture(
         // start
         processor.startPath()
 
-        // circle
-        processor.addCircle(
-            cX = center.x,
-            cY = center.y,
-            r = diameter / 2
+        // drawRoundRect
+        processor.addRoundedRect(
+            left = center.x - xSize / 2,
+            top = center.y + ySize / 2,
+            right = center.x + xSize / 2,
+            bottom = center.y - ySize / 2,
+            radius = minOf(xSize, ySize)
         )
 
         // hole

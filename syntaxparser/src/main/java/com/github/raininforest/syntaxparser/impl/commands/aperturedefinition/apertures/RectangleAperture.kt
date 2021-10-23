@@ -4,13 +4,14 @@ import com.github.raininforest.syntaxparser.api.Aperture
 import com.github.raininforest.syntaxparser.api.GraphicsProcessor
 
 /**
- * Standard circle [Aperture]
+ * Standard rectangle [Aperture]
  *
  * Created by Sergey Velesko on 16.10.2021
  */
-data class CircleAperture(
+data class RectangleAperture(
     override val apertureId: String,
-    val diameter: Double,
+    val xSize: Double,
+    val ySize: Double,
     val holeDiameter: Double
 ) : Aperture {
 
@@ -20,11 +21,12 @@ data class CircleAperture(
         // start
         processor.startPath()
 
-        // circle
-        processor.addCircle(
-            cX = center.x,
-            cY = center.y,
-            r = diameter / 2
+        // rectangle
+        processor.addRect(
+            left = center.x - xSize / 2,
+            top = center.y + ySize / 2,
+            right = center.x + xSize / 2,
+            bottom = center.y - ySize / 2,
         )
 
         // hole
