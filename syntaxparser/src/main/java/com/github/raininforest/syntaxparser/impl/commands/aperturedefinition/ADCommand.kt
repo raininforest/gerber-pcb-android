@@ -15,10 +15,10 @@ import java.util.regex.Pattern
  * Created by Sergey Velesko on 16.10.2021
  */
 data class ADCommand(
-    override val lineNumber: Int,
     val apertureId: String,
     val apertureTemplate: String,
-    val parameters: List<Double>
+    val parameters: List<Double>,
+    override val lineNumber: Int,
 ) : GerberCommand {
 
     override fun perform(processor: GraphicsProcessor) {
