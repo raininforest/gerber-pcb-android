@@ -1,6 +1,6 @@
 package com.github.raininforest.syntaxparser.api.dictionary
 
-import com.github.raininforest.syntaxparser.api.MacroTemplate
+import com.github.raininforest.syntaxparser.impl.commands.aperturemacro.templates.MacroTemplate
 
 /**
  * Macro templates dictionary. Contains macro templates that are used to create apertures
