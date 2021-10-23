@@ -6,6 +6,6 @@ package com.github.raininforest.syntaxparser.impl.exceptions
  * Created by Sergey Velesko on 26.09.2021
  */
 data class WrongCommandFormatException(
-    private val line: Int,
+    private val line: Int? = null,
     override val message: String = "Wrong command format",
 ) : Throwable()
