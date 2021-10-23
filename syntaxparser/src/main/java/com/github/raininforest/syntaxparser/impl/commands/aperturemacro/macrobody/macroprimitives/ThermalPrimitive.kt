@@ -3,17 +3,17 @@ package com.github.raininforest.syntaxparser.impl.commands.aperturemacro.macrobo
 import com.github.raininforest.syntaxparser.api.GraphicsProcessor
 
 /**
- * Comment [MacroPrimitive]
- *
  * Created by Sergey Velesko on 20.10.2021
  */
-class CommentPrimitive : MacroPrimitive {
+class ThermalPrimitive : MacroPrimitive {
 
     override fun draw(processor: GraphicsProcessor) {
-        // ignore
+        TODO("Not yet implemented")
     }
 
     companion object : MacroPrimitive.MacroPrimitiveFactory {
-        override fun create(modifiers: List<Double>): MacroPrimitive = CommentPrimitive()
+        override fun create(modifiers: List<Double>): MacroPrimitive {
+            TODO("Not yet implemented")
+        }
     }
 }
