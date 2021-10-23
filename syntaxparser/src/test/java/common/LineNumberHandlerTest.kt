@@ -22,9 +22,9 @@ class LineNumberHandlerTest {
 
     @Test(expected = IndexOutOfBoundsException::class)
     fun `test illegal index increment`() {
-        val maxIndex = 2147483647
+        val maxIndex = 214748364
         val indexHandler = LineNumberHandler(maxIndex)
-        for (i in 0..maxIndex) {
+        for (i in 0..(maxIndex+1)) {
             indexHandler.increment()
         }
     }

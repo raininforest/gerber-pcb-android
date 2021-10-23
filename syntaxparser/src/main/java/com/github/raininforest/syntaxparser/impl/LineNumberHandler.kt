@@ -22,7 +22,7 @@ internal class LineNumberHandler(val maxIndex: Int) {
         get() = _lineNumber
 
     fun increment() {
-        if (_lineNumber < maxIndex) {
+        if (_lineNumber <= maxIndex) {
             _lineNumber++
         } else {
             throw IndexOutOfBoundsException("Wrong line index! Index must be < list size")
