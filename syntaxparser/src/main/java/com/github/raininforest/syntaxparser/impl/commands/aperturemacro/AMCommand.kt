@@ -49,7 +49,7 @@ data class AMCommand(
                     while (notEndOfAM) {
                         lineNumberHandler.increment()
                         oneLineAMStringBuilder.append(stringList[lineNumberHandler.lineNumber])
-                        notEndOfAM = !stringList[lineNumberHandler.lineNumber].contains("*%")
+                        notEndOfAM = !stringList[lineNumberHandler.lineNumber].contains("%")
                     }
                 }
 
