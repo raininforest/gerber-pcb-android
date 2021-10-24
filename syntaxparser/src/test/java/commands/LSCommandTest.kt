@@ -64,7 +64,7 @@ class LSCommandTest {
 
     @Test
     fun `perform test `() {
-        val command: GerberCommand = LSCommand(54, 0.254)
+        val command: GerberCommand = LSCommand(0.254, 54)
         val processor = mockk<GraphicsProcessor>(relaxed = true)
         command.perform(processor)
 

@@ -81,7 +81,7 @@ class LRCommandTest {
 
     @Test
     fun `perform test `() {
-        val command: GerberCommand = LRCommand(54, 140.254)
+        val command: GerberCommand = LRCommand( 140.254, 54)
         val processor = mockk<GraphicsProcessor>(relaxed = true)
         command.perform(processor)
 
