@@ -1,4 +1,4 @@
-package extensions
+package extensions.stringextensions
 
 import com.github.raininforest.syntaxparser.impl.utils.isNotOneLineAMCommand
 import org.junit.Assert

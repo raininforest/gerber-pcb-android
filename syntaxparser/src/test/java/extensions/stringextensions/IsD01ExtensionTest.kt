@@ -1,6 +1,6 @@
-package extensions
+package extensions.stringextensions
 
-import com.github.raininforest.syntaxparser.impl.utils.isDCodeD02
+import com.github.raininforest.syntaxparser.impl.utils.isDCodeD01
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -10,10 +10,10 @@ import org.junit.runners.Parameterized
  * Created by Sergey Velesko on 11.10.2021
  */
 @RunWith(Parameterized::class)
-class IsD02ExtensionTest(private val line: String, private val isD02: Boolean) {
+class IsD01ExtensionTest(private val line: String, private val isD01: Boolean) {
     @Test
     fun test() {
-        Assert.assertEquals(line.isDCodeD02(), isD02)
+        Assert.assertEquals(line.isDCodeD01(), isD01)
     }
 
     companion object {
@@ -26,11 +26,11 @@ class IsD02ExtensionTest(private val line: String, private val isD02: Boolean) {
             arrayOf("D99", false),
             arrayOf("D12*", false),
             arrayOf("D09*", false),
-            arrayOf("D1*", false),
-            arrayOf("D01*", false),
-            arrayOf("D2*", true),
-            arrayOf("D02*", true),
+            arrayOf("D01*", true),
+            arrayOf("D02*", false),
             arrayOf("D03*", false),
+            arrayOf("D1*", true),
+            arrayOf("D2*", false),
             arrayOf("10", false),
         )
     }

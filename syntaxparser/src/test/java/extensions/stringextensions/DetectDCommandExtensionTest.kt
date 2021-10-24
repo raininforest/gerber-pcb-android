@@ -1,4 +1,4 @@
-package extensions
+package extensions.stringextensions
 
 import com.github.raininforest.syntaxparser.impl.utils.detectDCommand
 import org.junit.Assert
