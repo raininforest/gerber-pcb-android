@@ -12,7 +12,7 @@ import java.lang.StringBuilder
 /**
  * True if string ends with %*
  */
-internal fun StringBuilder.isNotOneLineAMCommand(): Boolean = !endsWith("%*")
+internal fun StringBuilder.isNotOneLineAMCommand(): Boolean = !endsWith("%") && !endsWith("%*")
 
 /**
  * True if end of file command
