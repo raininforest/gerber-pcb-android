@@ -3,7 +3,6 @@ package commands
 import com.github.raininforest.syntaxparser.api.GraphicsProcessor
 import com.github.raininforest.syntaxparser.api.PointD
 import com.github.raininforest.syntaxparser.api.graphicsstate.CoordinateFormat
-import com.github.raininforest.syntaxparser.impl.LineNumberHandler
 import com.github.raininforest.syntaxparser.impl.commands.operations.D03Command
 import io.mockk.every
 import io.mockk.mockk
@@ -36,7 +35,6 @@ class D03CommandTest(
 
         command.perform(graphicsProcessor)
 
-        verify { graphicsProcessor.flash(x = xVal ?: currentVal, y = yVal ?: currentVal) }
         verify {
             graphicsProcessor.graphicsState.currentPoint =
                 PointD(xVal ?: currentVal, yVal ?: currentVal)

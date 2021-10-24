@@ -11,18 +11,15 @@ import com.github.raininforest.syntaxparser.impl.exceptions.WrongCommandFormatEx
  *
  * Created by Sergey Velesko on 19.09.2021
  */
-class D03Command(
+data class D03Command(
     val x: Double? = null,
     val y: Double? = null,
     override val lineNumber: Int
 ) : DOperationCommand(), GerberCommand {
 
     override fun perform(processor: GraphicsProcessor) {
-        processor.flash(
-            x ?: processor.graphicsState.currentPoint.x,
-            y ?: processor.graphicsState.currentPoint.y
-        )
         updateCurrentPoint(processor, x, y)
+        processor.graphicsState.currentAperture.flash(processor)
     }
 
     internal companion object : CoordinateDataParsable {
