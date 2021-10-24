@@ -1,0 +1,19 @@
+{Program	Expedition GerbTool(tm)
+	{Version	8.1.2 X1}
+	{Created	Mon Feb 18 16:36:04 2019}
+}
+{Environment
+	{ViewMetric	Yes}
+}
+{Format Gerber
+	{Dialect		RS274X}
+	{m.n			2.4}
+	{Mode			Absolute}
+	{ZeroSuppression	Leading}
+	{Terminator		0x2a, 0xd, 0xa}
+	{Metric			Yes}
+	{Modal			Yes}
+	{CharSet		ASCII}
+	{Arcs360		No}
+	{ArcsModal		Yes}
+}
