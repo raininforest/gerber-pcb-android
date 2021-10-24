@@ -28,8 +28,7 @@ android {
 
 dependencies {
 
-    //timber
-    implementation("com.jakewharton.timber:timber:5.0.1")
+    implementation(project(mapOf("path" to ":logger")))
 
     implementation("androidx.core:core-ktx:1.6.0")
     implementation("androidx.appcompat:appcompat:1.3.1")
