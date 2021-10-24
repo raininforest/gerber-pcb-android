@@ -6,7 +6,7 @@ import android.view.MenuItem
 import androidx.navigation.findNavController
 import com.github.raininforest.gerberpcb.R
 import com.github.raininforest.gerberpcb.databinding.ActivityMainBinding
-import timber.log.Timber
+import com.github.raininforest.logger.Logger
 
 /**
  * Created by Sergey Velesko on 18.07.2021
@@ -31,22 +31,22 @@ class MainActivity : AppCompatActivity() {
         when (it.itemId) {
             R.id.action_layers -> {
                 findNavController(R.id.my_nav_host_fragment).navigate(R.id.layersFragment)
-                Timber.d("Navigate to Layers screen")
+                Logger.d("Navigate to Layers screen")
                 true
             }
             R.id.action_graphics -> {
                 findNavController(R.id.my_nav_host_fragment).navigate(R.id.graphicsFragment)
-                Timber.d("Navigate to Graphics screen")
+                Logger.d("Navigate to Graphics screen")
                 true
             }
             R.id.action_settings -> {
                 findNavController(R.id.my_nav_host_fragment).navigate(R.id.settingsFragment)
-                Timber.d("Navigate to Settings screen")
+                Logger.d("Navigate to Settings screen")
                 true
             }
             R.id.action_help -> {
                 findNavController(R.id.my_nav_host_fragment).navigate(R.id.helpFragment)
-                Timber.d("Navigate to Help screen")
+                Logger.d("Navigate to Help screen")
                 true
             }
             else -> false

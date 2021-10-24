@@ -4,9 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -15,7 +13,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.github.raininforest.gerberpcb.R
 import com.github.raininforest.gerberpcb.databinding.LayersFragmentBinding
 import com.github.raininforest.gerberpcb.ui.showMsg
-import timber.log.Timber
+import com.github.raininforest.logger.Logger
 
 /**
  * Created by Sergey Velesko on 18.07.2021
@@ -32,7 +30,7 @@ class LayersFragment : Fragment(R.layout.layers_fragment) {
             val data: Intent? = result.data
             val uri: Uri = data?.data ?: Uri.EMPTY
             //TODO pass uri to ViewModel
-            Timber.d("File opened: ${uri.path}")
+            Logger.d("File opened: ${uri.path}")
         }
     }
 

@@ -2,7 +2,7 @@ package com.github.raininforest.gerberfilereader
 
 import android.content.Context
 import android.net.Uri
-import timber.log.Timber
+import com.github.raininforest.logger.Logger
 
 /**
  * Reads gerber file and return list of strings
@@ -25,8 +25,8 @@ class GerberFileReaderImpl(
                         ?.let { list -> result.addAll(list) }
                 }
         } catch (e: Throwable) {
-            Timber.e("File reading error!")
-            Timber.e(e)
+            Logger.e("File reading error!")
+            Logger.e(e.message ?: "")
         }
         return result
     }
