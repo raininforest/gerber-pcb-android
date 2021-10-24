@@ -1,6 +1,5 @@
 package com.github.raininforest.syntaxparser.impl.commands.operations
 
-import com.github.raininforest.core.radiansToDegrees
 import com.github.raininforest.syntaxparser.api.GerberCommand
 import com.github.raininforest.syntaxparser.api.GraphicsProcessor
 import com.github.raininforest.syntaxparser.api.PointD
@@ -9,6 +8,7 @@ import com.github.raininforest.syntaxparser.api.graphicsstate.enums.Interpolatio
 import com.github.raininforest.syntaxparser.api.graphicsstate.enums.RegionMode
 import com.github.raininforest.syntaxparser.impl.CoordinateDataParsable
 import com.github.raininforest.syntaxparser.impl.exceptions.WrongCommandFormatException
+import com.github.raininforest.syntaxparser.impl.utils.radiansToDegrees
 import kotlin.math.atan2
 import kotlin.math.sqrt
 
@@ -42,8 +42,10 @@ data class D01Command(
             )
         } else {
             processor.drawLine(
-                x = x ?: processor.graphicsState.currentPoint.x,
-                y = y ?: processor.graphicsState.currentPoint.y
+                x1 = processor.graphicsState.currentPoint.x,
+                y1 = processor.graphicsState.currentPoint.y,
+                x2 = x ?: processor.graphicsState.currentPoint.x,
+                y2 = y ?: processor.graphicsState.currentPoint.y
             )
         }
         updateCurrentPoint(processor, x, y)
