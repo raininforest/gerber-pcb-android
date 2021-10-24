@@ -13,4 +13,7 @@ import com.github.raininforest.core.pi
  */
 fun Double.degreesToRadians() = this * pi / 180
 
+/**
+ * Converts [Double] radians to [Double] degrees
+ */
 fun Double.radiansToDegrees() = this * 180 / pi
