@@ -1,7 +1,6 @@
 package com.github.raininforest.syntaxparser.impl.utils
 
 import com.github.raininforest.syntaxparser.impl.commands.aperturedefinition.DnnCommand
-import java.lang.StringBuilder
 
 /**
  * String utils for parsing
@@ -12,7 +11,7 @@ import java.lang.StringBuilder
 /**
  * True if string ends with %*
  */
-internal fun StringBuilder.isNotOneLineAMCommand(): Boolean = !endsWith("%*")
+internal fun StringBuilder.isNotOneLineAMCommand(): Boolean = !endsWith("%") && !endsWith("%*")
 
 /**
  * True if end of file command

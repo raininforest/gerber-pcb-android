@@ -7,7 +7,7 @@ import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 
 /**
- * Test for detectDCommand string extension
+ * Test for [detectDCommand] string extension
  *
  * Created by Sergey Velesko on 11.10.2021
  */
