@@ -2,7 +2,7 @@ package com.github.raininforest.syntaxparser.impl.commands.aperturemacro.macrobo
 
 import com.github.raininforest.syntaxparser.api.GraphicsProcessor
 import com.github.raininforest.syntaxparser.api.PointD
-import com.github.raininforest.syntaxparser.impl.utils.degreesToRadians
+import com.github.raininforest.syntaxparser.impl.utils.toRadians
 import kotlin.math.cos
 import kotlin.math.sin
 
@@ -28,8 +28,8 @@ data class PolygonPrimitive(
         for (i in 0 until vertices) {
             points.add(
                 PointD(
-                    x = (outerDiameter / 2) * cos(initAngle.degreesToRadians()),
-                    y = (outerDiameter / 2) * sin(initAngle.degreesToRadians())
+                    x = (outerDiameter / 2) * cos(initAngle.toRadians()),
+                    y = (outerDiameter / 2) * sin(initAngle.toRadians())
                 )
             )
             initAngle += deltaAngle

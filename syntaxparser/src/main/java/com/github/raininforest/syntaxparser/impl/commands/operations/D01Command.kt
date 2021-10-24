@@ -8,7 +8,7 @@ import com.github.raininforest.syntaxparser.api.graphicsstate.enums.Interpolatio
 import com.github.raininforest.syntaxparser.api.graphicsstate.enums.RegionMode
 import com.github.raininforest.syntaxparser.impl.CoordinateDataParsable
 import com.github.raininforest.syntaxparser.impl.exceptions.WrongCommandFormatException
-import com.github.raininforest.syntaxparser.impl.utils.radiansToDegrees
+import com.github.raininforest.syntaxparser.impl.utils.toDegrees
 import kotlin.math.atan2
 import kotlin.math.sqrt
 
@@ -60,8 +60,8 @@ data class D01Command(
         val xVal = x ?: processor.graphicsState.currentPoint.x
         val yVal = y ?: processor.graphicsState.currentPoint.y
 
-        val startAngle = atan2(-i, -j).radiansToDegrees()
-        val endAngle = atan2(yVal - center.y, xVal - center.x).radiansToDegrees()
+        val startAngle = atan2(-i, -j).toDegrees()
+        val endAngle = atan2(yVal - center.y, xVal - center.x).toDegrees()
         val sweepAngle = calculateSweepAngle(startAngle, endAngle, isClockwise)
 
         if (processor.regionMode == RegionMode.REGION) {

@@ -1,6 +1,6 @@
 package com.github.raininforest.syntaxparser.impl.utils
 
-import com.github.raininforest.core.pi
+import com.github.raininforest.core.PI
 
 /**
  * Math extensions
@@ -11,9 +11,9 @@ import com.github.raininforest.core.pi
 /**
  * Converts [Double] degrees to [Double] radians
  */
-fun Double.degreesToRadians() = this * pi / 180
+fun Double.toRadians() = this * PI / 180
 
 /**
  * Converts [Double] radians to [Double] degrees
  */
-fun Double.radiansToDegrees() = this * 180 / pi
+fun Double.toDegrees() = this * 180 / PI
