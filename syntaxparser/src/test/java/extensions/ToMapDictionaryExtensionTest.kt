@@ -1,4 +1,4 @@
-package extensions.vardictionary
+package extensions
 
 import com.github.raininforest.syntaxparser.impl.utils.toMapDictionary
 import org.junit.Assert
