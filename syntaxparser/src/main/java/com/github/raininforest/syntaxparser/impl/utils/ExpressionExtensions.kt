@@ -36,12 +36,17 @@ internal fun Char.toOperator(isUnary: Boolean = false) =
         }
     }
 
+/**
+ * Parses string expression to infix [MacroExpression]
+ *
+ * @return [MacroExpression]
+ */
 internal fun String.parseToExpression(): MacroExpression {
     val expressionItems: MutableList<MacroExpressionItem> = mutableListOf()
-
+    val string = this.filter { !it.isWhitespace() }
     var charIndex = 0
-    while (charIndex < length) {
-        var currentChar = this[charIndex]
+    while (charIndex < string.length) {
+        var currentChar = string[charIndex]
 
         val isNumberBegins = Character.isDigit(currentChar)
         val isVarBegins = currentChar == '$'
@@ -53,7 +58,7 @@ internal fun String.parseToExpression(): MacroExpression {
                 (currentChar == ')')
         val isPreviousSymbolOperator =
             charIndex > 0 && (expressionItems.last() is MacroExpressionOperator)
-        val isPreviousSymbolNotClosingPar = charIndex > 0 && this[charIndex-1] != ')'
+        val isPreviousSymbolNotClosingPar = charIndex > 0 && string[charIndex-1] != ')'
         val isItUnaryOperator = (currentChar == '-' || currentChar == '+') &&
                 (charIndex == 0 || (isPreviousSymbolOperator && isPreviousSymbolNotClosingPar))
 
@@ -64,8 +69,8 @@ internal fun String.parseToExpression(): MacroExpression {
                 while (isNumberNotEnd) {
                     numberBuilder.append(currentChar)
                     charIndex++
-                    if (charIndex < length) {
-                        currentChar = this[charIndex]
+                    if (charIndex < string.length) {
+                        currentChar = string[charIndex]
                         isNumberNotEnd = Character.isDigit(currentChar) || (currentChar == '.')
                     } else {
                         isNumberNotEnd = false
@@ -75,14 +80,14 @@ internal fun String.parseToExpression(): MacroExpression {
             }
             isVarBegins -> {
                 charIndex++
-                currentChar = this[charIndex]
+                currentChar = string[charIndex]
                 val varNameBuilder = StringBuilder()
                 var isVarNotEnd = true
                 while (isVarNotEnd) {
                     varNameBuilder.append(currentChar)
                     charIndex++
-                    if (charIndex < length) {
-                        currentChar = this[charIndex]
+                    if (charIndex < string.length) {
+                        currentChar = string[charIndex]
                         isVarNotEnd = Character.isDigit(currentChar)
                     } else {
                         isVarNotEnd = false
@@ -102,6 +107,11 @@ internal fun String.parseToExpression(): MacroExpression {
     return MacroExpression(expressionItems = expressionItems)
 }
 
+/**
+ * Converts infix [MacroExpression] to postfix [MacroExpression]
+ *
+ * @return list of [MacroExpressionItem]
+ */
 internal fun List<MacroExpressionItem>.infixToPostfixExpression(): List<MacroExpressionItem> {
     val infixExpression = this
     val operationStack: MutableList<MacroExpressionOperator> = mutableListOf()
@@ -147,6 +157,11 @@ internal fun List<MacroExpressionItem>.infixToPostfixExpression(): List<MacroExp
     return postfixExpression
 }
 
+/**
+ * Calculates postfix [MacroExpressionItem] list
+ *
+ * @return [Double] result
+ */
 internal fun List<MacroExpressionItem>.calculatePostfixExpression(): Double {
     val postfixExpression = this
     val operandStack: MutableList<MacroExpressionOperand> = mutableListOf()
