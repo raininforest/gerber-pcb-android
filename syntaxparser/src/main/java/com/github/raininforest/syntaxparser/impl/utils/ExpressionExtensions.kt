@@ -212,14 +212,14 @@ internal fun List<MacroExpressionItem>.calculatePostfixExpression(): Double {
 /**
  * Stack push method for list
  */
-fun <T> MutableList<T>.push(item: T) = this.add(this.count(), item)
+internal fun <T> MutableList<T>.push(item: T) = this.add(this.count(), item)
 
 /**
  * Stack pop method for list
  */
-fun <T> MutableList<T>.pop(): T = this.removeAt(this.count() - 1)
+internal fun <T> MutableList<T>.pop(): T = this.removeAt(this.count() - 1)
 
 /**
  * Stack peek method for list
  */
-fun <T> MutableList<T>.peek(): T = this[this.count() - 1]
+internal fun <T> MutableList<T>.peek(): T = this[this.count() - 1]
