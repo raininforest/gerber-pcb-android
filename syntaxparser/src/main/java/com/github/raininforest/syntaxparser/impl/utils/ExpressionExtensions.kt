@@ -5,9 +5,17 @@ import com.github.raininforest.syntaxparser.impl.exceptions.CalculateExpressionE
 import java.lang.IllegalStateException
 
 /**
+ * Extensions for expressions in macro body
+ *
  * Created by Sergey Velesko on 16.10.2021
  */
 
+/**
+ * Converts [Char] to [MacroExpressionOperator]
+ *
+ * @param isUnary indicates this char should be parsed as unary operator or not
+ * @return [MacroExpressionOperator]
+ */
 internal fun Char.toOperator(isUnary: Boolean = false) =
     when (this) {
         '-' -> {
