@@ -16,20 +16,20 @@ import java.util.regex.Pattern
  */
 data class ADCommand(
     val apertureId: String,
-    val apertureTemplate: String,
+    val apertureTemplateName: String,
     val parameters: List<Double>,
     override val lineNumber: Int,
 ) : GerberCommand {
 
     override fun perform(processor: GraphicsProcessor) {
-        val template = processor.templateDictionary.get(id = apertureTemplate)
+        val template = processor.templateDictionary.get(id = apertureTemplateName)
         val aperture = template.buildAperture(apertureId, parameters)
         processor.apertureDictionary.add(aperture)
     }
 
     internal companion object : MultiStringParsable {
 
-        private val AD_PATTERN: Pattern by lazy { Pattern.compile("^%ADD([1-9]\\d+)(\\w+),(.*)\\*%") }
+        private val AD_PATTERN: Pattern by lazy { Pattern.compile("^%ADD([1-9]\\d+)(\\w+),?(.*)?\\*%") }
 
         override fun parse(
             stringList: List<String>,
@@ -42,12 +42,13 @@ data class ADCommand(
                     val apertureTemplateName = matcher.group(2)
                     val parameters: List<Double> = matcher.group(3)
                         .split("X")
+                        .filter { it.isNotEmpty() }
                         .map { it.toDouble() }
 
                     return ADCommand(
                         lineNumber = lineNumberHandler.lineNumber,
                         apertureId = apertureId,
-                        apertureTemplate = apertureTemplateName,
+                        apertureTemplateName = apertureTemplateName,
                         parameters = parameters
                     )
                 } else {
