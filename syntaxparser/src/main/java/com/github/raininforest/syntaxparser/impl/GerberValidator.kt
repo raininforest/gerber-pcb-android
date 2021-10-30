@@ -9,10 +9,10 @@ import com.github.raininforest.syntaxparser.impl.commands.coordinate.MOCommand
  *
  * Created by Sergey Velesko on 15.10.2021
  */
-internal class GerberValidator(private val notCommentStringsCountToFindFsAndMo: Int = 10) {
+class GerberValidator {
 
     /**
-     * If [notCommentStringsCountToFindFsAndMo] commands parsed, and FS and MO are not found,
+     * If [NOT_COMMENT_STRING_COUNT_TO_FIND_FS_MO] commands parsed, and FS and MO are not found,
      * gerber is invalid
      */
     infix fun isGerberValid(stringList: List<String>): Boolean {
@@ -28,7 +28,7 @@ internal class GerberValidator(private val notCommentStringsCountToFindFsAndMo: 
         // counter how many commands were before FS/MO
         var notCommentStringCounter = 0
 
-        while (notCommentStringCounter < notCommentStringsCountToFindFsAndMo) {
+        while (notCommentStringCounter < NOT_COMMENT_STRING_COUNT_TO_FIND_FS_MO) {
             val currentString = stringList[lineNumberHandler.lineNumber]
             if (currentString.startsWith("G04")) {
                 continue
@@ -55,5 +55,9 @@ internal class GerberValidator(private val notCommentStringsCountToFindFsAndMo: 
 
         Logger.d("Finished gerber validating. isFileValid=$isFileValid")
         return isFileValid
+    }
+
+    companion object {
+        private const val NOT_COMMENT_STRING_COUNT_TO_FIND_FS_MO: Int = 10
     }
 }
