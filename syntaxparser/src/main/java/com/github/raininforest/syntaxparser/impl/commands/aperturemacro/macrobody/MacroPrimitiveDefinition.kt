@@ -13,7 +13,7 @@ data class MacroPrimitiveDefinition(
 ) : MacroBodyItem {
 
     companion object {
-        fun parsePrimitiveDefinition(s: String): MacroBodyItem {
+        fun parsePrimitiveDefinition(s: String): MacroPrimitiveDefinition {
             return try {
                 val values = s.split(",")
                 when {
