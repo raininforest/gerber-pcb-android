@@ -1,27 +1,191 @@
 package com.github.raininforest.syntaxparser.impl
 
+import com.github.raininforest.logger.Logger
 import com.github.raininforest.syntaxparser.api.GerberCommand
 import com.github.raininforest.syntaxparser.api.SyntaxParser
+import com.github.raininforest.syntaxparser.api.graphicsstate.CoordinateFormat
+import com.github.raininforest.syntaxparser.impl.commands.M02Command
+import com.github.raininforest.syntaxparser.impl.commands.aperturedefinition.ADCommand
+import com.github.raininforest.syntaxparser.impl.commands.aperturedefinition.DnnCommand
+import com.github.raininforest.syntaxparser.impl.commands.aperturemacro.AMCommand
+import com.github.raininforest.syntaxparser.impl.commands.aperturetransformation.LMCommand
+import com.github.raininforest.syntaxparser.impl.commands.aperturetransformation.LPCommand
+import com.github.raininforest.syntaxparser.impl.commands.aperturetransformation.LRCommand
+import com.github.raininforest.syntaxparser.impl.commands.aperturetransformation.LSCommand
+import com.github.raininforest.syntaxparser.impl.commands.coordinate.FSCommand
+import com.github.raininforest.syntaxparser.impl.commands.coordinate.MOCommand
+import com.github.raininforest.syntaxparser.impl.commands.inerpolationstate.*
+import com.github.raininforest.syntaxparser.impl.commands.operations.D01Command
+import com.github.raininforest.syntaxparser.impl.commands.operations.D02Command
+import com.github.raininforest.syntaxparser.impl.commands.operations.D03Command
+import com.github.raininforest.syntaxparser.impl.commands.regionstate.G36Command
+import com.github.raininforest.syntaxparser.impl.commands.regionstate.G37Command
+import com.github.raininforest.syntaxparser.impl.exceptions.WrongCommandFormatException
+import com.github.raininforest.syntaxparser.impl.utils.*
 
-class SyntaxParserImpl() : SyntaxParser {
+/**
+ * [SyntaxParser] implementation
+ *
+ * Created by Sergey Velesko on 14.10.2021
+ */
+class SyntaxParserImpl(private val gerberValidator: GerberValidator) : SyntaxParser {
 
-    override fun parse(stringList: List<String>): List<GerberCommand> =
-        if (isGerberFileValid(stringList)) {
-            parseFile(stringList)
-        } else {
+    override fun parse(stringList: List<String>, name: String): List<GerberCommand> =
+        try {
+            if (gerberValidator isGerberValid stringList) {
+                parseFile(stringList, name)
+            } else {
+                Logger.e("Gerber $name is invalid")
+                emptyList()
+            }
+        } catch (e: Throwable) {
+            e.printStackTrace()
+            Logger.e(e.localizedMessage)
             emptyList()
-            //TODO log error
         }
 
-    private fun isGerberFileValid(stringList: List<String>): Boolean {
-        //TODO log start validating file
-        TODO("Not yet implemented")
-        //TODO log finish validating
+    private fun parseFile(stringList: List<String>, name: String): List<GerberCommand> {
+        val coordinateFormat: CoordinateFormat? = null
+
+        Logger.d("Start parsing file $name")
+        val commandList = mutableListOf<GerberCommand>()
+
+        val lineNumberHandler = LineNumberHandler(stringList.size - 1)
+        try {
+            while (lineNumberHandler.lineNumber <= lineNumberHandler.maxIndex) {
+                val currentString = stringList[lineNumberHandler.lineNumber]
+
+                when {
+                    currentString.detectComment() -> {
+                        // ignore
+                    }
+                    currentString.detectExtendedCommand() -> {
+                        val extendedCommand = currentString
+                            .substring(
+                                START_INDEX_OF_EXTENDED_COMMAND,
+                                END_INDEX_OF_EXTENDED_COMMAND
+                            )
+                        commandList
+                            .add(
+                                parseExtendedCommand(
+                                    extendedCommand,
+                                    stringList,
+                                    lineNumberHandler,
+                                    coordinateFormat
+                                )
+                            )
+                    }
+                    currentString.detectDCommand() -> {
+                        coordinateFormat?.let {
+                            commandList.add(
+                                parseDCommand(
+                                    currentString,
+                                    lineNumberHandler.lineNumber,
+                                    coordinateFormat
+                                )
+                            )
+                        }
+                    }
+                    currentString.detectGCommand() -> {
+                        val gCommand = currentString
+                            .substring(START_INDEX_OF_G_COMMAND, END_INDEX_OF_G_COMMAND)
+                        commandList.add(parseGCommand(gCommand, lineNumberHandler.lineNumber))
+                    }
+                    currentString.detectEndOfFile() -> {
+                        commandList.add(M02Command.parse(stringList, lineNumberHandler))
+                        Logger.d("End of file $name")
+                    }
+                }
+                lineNumberHandler.increment()
+            }
+        } catch (e: Throwable) {
+            Logger.e("Parsing file $name failed!")
+            throw WrongCommandFormatException(
+                line = lineNumberHandler.lineNumber,
+                e.localizedMessage
+            )
+        }
+
+        Logger
+        return commandList
     }
 
-    private fun parseFile(stringList: List<String>): List<GerberCommand> {
-        //TODO log start parsing file
-        TODO("Not yet implemented")
-        //TODO finish parsing
+    private fun parseGCommand(
+        gCommand: String,
+        lineNumber: Int
+    ): GerberCommand =
+        when (gCommand) {
+            "G01" -> G01Command(lineNumber)
+            "G02" -> G02Command(lineNumber)
+            "G03" -> G03Command(lineNumber)
+            "G36" -> G36Command(lineNumber)
+            "G37" -> G37Command(lineNumber)
+            "G74" -> G74Command(lineNumber)
+            "G75" -> G75Command(lineNumber)
+            else -> throw WrongCommandFormatException(
+                lineNumber,
+                "There is no valid G-code gerber command but 'G' was found"
+            )
+        }
+
+    private fun parseDCommand(
+        currentString: String,
+        lineNumber: Int,
+        coordinateFormat: CoordinateFormat
+    ): GerberCommand =
+        when {
+            currentString.isDnn() -> DnnCommand.parse(currentString, lineNumber)
+            currentString.isDCodeD01() -> D01Command.parse(
+                currentString = currentString,
+                lineNumber = lineNumber,
+                coordinateFormat = coordinateFormat
+            )
+            currentString.isDCodeD02() -> D02Command.parse(
+                currentString = currentString,
+                lineNumber = lineNumber,
+                coordinateFormat = coordinateFormat
+            )
+            currentString.isDCodeD03() -> D03Command.parse(
+                currentString = currentString,
+                lineNumber = lineNumber,
+                coordinateFormat = coordinateFormat
+            )
+            else -> throw WrongCommandFormatException(
+                lineNumber,
+                "There is no valid D-code gerber command but 'D' || 'X' || 'Y' was found"
+            )
+        }
+
+    private fun parseExtendedCommand(
+        extendedCommand: String,
+        stringList: List<String>,
+        lineNumberHandler: LineNumberHandler,
+        coordinateFormat: CoordinateFormat?
+    ): GerberCommand =
+        when (extendedCommand) {
+            "FS" -> {
+                val command = (FSCommand.parse(stringList, lineNumberHandler) as FSCommand)
+                coordinateFormat?.integerCount = command.numOfInteger
+                coordinateFormat?.decimalCount = command.numOfDecimal
+                command
+            }
+            "MO" -> MOCommand.parse(stringList, lineNumberHandler)
+            "AD" -> ADCommand.parse(stringList, lineNumberHandler)
+            "AM" -> AMCommand.parse(stringList, lineNumberHandler)
+            "LP" -> LPCommand.parse(stringList, lineNumberHandler)
+            "LS" -> LSCommand.parse(stringList, lineNumberHandler)
+            "LR" -> LRCommand.parse(stringList, lineNumberHandler)
+            "LM" -> LMCommand.parse(stringList, lineNumberHandler)
+            else -> throw WrongCommandFormatException(
+                lineNumberHandler.lineNumber,
+                "There is no valid extended gerber command but '%' was found"
+            )
+        }
+
+    companion object {
+        private const val START_INDEX_OF_EXTENDED_COMMAND = 1
+        private const val END_INDEX_OF_EXTENDED_COMMAND = 3
+        private const val START_INDEX_OF_G_COMMAND = 0
+        private const val END_INDEX_OF_G_COMMAND = 2
     }
 }

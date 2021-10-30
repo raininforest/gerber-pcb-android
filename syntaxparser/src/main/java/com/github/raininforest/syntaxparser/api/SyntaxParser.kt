@@ -13,7 +13,8 @@ interface SyntaxParser {
      * Gives a [List] of [GerberCommand].
      *
      * @param stringList list of [String] from gerber file
+     * @param name of gerber file
      * @return [List] of [GerberCommand]
      */
-    infix fun parse(stringList: List<String>): List<GerberCommand>
+    fun parse(stringList: List<String>, name: String): List<GerberCommand>
 }
