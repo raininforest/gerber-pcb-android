@@ -28,24 +28,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     private val menuItemListener: (MenuItem) -> Boolean = {
+        val navController = findNavController(R.id.my_nav_host_fragment)
         when (it.itemId) {
             R.id.action_layers -> {
-                findNavController(R.id.my_nav_host_fragment).navigate(R.id.layersFragment)
+                navController.navigate(R.id.layersFragment)
                 Logger.d("Navigate to Layers screen")
                 true
             }
             R.id.action_graphics -> {
-                findNavController(R.id.my_nav_host_fragment).navigate(R.id.graphicsFragment)
+                navController.navigate(R.id.graphicsFragment)
                 Logger.d("Navigate to Graphics screen")
                 true
             }
-            R.id.action_settings -> {
-                findNavController(R.id.my_nav_host_fragment).navigate(R.id.settingsFragment)
-                Logger.d("Navigate to Settings screen")
-                true
-            }
             R.id.action_help -> {
-                findNavController(R.id.my_nav_host_fragment).navigate(R.id.helpFragment)
+                navController.navigate(R.id.helpFragment)
                 Logger.d("Navigate to Help screen")
                 true
             }
