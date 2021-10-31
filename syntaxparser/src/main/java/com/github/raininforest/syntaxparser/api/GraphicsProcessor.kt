@@ -12,11 +12,15 @@ interface GraphicsProcessor {
 
     val graphicsState: GraphicsState
     val apertureDictionary: ApertureDictionary
-    val macroTemplateDictionary: MacroTemplateDictionary
+    val templateDictionary: MacroTemplateDictionary
 
     var regionMode: RegionMode
 
-    fun drawLine(x: Double, y: Double)
+    // Macro
+    var isExposure: Boolean
+    var macroRotation: Double
+
+    fun drawLine(x1: Double, y1: Double, x2: Double, y2: Double)
 
     fun drawArc(
         left: Double,
@@ -27,8 +31,9 @@ interface GraphicsProcessor {
         sweepAngle: Double
     )
 
+    fun startPath()
+    fun moveTo(x: Double, y: Double)
     fun lineTo(x: Double, y: Double)
-
     fun arcTo(
         left: Double,
         top: Double,
@@ -37,8 +42,23 @@ interface GraphicsProcessor {
         startAngle: Double,
         sweepAngle: Double
     )
+    fun addCircle(cX: Double, cY: Double, r: Double)
+    fun addRect(
+        left: Double,
+        top: Double,
+        right: Double,
+        bottom: Double
+    )
+    fun addRoundedRect(
+        left: Double,
+        top: Double,
+        right: Double,
+        bottom: Double,
+        radius: Double
+    )
+    fun closeAndFillPath()
 
-    fun flash(x: Double, y: Double)
+    fun drawPath(points: List<PointD>)
 
     fun closeContourAndStartNewOne()
 
