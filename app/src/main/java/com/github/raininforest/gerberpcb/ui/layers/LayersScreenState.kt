@@ -1,6 +1,5 @@
 package com.github.raininforest.gerberpcb.ui.layers
 
-import androidx.lifecycle.LiveData
 import com.github.raininforest.gerberpcb.model.GerberItemUi
 
 /**
@@ -9,5 +8,4 @@ import com.github.raininforest.gerberpcb.model.GerberItemUi
 sealed class LayersScreenState {
     data class Success(val gerberList: List<GerberItemUi>): LayersScreenState()
     data class Error(val error: String): LayersScreenState()
-    data class Loading(val progress: LiveData<String>) : LayersScreenState()
 }
