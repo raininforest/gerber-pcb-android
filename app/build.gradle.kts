@@ -41,6 +41,9 @@ dependencies {
 
     implementation(project(mapOf("path" to ":logger")))
 
+    //lottie
+    implementation("com.airbnb.android:lottie:3.6.0")
+
     //timber
     implementation("com.jakewharton.timber:timber:5.0.1")
 
