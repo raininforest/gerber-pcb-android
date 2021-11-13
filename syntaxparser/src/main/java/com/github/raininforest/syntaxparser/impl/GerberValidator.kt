@@ -31,6 +31,7 @@ class GerberValidator {
         while (notCommentStringCounter < NOT_COMMENT_STRING_COUNT_TO_FIND_FS_MO) {
             val currentString = stringList[lineNumberHandler.lineNumber]
             if (currentString.startsWith("G04")) {
+                lineNumberHandler.increment()
                 continue
             }
 
@@ -58,6 +59,6 @@ class GerberValidator {
     }
 
     companion object {
-        private const val NOT_COMMENT_STRING_COUNT_TO_FIND_FS_MO: Int = 10
+        private const val NOT_COMMENT_STRING_COUNT_TO_FIND_FS_MO: Int = 30
     }
 }
