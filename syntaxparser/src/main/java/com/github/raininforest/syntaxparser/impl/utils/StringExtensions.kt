@@ -1,6 +1,7 @@
 package com.github.raininforest.syntaxparser.impl.utils
 
 import com.github.raininforest.syntaxparser.impl.commands.aperturedefinition.DnnCommand
+import com.github.raininforest.syntaxparser.impl.commands.operations.DOperationCommand
 
 /**
  * String utils for parsing
@@ -57,17 +58,26 @@ internal fun String.isDnn(): Boolean = DnnCommand.DNN_PATTERN.matcher(this).find
 /**
  * Detects D01 command in string, that has been already defined as DCommand string.
  */
-internal fun String.isDCodeD01(): Boolean = this.contains("D01*") || this.contains("D1*")
+internal fun String.isDCodeD01(currentDCode: DOperationCommand.DCode) =
+    if (this.contains("D01*") || this.contains("D1*")) {
+        true
+    } else currentDCode == DOperationCommand.DCode.D01 && (!this.contains("D"))
 
 /**
  * Detects D02 command in string, that has been already defined as DCommand string.
  */
-internal fun String.isDCodeD02(): Boolean = this.contains("D02*") || this.contains("D2*")
+internal fun String.isDCodeD02(currentDCode: DOperationCommand.DCode) =
+    if (this.contains("D02*") || this.contains("D2*")) {
+        true
+    } else currentDCode == DOperationCommand.DCode.D02 && (!this.contains("D"))
 
 /**
  * Detects D03 command in string, that has been already defined as DCommand string.
  */
-internal fun String.isDCodeD03(): Boolean = this.contains("D03*") || this.contains("D3*")
+internal fun String.isDCodeD03(currentDCode: DOperationCommand.DCode) =
+    if (this.contains("D03*") || this.contains("D3*")) {
+        true
+    } else currentDCode == DOperationCommand.DCode.D03 && (!this.contains("D"))
 
 /**
  * Parses string value of coordinate to double
