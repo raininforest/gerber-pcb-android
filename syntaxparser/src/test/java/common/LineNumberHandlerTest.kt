@@ -20,13 +20,14 @@ class LineNumberHandlerTest {
         Assert.assertEquals(indexHandler.lineNumber, maxIndex)
     }
 
-    @Test(expected = IndexOutOfBoundsException::class)
+    @Test
     fun `test illegal index increment`() {
-        val maxIndex = 214748364
+        val maxIndex = 3
         val indexHandler = LineNumberHandler(maxIndex)
-        for (i in 0..(maxIndex+1)) {
+        for (i in 0..(maxIndex + 3)) {
             indexHandler.increment()
         }
+        Assert.assertEquals(indexHandler.lineNumber, maxIndex)
     }
 
     @Test
