@@ -19,6 +19,11 @@ internal fun StringBuilder.isNotOneLineAMCommand(): Boolean = !endsWith("%") && 
 internal fun String.detectEndOfFile(): Boolean = this.contains("M02")
 
 /**
+ * True if %ICAS detected
+ */
+internal fun String.detectICAS(): Boolean = this.contains("ICAS")
+
+/**
  * True if command is comment G04
  */
 internal fun String.detectComment(): Boolean = this.startsWith("G04")
