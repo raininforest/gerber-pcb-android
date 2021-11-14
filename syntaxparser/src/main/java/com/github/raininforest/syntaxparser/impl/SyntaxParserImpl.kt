@@ -20,6 +20,7 @@ import com.github.raininforest.syntaxparser.impl.commands.inerpolationstate.*
 import com.github.raininforest.syntaxparser.impl.commands.operations.D01Command
 import com.github.raininforest.syntaxparser.impl.commands.operations.D02Command
 import com.github.raininforest.syntaxparser.impl.commands.operations.D03Command
+import com.github.raininforest.syntaxparser.impl.commands.operations.DOperationCommand
 import com.github.raininforest.syntaxparser.impl.commands.regionstate.G36Command
 import com.github.raininforest.syntaxparser.impl.commands.regionstate.G37Command
 import com.github.raininforest.syntaxparser.impl.commands.unused.OFCommand
@@ -82,20 +83,29 @@ class SyntaxParserImpl(private val gerberValidator: GerberValidator) : SyntaxPar
                             )
                     }
                     currentString.detectDCommand() -> {
-                        coordinateFormat?.let {
-                            commandList.add(
-                                parseDCommand(
-                                    currentString,
-                                    lineNumberHandler.lineNumber,
-                                    coordinateFormat
-                                )
+                        // for deprecated practise support (g command in d command)
+                        if (currentString.removeDeprecationG54().detectGCommand()) {
+                            addGCommand(currentString, lineNumberHandler.lineNumber, commandList)
+                        }
+
+                        coordinateFormat.let {
+                            val command = parseDCommand(
+                                currentString.removeDeprecationG54(),
+                                lineNumberHandler.lineNumber,
+                                coordinateFormat,
+                                currentDCodeHolder.currentDCode
                             )
+                            commandList.add(command)
+                            currentDCodeHolder.currentDCode = when (command) {
+                                is D01Command -> DOperationCommand.DCode.D01
+                                is D02Command -> DOperationCommand.DCode.D02
+                                is D03Command -> DOperationCommand.DCode.D03
+                                else -> DOperationCommand.DCode.D01
+                            }
                         }
                     }
                     currentString.detectGCommand() -> {
-                        val gCommand = currentString
-                            .substring(START_INDEX_OF_G_COMMAND, END_INDEX_OF_G_COMMAND)
-                        commandList.add(parseGCommand(gCommand, lineNumberHandler.lineNumber))
+                        addGCommand(currentString, lineNumberHandler.lineNumber, commandList)
                     }
                     currentString.detectEndOfFile() -> {
                         commandList.add(M02Command.parse(stringList, lineNumberHandler))
@@ -114,6 +124,12 @@ class SyntaxParserImpl(private val gerberValidator: GerberValidator) : SyntaxPar
 
         Logger
         return commandList
+    }
+
+    private fun addGCommand(currentString: String, lineNumber: Int, commandList: MutableList<GerberCommand>) {
+        val gCommand = currentString
+            .substring(START_INDEX_OF_G_COMMAND, END_INDEX_OF_G_COMMAND)
+        commandList.add(parseGCommand(gCommand, lineNumber))
     }
 
     private fun parseGCommand(
@@ -137,21 +153,22 @@ class SyntaxParserImpl(private val gerberValidator: GerberValidator) : SyntaxPar
     private fun parseDCommand(
         currentString: String,
         lineNumber: Int,
-        coordinateFormat: CoordinateFormat
+        coordinateFormat: CoordinateFormat,
+        currentDCode: DOperationCommand.DCode
     ): GerberCommand =
         when {
             currentString.isDnn() -> DnnCommand.parse(currentString, lineNumber)
-            currentString.isDCodeD01() -> D01Command.parse(
+            currentString.isDCodeD01(currentDCode) -> D01Command.parse(
                 currentString = currentString,
                 lineNumber = lineNumber,
                 coordinateFormat = coordinateFormat
             )
-            currentString.isDCodeD02() -> D02Command.parse(
+            currentString.isDCodeD02(currentDCode) -> D02Command.parse(
                 currentString = currentString,
                 lineNumber = lineNumber,
                 coordinateFormat = coordinateFormat
             )
-            currentString.isDCodeD03() -> D03Command.parse(
+            currentString.isDCodeD03(currentDCode) -> D03Command.parse(
                 currentString = currentString,
                 lineNumber = lineNumber,
                 coordinateFormat = coordinateFormat
