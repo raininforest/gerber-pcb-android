@@ -40,6 +40,11 @@ internal fun String.detectDCommand(): Boolean =
     this.contains("X") || this.contains("Y") || this.contains("D")
 
 /**
+ * Removes deprecated G54 command from d code command
+ */
+internal fun String.removeDeprecationG54() = this.removePrefix("G54")
+
+/**
  * True if contains G
  */
 internal fun String.detectGCommand(): Boolean = this.contains("G")
