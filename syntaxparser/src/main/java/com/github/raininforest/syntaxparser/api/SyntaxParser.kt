@@ -16,5 +16,5 @@ interface SyntaxParser {
      * @param name of gerber file
      * @return [List] of [GerberCommand]
      */
-    fun parse(stringList: List<String>, name: String): List<GerberCommand>
+    fun parse(stringList: List<String>, name: String = "<empty>"): List<GerberCommand>
 }
