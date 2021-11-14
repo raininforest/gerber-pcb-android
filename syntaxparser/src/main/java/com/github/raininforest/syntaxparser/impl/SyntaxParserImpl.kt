@@ -4,6 +4,8 @@ import com.github.raininforest.logger.Logger
 import com.github.raininforest.syntaxparser.api.GerberCommand
 import com.github.raininforest.syntaxparser.api.SyntaxParser
 import com.github.raininforest.syntaxparser.api.graphicsstate.CoordinateFormat
+import com.github.raininforest.syntaxparser.impl.commands.unused.G90Command
+import com.github.raininforest.syntaxparser.impl.commands.unused.ICASCommand
 import com.github.raininforest.syntaxparser.impl.commands.M02Command
 import com.github.raininforest.syntaxparser.impl.commands.aperturedefinition.ADCommand
 import com.github.raininforest.syntaxparser.impl.commands.aperturedefinition.DnnCommand
@@ -20,6 +22,7 @@ import com.github.raininforest.syntaxparser.impl.commands.operations.D02Command
 import com.github.raininforest.syntaxparser.impl.commands.operations.D03Command
 import com.github.raininforest.syntaxparser.impl.commands.regionstate.G36Command
 import com.github.raininforest.syntaxparser.impl.commands.regionstate.G37Command
+import com.github.raininforest.syntaxparser.impl.commands.unused.OFCommand
 import com.github.raininforest.syntaxparser.impl.exceptions.WrongCommandFormatException
 import com.github.raininforest.syntaxparser.impl.utils.*
 
@@ -176,6 +179,8 @@ class SyntaxParserImpl(private val gerberValidator: GerberValidator) : SyntaxPar
             "LS" -> LSCommand.parse(stringList, lineNumberHandler)
             "LR" -> LRCommand.parse(stringList, lineNumberHandler)
             "LM" -> LMCommand.parse(stringList, lineNumberHandler)
+            "IC" -> ICASCommand(lineNumberHandler.lineNumber)
+            "OF" -> OFCommand(lineNumberHandler.lineNumber)
             else -> throw WrongCommandFormatException(
                 lineNumberHandler.lineNumber,
                 "There is no valid extended gerber command but '%' was found"
