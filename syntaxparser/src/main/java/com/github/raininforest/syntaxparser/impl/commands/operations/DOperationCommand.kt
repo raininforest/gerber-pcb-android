@@ -42,4 +42,10 @@ abstract class DOperationCommand {
             return coordinates
         }
     }
+
+    enum class DCode {
+        D01,
+        D02,
+        D03
+    }
 }
