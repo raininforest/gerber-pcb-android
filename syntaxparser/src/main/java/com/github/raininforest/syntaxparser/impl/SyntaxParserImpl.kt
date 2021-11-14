@@ -49,8 +49,6 @@ class SyntaxParserImpl(private val gerberValidator: GerberValidator) : SyntaxPar
         }
 
     private fun parseFile(stringList: List<String>, name: String): List<GerberCommand> {
-        val coordinateFormat: CoordinateFormat? = null
-
         Logger.d("Start parsing file $name")
         val commandList = mutableListOf<GerberCommand>()
 
@@ -184,13 +182,13 @@ class SyntaxParserImpl(private val gerberValidator: GerberValidator) : SyntaxPar
         extendedCommand: String,
         stringList: List<String>,
         lineNumberHandler: LineNumberHandler,
-        coordinateFormat: CoordinateFormat?
+        coordinateFormat: CoordinateFormat
     ): GerberCommand =
         when (extendedCommand) {
             "FS" -> {
                 val command = (FSCommand.parse(stringList, lineNumberHandler) as FSCommand)
-                coordinateFormat?.integerCount = command.numOfInteger
-                coordinateFormat?.decimalCount = command.numOfDecimal
+                coordinateFormat.integerCount = command.numOfInteger
+                coordinateFormat.decimalCount = command.numOfDecimal
                 command
             }
             "MO" -> MOCommand.parse(stringList, lineNumberHandler)
