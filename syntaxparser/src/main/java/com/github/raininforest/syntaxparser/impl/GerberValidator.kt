@@ -28,7 +28,7 @@ class GerberValidator {
         // counter how many commands were before FS/MO
         var notCommentStringCounter = 0
 
-        while (notCommentStringCounter < NOT_COMMENT_STRING_COUNT_TO_FIND_FS_MO) {
+        while (notCommentStringCounter < NOT_COMMENT_STRING_COUNT_TO_FIND_FS_MO || !lineNumberHandler.isEnd) {
             val currentString = stringList[lineNumberHandler.lineNumber]
             if (currentString.startsWith("G04")) {
                 lineNumberHandler.increment()
