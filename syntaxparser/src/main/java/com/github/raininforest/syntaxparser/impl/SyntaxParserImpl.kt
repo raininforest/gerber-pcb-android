@@ -210,6 +210,6 @@ class SyntaxParserImpl(private val gerberValidator: GerberValidator) : SyntaxPar
         private const val START_INDEX_OF_EXTENDED_COMMAND = 1
         private const val END_INDEX_OF_EXTENDED_COMMAND = 3
         private const val START_INDEX_OF_G_COMMAND = 0
-        private const val END_INDEX_OF_G_COMMAND = 2
+        private const val END_INDEX_OF_G_COMMAND = 3
     }
 }
