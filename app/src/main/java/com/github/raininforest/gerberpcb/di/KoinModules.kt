@@ -22,7 +22,8 @@ val application = module {
     single<ILogger> { GerberReaderLogger() }
 
     single<GerberFileReader> { GerberFileReaderImpl(context = get()) }
-    single<SyntaxParser> { SyntaxParserImpl(GerberValidator()) }
+    single { GerberValidator() }
+    single<SyntaxParser> { SyntaxParserImpl(gerberValidator = get()) }
 
     single<GerberRepository> { GerberRepositoryImpl(fileReader = get(), syntaxParser = get()) }
 
