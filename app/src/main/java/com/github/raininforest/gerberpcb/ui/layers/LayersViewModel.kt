@@ -1,44 +1,84 @@
 package com.github.raininforest.gerberpcb.ui.layers
 
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.github.raininforest.gerberpcb.model.DataService
-import com.github.raininforest.gerberpcb.model.IDataService
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import com.github.raininforest.gerberpcb.model.GerberRepository
+import com.github.raininforest.logger.Logger
+import kotlinx.coroutines.*
 
 /**
+ * [ViewModel] for [LayersFragment]
+ *
  * Created by Sergey Velesko on 18.07.2021
  */
-class LayersViewModel : ViewModel() {
+class LayersViewModel(
+    private val gerberRepository: GerberRepository
+) : ViewModel() {
 
-    private val dataService = DataService()
+    private val _data: MutableLiveData<LayersScreenState> = MutableLiveData()
+    private val _isLoading: MutableLiveData<Boolean> = MutableLiveData()
 
-    private val data: MutableLiveData<LayersScreenState> = MutableLiveData()
-    private val progressValue: MutableLiveData<String> = MutableLiveData()
+    private val vmCoroutineScope = CoroutineScope(
+        Dispatchers.Main
+                + SupervisorJob()
+                + CoroutineExceptionHandler { _, throwable ->
+            handleError(throwable)
+        })
 
-    fun data(): LiveData<LayersScreenState> {
-        dataService.list()
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                { data.value = LayersScreenState.Success(it) },
-                { it.printStackTrace() }
-            )
-        return data
+    val data: LiveData<LayersScreenState>
+        get() = _data
+    val isLoading: LiveData<Boolean>
+        get() = _isLoading
+
+    fun list() {
+        cancelJob()
+        vmCoroutineScope.launch {
+            _data.postValue(LayersScreenState.Success(gerberRepository.list()))
+        }
     }
 
-    fun gerberAdded(filename: String) {
-        dataService.addItem(filename)
-        //TODO subscribe on progress and change livedata (progressValue) value to loading
+    fun gerberAdded(fileUri: Uri) {
+        _isLoading.value = true
+        vmCoroutineScope.launch {
+            val processed = gerberRepository.addItem(fileUri)
+            if (processed) {
+                _data.postValue(LayersScreenState.Success(gerberRepository.list()))
+                _isLoading.postValue(false)
+            } else {
+                _data.postValue(LayersScreenState.Error("Can't process gerber!"))
+                _isLoading.postValue(false)
+            }
+        }
     }
 
     fun gerberRemoved(id: String) {
-        dataService.removeItem(id)
-        //TODO subscribe on completable, write log on error
+        vmCoroutineScope.launch {
+            gerberRepository.removeItem(id)
+            _data.postValue(LayersScreenState.Success(gerberRepository.list()))
+        }
     }
 
     fun gerberVisibilityChanged(id: String, visibility: Boolean) {
-        dataService.changeItemVisibility(id, visibility)
-        //TODO subscribe on Completable?
+        vmCoroutineScope.launch {
+            gerberRepository.changeItemVisibility(id, visibility)
+            _data.postValue(LayersScreenState.Success(gerberRepository.list()))
+        }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        cancelJob()
+    }
+
+    private fun handleError(e: Throwable) {
+        Logger.d(e.localizedMessage ?: "Error getting data from GerberRepository")
+        _isLoading.value = false
+        _data.value = LayersScreenState.Error("Data loading failed!")
+    }
+
+    private fun cancelJob() {
+        vmCoroutineScope.coroutineContext.cancelChildren()
     }
 }
