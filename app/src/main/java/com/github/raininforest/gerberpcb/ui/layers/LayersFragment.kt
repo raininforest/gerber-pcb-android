@@ -32,8 +32,8 @@ class LayersFragment : Fragment(R.layout.layers_fragment) {
             if (result.resultCode == Activity.RESULT_OK) {
                 val data: Intent? = result.data
                 val uri: Uri = data?.data ?: Uri.EMPTY
-                layersViewModel.gerberAdded(uri)
                 Logger.d("File opened: ${uri.path}")
+                layersViewModel.gerberAdded(uri)
             }
         }
 
