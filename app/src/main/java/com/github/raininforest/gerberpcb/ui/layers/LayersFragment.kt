@@ -62,9 +62,9 @@ class LayersFragment : Fragment(R.layout.layers_fragment) {
     }
 
     private fun initViewModel() {
+        layersViewModel.init()
         layersViewModel.data.observe(viewLifecycleOwner) { screenState -> renderData(screenState) }
         layersViewModel.isLoading.observe(viewLifecycleOwner) { showLoading(it) }
-        layersViewModel.list()
     }
 
     private fun showLoading(isLoading: Boolean) {
