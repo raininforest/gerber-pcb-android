@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.github.raininforest.gerberpcb.R
 import com.github.raininforest.gerberpcb.databinding.LayersFragmentBinding
-import com.github.raininforest.gerberpcb.ui.showSnack
+import com.github.raininforest.gerberpcb.ui.layers.message.showMessageDialog
 import com.github.raininforest.logger.Logger
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -77,7 +77,7 @@ class LayersFragment : Fragment(R.layout.layers_fragment) {
                 listAdapter.setList(screenState.gerberList)
             }
             is LayersScreenState.Error -> {
-                showSnack(binding.root, screenState.error)
+                showMessageDialog(message = getString(R.string.error_gerber), childFragmentManager)
             }
         }
 }
