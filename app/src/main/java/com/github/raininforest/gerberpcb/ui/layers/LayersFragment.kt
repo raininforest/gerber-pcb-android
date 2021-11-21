@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isGone
+import androidx.documentfile.provider.DocumentFile
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -32,8 +33,9 @@ class LayersFragment : Fragment(R.layout.layers_fragment) {
             if (result.resultCode == Activity.RESULT_OK) {
                 val data: Intent? = result.data
                 val uri: Uri = data?.data ?: Uri.EMPTY
-                Logger.d("File opened: ${uri.path}")
-                layersViewModel.gerberAdded(uri)
+                val fileName = DocumentFile.fromSingleUri(requireContext(), uri)?.name ?: "<empty>"
+                Logger.d("File opened: $fileName")
+                layersViewModel.gerberAdded(uri, fileName)
             }
         }
 
