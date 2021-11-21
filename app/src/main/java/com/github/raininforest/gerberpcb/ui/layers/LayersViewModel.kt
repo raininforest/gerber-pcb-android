@@ -21,7 +21,7 @@ class LayersViewModel(
     private val _isLoading: MutableLiveData<Boolean> = MutableLiveData()
 
     private val vmCoroutineScope = CoroutineScope(
-        Dispatchers.Main
+        Dispatchers.IO
                 + SupervisorJob()
                 + CoroutineExceptionHandler { _, throwable ->
             handleError(throwable)
@@ -32,39 +32,35 @@ class LayersViewModel(
     val isLoading: LiveData<Boolean>
         get() = _isLoading
 
-    fun list() {
+    fun init() {
         cancelJob()
-        vmCoroutineScope.launch {
-            _data.postValue(LayersScreenState.Success(gerberRepository.list()))
-        }
+        _data.value = gerberRepository.gerbers.toScreenState()
     }
 
-    fun gerberAdded(fileUri: Uri) {
+    fun gerberAdded(fileUri: Uri, fileName: String) {
         _isLoading.value = true
         vmCoroutineScope.launch {
-            val processed = gerberRepository.addItem(fileUri)
-            if (processed) {
-                _data.postValue(LayersScreenState.Success(gerberRepository.list()))
-                _isLoading.postValue(false)
-            } else {
-                _data.postValue(LayersScreenState.Error("Can't process gerber!"))
-                _isLoading.postValue(false)
+            val processed = gerberRepository.addItem(fileUri, fileName)
+            withContext(Dispatchers.Main) {
+                if (processed) {
+                    _data.value = gerberRepository.gerbers.toScreenState()
+                    _isLoading.value = false
+                } else {
+                    _data.value = LayersScreenState.Error("Can't process gerber!")
+                    _isLoading.value = false
+                }
             }
         }
     }
 
     fun gerberRemoved(id: String) {
-        vmCoroutineScope.launch {
-            gerberRepository.removeItem(id)
-            _data.postValue(LayersScreenState.Success(gerberRepository.list()))
-        }
+        gerberRepository.removeItem(id)
+        _data.value = gerberRepository.gerbers.toScreenState()
     }
 
     fun gerberVisibilityChanged(id: String, visibility: Boolean) {
-        vmCoroutineScope.launch {
-            gerberRepository.changeItemVisibility(id, visibility)
-            _data.postValue(LayersScreenState.Success(gerberRepository.list()))
-        }
+        gerberRepository.changeItemVisibility(id, visibility)
+        _data.value = gerberRepository.gerbers.toScreenState()
     }
 
     override fun onCleared() {
