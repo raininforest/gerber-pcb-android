@@ -2,7 +2,7 @@ package com.github.raininforest.gerberpcb.di
 
 import com.github.raininforest.gerberfilereader.GerberFileReader
 import com.github.raininforest.gerberfilereader.GerberFileReaderImpl
-import com.github.raininforest.gerberpcb.app.GerberReaderLogger
+import com.github.raininforest.gerberpcb.logger.GerberReaderLogger
 import com.github.raininforest.gerberpcb.model.GerberProcessor
 import com.github.raininforest.gerberpcb.model.GerberRepository
 import com.github.raininforest.gerberpcb.model.GerberRepositoryImpl

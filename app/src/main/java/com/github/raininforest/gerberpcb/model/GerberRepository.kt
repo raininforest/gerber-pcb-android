@@ -1,6 +1,7 @@
 package com.github.raininforest.gerberpcb.model
 
 import android.net.Uri
+import com.github.raininforest.gerberpcb.model.entity.Gerber
 
 /**
  * Interface for [GerberRepository]

@@ -1,4 +1,4 @@
-package com.github.raininforest.gerberpcb.app
+package com.github.raininforest.gerberpcb.logger
 
 import com.github.raininforest.logger.ILogger
 import timber.log.Timber

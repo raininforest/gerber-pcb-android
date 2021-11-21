@@ -1,7 +1,6 @@
 package com.github.raininforest.gerberpcb.ui.layers
 
-import com.github.raininforest.gerberpcb.model.Gerber
-import com.github.raininforest.gerberpcb.model.GerberItemUi
+import com.github.raininforest.gerberpcb.model.entity.Gerber
 
 fun List<Gerber>.toScreenState(): LayersScreenState =
     LayersScreenState.Success(

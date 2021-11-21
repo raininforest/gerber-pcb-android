@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.github.raininforest.gerberpcb.databinding.ItemViewBinding
-import com.github.raininforest.gerberpcb.model.GerberItemUi
 
 /**
  * Created by Sergey Velesko on 18.07.2021

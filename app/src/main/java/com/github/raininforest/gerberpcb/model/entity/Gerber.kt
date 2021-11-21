@@ -1,4 +1,4 @@
-package com.github.raininforest.gerberpcb.model
+package com.github.raininforest.gerberpcb.model.entity
 
 import java.util.*
 
