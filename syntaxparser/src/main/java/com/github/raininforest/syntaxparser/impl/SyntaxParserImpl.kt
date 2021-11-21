@@ -24,6 +24,7 @@ import com.github.raininforest.syntaxparser.impl.commands.operations.DOperationC
 import com.github.raininforest.syntaxparser.impl.commands.regionstate.G36Command
 import com.github.raininforest.syntaxparser.impl.commands.regionstate.G37Command
 import com.github.raininforest.syntaxparser.impl.commands.unused.OFCommand
+import com.github.raininforest.syntaxparser.impl.exceptions.InvalidGerberException
 import com.github.raininforest.syntaxparser.impl.exceptions.WrongCommandFormatException
 import com.github.raininforest.syntaxparser.impl.utils.*
 
@@ -37,15 +38,14 @@ class SyntaxParserImpl(private val gerberValidator: GerberValidator) : SyntaxPar
     override fun parse(stringList: List<String>, name: String): List<GerberCommand> =
         try {
             if (gerberValidator isGerberValid stringList) {
-                parseFile(stringList, name)
+                parseFile(stringList, name).also { Logger.d("command count: ${it.size}") }
             } else {
                 Logger.e("Gerber $name is invalid")
-                emptyList()
+                throw InvalidGerberException()
             }
         } catch (e: Throwable) {
-            e.printStackTrace()
-            Logger.e(e.localizedMessage)
-            emptyList()
+            Logger.e(e.message.orEmpty())
+            throw e
         }
 
     private fun parseFile(stringList: List<String>, name: String): List<GerberCommand> {
