@@ -1,4 +1,4 @@
-package com.github.raininforest.gerberpcb.ui.layers.message
+package com.github.raininforest.gerberpcb.ui.screens.messagedialog
 
 import androidx.fragment.app.FragmentManager
 

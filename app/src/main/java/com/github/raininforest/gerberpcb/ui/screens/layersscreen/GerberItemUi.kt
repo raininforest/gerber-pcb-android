@@ -1,4 +1,4 @@
-package com.github.raininforest.gerberpcb.ui.layers
+package com.github.raininforest.gerberpcb.ui.screens.layersscreen
 
 import java.util.*
 

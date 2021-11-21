@@ -1,4 +1,4 @@
-package com.github.raininforest.gerberpcb.ui.layers
+package com.github.raininforest.gerberpcb.ui.screens.layersscreen
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

@@ -6,7 +6,7 @@ import com.github.raininforest.gerberpcb.app.logger.GerberReaderLogger
 import com.github.raininforest.gerberpcb.model.GerberProcessor
 import com.github.raininforest.gerberpcb.model.GerberRepository
 import com.github.raininforest.gerberpcb.model.GerberRepositoryImpl
-import com.github.raininforest.gerberpcb.ui.layers.LayersViewModel
+import com.github.raininforest.gerberpcb.ui.screens.layersscreen.LayersViewModel
 import com.github.raininforest.logger.ILogger
 import com.github.raininforest.syntaxparser.api.SyntaxParser
 import com.github.raininforest.syntaxparser.impl.GerberValidator

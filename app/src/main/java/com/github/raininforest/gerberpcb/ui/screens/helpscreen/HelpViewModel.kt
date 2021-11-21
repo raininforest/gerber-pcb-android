@@ -1,4 +1,4 @@
-package com.github.raininforest.gerberpcb.ui.help
+package com.github.raininforest.gerberpcb.ui.screens.helpscreen
 
 import androidx.lifecycle.ViewModel
 

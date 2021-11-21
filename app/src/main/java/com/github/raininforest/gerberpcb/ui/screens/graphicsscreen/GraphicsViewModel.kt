@@ -1,4 +1,4 @@
-package com.github.raininforest.gerberpcb.ui.graphics
+package com.github.raininforest.gerberpcb.ui.screens.graphicsscreen
 
 import androidx.lifecycle.ViewModel
 

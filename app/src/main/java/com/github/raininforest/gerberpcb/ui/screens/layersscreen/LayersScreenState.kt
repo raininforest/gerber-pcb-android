@@ -1,4 +1,4 @@
-package com.github.raininforest.gerberpcb.ui.layers
+package com.github.raininforest.gerberpcb.ui.screens.layersscreen
 
 /**
  * Created by Sergey Velesko on 18.07.2021
