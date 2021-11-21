@@ -1,9 +1,7 @@
 package com.github.raininforest.gerberpcb.model
 
 import android.net.Uri
-import com.github.raininforest.gerberfilereader.GerberFileReader
-import com.github.raininforest.syntaxparser.api.GerberCommand
-import com.github.raininforest.syntaxparser.api.SyntaxParser
+import com.github.raininforest.logger.Logger
 
 /**
  * [GerberRepository] implementation
@@ -11,37 +9,40 @@ import com.github.raininforest.syntaxparser.api.SyntaxParser
  * Created by Sergey Velesko on 18.07.2021
  */
 class GerberRepositoryImpl(
-    private val fileReader: GerberFileReader,
-    private val syntaxParser: SyntaxParser
+    private val gerberProcessor: GerberProcessor
 ) : GerberRepository {
 
-    private val gerbers: MutableMap<String, Gerber> = mutableMapOf()
+    private val _gerbersDictionary: MutableMap<String, Gerber> = mutableMapOf()
+    private val _gerbers = mutableListOf<Gerber>()
 
-    override suspend fun list(): List<GerberItemUi> =
-        listOf(
-            GerberItemUi(name = "gerber_topsilk_01.gbr"),
-            GerberItemUi(name = "gerber_02.gbr", checked = true),
-            GerberItemUi(name = "gerber_03.gbr")
-        )
+    override val gerbers: List<Gerber>
+        get() = _gerbers
 
+    override suspend fun addItem(fileUri: Uri, fileName: String) =
+        when (val result = gerberProcessor.process(fileUri, fileName)) {
+            is GerberResult.Error -> {
+                Logger.e(result.errorMessage)
+                false
+            }
+            is GerberResult.Success -> {
+                _gerbersDictionary[result.gerber.id] = result.gerber
+                updateList()
+                true
+            }
+        }
 
-    override suspend fun addItem(fileUri: Uri): Boolean {
-        val filename = fileUri.path?.substring(
-            fileUri.path?.lastIndexOf('/') ?: 0,
-            fileUri.path?.lastIndex ?: 0
-        ) ?: "<empty>"
-
-        val listOfCommands: List<GerberCommand> =
-            syntaxParser.parse(stringList = fileReader.read(fileUri), name = filename)
-        TODO("Not yet implemented")
-        return listOfCommands.isNotEmpty()
+    override fun removeItem(id: String) {
+        _gerbersDictionary.remove(id)
+        updateList()
     }
 
-    override suspend fun removeItem(id: String) {
-        TODO("Not yet implemented")
+    override fun changeItemVisibility(id: String, visibility: Boolean) {
+        _gerbersDictionary[id]?.isVisible = visibility
+        updateList()
     }
 
-    override suspend fun changeItemVisibility(id: String, visibility: Boolean) {
-        TODO("Not yet implemented")
+    private fun updateList() {
+        _gerbers.clear()
+        _gerbers.addAll(_gerbersDictionary.values.toList())
     }
 }
