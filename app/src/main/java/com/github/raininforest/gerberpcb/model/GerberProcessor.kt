@@ -9,13 +9,13 @@ class GerberProcessor(
     private val parser: SyntaxParser,
     //TODO private val graphicsProcessor: GraphicsProcessor
 ) {
-    fun process(uri: Uri): GerberResult {
+    fun process(uri: Uri, fileName: String): GerberResult {
         return try {
             //TODO graphicsProcessor.createGraphicsStream(parser.parse(fileReader.read(uri)))
-            parser.parse(stringList = fileReader.read(uri), name = uri.lastPathSegment ?: "<empty>")
-            GerberResult.Success(Gerber(name = uri.lastPathSegment ?: "<empty>"))
+            parser.parse(stringList = fileReader.read(uri), name = fileName)
+            GerberResult.Success(Gerber(name = fileName))
         } catch (e: Throwable) {
-            GerberResult.Error(errorMessage = e.localizedMessage ?: "Reading file error!")
+            GerberResult.Error(errorMessage = e.localizedMessage ?: "Reading file error: $fileName")
         }
     }
 }

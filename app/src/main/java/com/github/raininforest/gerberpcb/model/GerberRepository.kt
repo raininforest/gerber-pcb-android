@@ -9,7 +9,7 @@ import android.net.Uri
  */
 interface GerberRepository {
     val gerbers: List<Gerber>
-    suspend fun addItem(fileUri: Uri): Boolean
+    suspend fun addItem(fileUri: Uri, fileName: String): Boolean
     fun removeItem(id: String)
     fun changeItemVisibility(id: String, visibility: Boolean)
 }
