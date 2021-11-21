@@ -1,7 +1,7 @@
 package com.github.raininforest.syntaxparser.impl.commands.aperturemacro
 
 import com.github.raininforest.syntaxparser.api.GerberCommand
-import com.github.raininforest.syntaxparser.api.GraphicsProcessor
+import com.github.raininforest.syntaxparser.api.CommandProcessor
 import com.github.raininforest.syntaxparser.impl.LineNumberHandler
 import com.github.raininforest.syntaxparser.impl.MultiStringParsable
 import com.github.raininforest.syntaxparser.impl.commands.aperturemacro.macrobody.MacroBody
@@ -23,7 +23,7 @@ data class AMCommand(
     override val lineNumber: Int
 ) : GerberCommand {
 
-    override fun perform(processor: GraphicsProcessor) {
+    override fun perform(processor: CommandProcessor) {
         processor.templateDictionary.add(macroTemplate)
     }
 

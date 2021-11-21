@@ -1,6 +1,6 @@
 package com.github.raininforest.syntaxparser.impl.commands.operations
 
-import com.github.raininforest.syntaxparser.api.GraphicsProcessor
+import com.github.raininforest.syntaxparser.api.CommandProcessor
 import com.github.raininforest.syntaxparser.api.PointD
 import com.github.raininforest.syntaxparser.impl.utils.fromCoordinateToDouble
 import java.util.regex.Pattern
@@ -12,7 +12,7 @@ import java.util.regex.Pattern
  */
 abstract class DOperationCommand {
 
-    protected fun updateCurrentPoint(processor: GraphicsProcessor, x: Double?, y: Double?) {
+    protected fun updateCurrentPoint(processor: CommandProcessor, x: Double?, y: Double?) {
         processor.graphicsState.currentPoint =
             PointD(
                 x ?: processor.graphicsState.currentPoint.x,

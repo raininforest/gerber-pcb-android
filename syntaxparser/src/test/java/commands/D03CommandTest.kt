@@ -1,6 +1,6 @@
 package commands
 
-import com.github.raininforest.syntaxparser.api.GraphicsProcessor
+import com.github.raininforest.syntaxparser.api.CommandProcessor
 import com.github.raininforest.syntaxparser.api.PointD
 import com.github.raininforest.syntaxparser.api.graphicsstate.CoordinateFormat
 import com.github.raininforest.syntaxparser.impl.commands.operations.D03Command
@@ -28,7 +28,7 @@ class D03CommandTest(
     @Test
     fun `perform test`() {
         val command = D03Command(xVal, yVal, 43)
-        val graphicsProcessor = mockk<GraphicsProcessor>(relaxed = true)
+        val graphicsProcessor = mockk<CommandProcessor>(relaxed = true)
 
         every { graphicsProcessor.graphicsState.currentPoint.x } returns currentVal
         every { graphicsProcessor.graphicsState.currentPoint.y } returns currentVal

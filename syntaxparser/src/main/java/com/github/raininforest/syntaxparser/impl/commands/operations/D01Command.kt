@@ -1,7 +1,7 @@
 package com.github.raininforest.syntaxparser.impl.commands.operations
 
 import com.github.raininforest.syntaxparser.api.GerberCommand
-import com.github.raininforest.syntaxparser.api.GraphicsProcessor
+import com.github.raininforest.syntaxparser.api.CommandProcessor
 import com.github.raininforest.syntaxparser.api.PointD
 import com.github.raininforest.syntaxparser.api.graphicsstate.CoordinateFormat
 import com.github.raininforest.syntaxparser.api.graphicsstate.enums.InterpolationState
@@ -26,7 +26,7 @@ data class D01Command(
     override val lineNumber: Int
 ) : DOperationCommand(), GerberCommand {
 
-    override fun perform(processor: GraphicsProcessor) {
+    override fun perform(processor: CommandProcessor) {
         when (processor.graphicsState.interpolationState) {
             InterpolationState.LINEAR -> drawLine(processor)
             InterpolationState.CLOCKWISE_CIRCULAR -> drawArc(processor, isClockwise = true)
@@ -34,7 +34,7 @@ data class D01Command(
         }
     }
 
-    private fun drawLine(processor: GraphicsProcessor) {
+    private fun drawLine(processor: CommandProcessor) {
         if (processor.regionMode == RegionMode.REGION) {
             processor.lineTo(
                 x = x ?: processor.graphicsState.currentPoint.x,
@@ -51,7 +51,7 @@ data class D01Command(
         updateCurrentPoint(processor, x, y)
     }
 
-    private fun drawArc(processor: GraphicsProcessor, isClockwise: Boolean) {
+    private fun drawArc(processor: CommandProcessor, isClockwise: Boolean) {
         val center = PointD(
             processor.graphicsState.currentPoint.x + i,
             processor.graphicsState.currentPoint.y + j

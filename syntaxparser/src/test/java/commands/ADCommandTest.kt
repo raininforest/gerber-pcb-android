@@ -1,7 +1,7 @@
 package commands
 
 import com.github.raininforest.syntaxparser.api.Aperture
-import com.github.raininforest.syntaxparser.api.GraphicsProcessor
+import com.github.raininforest.syntaxparser.api.CommandProcessor
 import com.github.raininforest.syntaxparser.impl.LineNumberHandler
 import com.github.raininforest.syntaxparser.impl.commands.aperturedefinition.ADCommand
 import com.github.raininforest.syntaxparser.impl.commands.aperturemacro.templates.MacroTemplate
@@ -26,7 +26,7 @@ class ADCommandTest {
 
     @Test
     fun `perform test`() {
-        val graphicsProcessor = mockk<GraphicsProcessor>(relaxed = true)
+        val graphicsProcessor = mockk<CommandProcessor>(relaxed = true)
         val template = mockk<MacroTemplate>(relaxed = true)
         val aperture = mockk<Aperture>()
 

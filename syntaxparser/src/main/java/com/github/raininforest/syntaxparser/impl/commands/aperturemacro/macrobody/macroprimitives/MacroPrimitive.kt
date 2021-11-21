@@ -1,6 +1,6 @@
 package com.github.raininforest.syntaxparser.impl.commands.aperturemacro.macrobody.macroprimitives
 
-import com.github.raininforest.syntaxparser.api.GraphicsProcessor
+import com.github.raininforest.syntaxparser.api.CommandProcessor
 
 /**
  * Base interface for macro primitives
@@ -8,7 +8,7 @@ import com.github.raininforest.syntaxparser.api.GraphicsProcessor
  * Created by Sergey Velesko on 16.10.2021
  */
 interface MacroPrimitive {
-    fun draw(processor: GraphicsProcessor)
+    fun draw(processor: CommandProcessor)
 
     /**
      * Base interface for [MacroPrimitive] factories

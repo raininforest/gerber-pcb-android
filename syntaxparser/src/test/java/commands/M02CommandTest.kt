@@ -1,6 +1,6 @@
 package commands
 
-import com.github.raininforest.syntaxparser.api.GraphicsProcessor
+import com.github.raininforest.syntaxparser.api.CommandProcessor
 import com.github.raininforest.syntaxparser.impl.LineNumberHandler
 import com.github.raininforest.syntaxparser.impl.commands.M02Command
 import com.github.raininforest.syntaxparser.impl.exceptions.WrongCommandFormatException
@@ -47,7 +47,7 @@ class M02CommandTest {
     @Test
     fun `perform test`() {
         val command = M02Command(56)
-        val mockedProcessor = mockk<GraphicsProcessor>(relaxed = true)
+        val mockedProcessor = mockk<CommandProcessor>(relaxed = true)
         command.perform(processor = mockedProcessor)
         verify { mockedProcessor.finishDrawing() }
     }

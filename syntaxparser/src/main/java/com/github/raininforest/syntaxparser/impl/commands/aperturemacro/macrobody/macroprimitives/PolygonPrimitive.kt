@@ -1,6 +1,6 @@
 package com.github.raininforest.syntaxparser.impl.commands.aperturemacro.macrobody.macroprimitives
 
-import com.github.raininforest.syntaxparser.api.GraphicsProcessor
+import com.github.raininforest.syntaxparser.api.CommandProcessor
 import com.github.raininforest.syntaxparser.api.PointD
 import com.github.raininforest.syntaxparser.impl.utils.toRadians
 import kotlin.math.cos
@@ -36,7 +36,7 @@ data class PolygonPrimitive(
         }
     }
 
-    override fun draw(processor: GraphicsProcessor) {
+    override fun draw(processor: CommandProcessor) {
         processor.isExposure = exposure
         processor.macroRotation = rotation
         processor.drawPath(points)

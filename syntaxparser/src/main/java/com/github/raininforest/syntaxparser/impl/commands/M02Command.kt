@@ -1,7 +1,7 @@
 package com.github.raininforest.syntaxparser.impl.commands
 
 import com.github.raininforest.syntaxparser.api.GerberCommand
-import com.github.raininforest.syntaxparser.api.GraphicsProcessor
+import com.github.raininforest.syntaxparser.api.CommandProcessor
 import com.github.raininforest.syntaxparser.impl.LineNumberHandler
 import com.github.raininforest.syntaxparser.impl.MultiStringParsable
 import com.github.raininforest.syntaxparser.impl.exceptions.WrongCommandFormatException
@@ -14,7 +14,7 @@ import java.util.regex.Pattern
  */
 data class M02Command(override val lineNumber: Int) : GerberCommand {
 
-    override fun perform(processor: GraphicsProcessor) {
+    override fun perform(processor: CommandProcessor) {
         processor.finishDrawing()
     }
 

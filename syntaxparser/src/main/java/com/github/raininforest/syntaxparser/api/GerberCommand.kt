@@ -6,5 +6,5 @@ package com.github.raininforest.syntaxparser.api
 interface GerberCommand {
     val lineNumber: Int
 
-    fun perform(processor: GraphicsProcessor)
+    fun perform(processor: CommandProcessor)
 }

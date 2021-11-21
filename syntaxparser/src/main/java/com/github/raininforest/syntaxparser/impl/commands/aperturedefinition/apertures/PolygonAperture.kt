@@ -1,7 +1,7 @@
 package com.github.raininforest.syntaxparser.impl.commands.aperturedefinition.apertures
 
 import com.github.raininforest.syntaxparser.api.Aperture
-import com.github.raininforest.syntaxparser.api.GraphicsProcessor
+import com.github.raininforest.syntaxparser.api.CommandProcessor
 import com.github.raininforest.syntaxparser.api.PointD
 import com.github.raininforest.syntaxparser.impl.utils.toRadians
 import kotlin.math.cos
@@ -37,7 +37,7 @@ data class PolygonAperture(
         }
     }
 
-    override fun flash(processor: GraphicsProcessor) {
+    override fun flash(processor: CommandProcessor) {
         val center = processor.graphicsState.currentPoint
 
         // start

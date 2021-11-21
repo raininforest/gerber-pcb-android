@@ -8,7 +8,7 @@ import com.github.raininforest.syntaxparser.api.graphicsstate.enums.RegionMode
 /**
  * Created by Sergey Velesko on 19.09.2021
  */
-interface GraphicsProcessor {
+interface CommandProcessor {
 
     val graphicsState: GraphicsState
     val apertureDictionary: ApertureDictionary

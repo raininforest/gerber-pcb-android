@@ -1,7 +1,7 @@
 package com.github.raininforest.syntaxparser.impl.commands.aperturedefinition.apertures
 
 import com.github.raininforest.syntaxparser.api.Aperture
-import com.github.raininforest.syntaxparser.api.GraphicsProcessor
+import com.github.raininforest.syntaxparser.api.CommandProcessor
 import com.github.raininforest.syntaxparser.impl.commands.aperturemacro.macrobody.macroprimitives.MacroPrimitive
 
 /**
@@ -14,7 +14,7 @@ data class MacroAperture(
     val primitives: List<MacroPrimitive>
 ): Aperture {
 
-    override fun flash(processor: GraphicsProcessor) {
+    override fun flash(processor: CommandProcessor) {
         primitives.forEach {
             it.draw(processor)
         }

@@ -1,7 +1,7 @@
 package commands
 
 import com.github.raininforest.syntaxparser.api.GerberCommand
-import com.github.raininforest.syntaxparser.api.GraphicsProcessor
+import com.github.raininforest.syntaxparser.api.CommandProcessor
 import com.github.raininforest.syntaxparser.impl.LineNumberHandler
 import com.github.raininforest.syntaxparser.impl.commands.aperturetransformation.LSCommand
 import com.github.raininforest.syntaxparser.impl.exceptions.WrongCommandFormatException
@@ -65,7 +65,7 @@ class LSCommandTest {
     @Test
     fun `perform test `() {
         val command: GerberCommand = LSCommand(0.254, 54)
-        val processor = mockk<GraphicsProcessor>(relaxed = true)
+        val processor = mockk<CommandProcessor>(relaxed = true)
         command.perform(processor)
 
         verify { processor.graphicsState.scaling = 0.254 }

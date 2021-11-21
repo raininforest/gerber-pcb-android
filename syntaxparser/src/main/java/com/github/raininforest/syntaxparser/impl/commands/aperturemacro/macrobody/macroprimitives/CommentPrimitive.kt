@@ -1,6 +1,6 @@
 package com.github.raininforest.syntaxparser.impl.commands.aperturemacro.macrobody.macroprimitives
 
-import com.github.raininforest.syntaxparser.api.GraphicsProcessor
+import com.github.raininforest.syntaxparser.api.CommandProcessor
 
 /**
  * Comment [MacroPrimitive]
@@ -9,7 +9,7 @@ import com.github.raininforest.syntaxparser.api.GraphicsProcessor
  */
 class CommentPrimitive : MacroPrimitive {
 
-    override fun draw(processor: GraphicsProcessor) {
+    override fun draw(processor: CommandProcessor) {
         // ignore
     }
 

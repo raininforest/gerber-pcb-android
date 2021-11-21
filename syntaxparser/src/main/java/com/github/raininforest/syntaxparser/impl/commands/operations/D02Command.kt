@@ -1,7 +1,7 @@
 package com.github.raininforest.syntaxparser.impl.commands.operations
 
 import com.github.raininforest.syntaxparser.api.GerberCommand
-import com.github.raininforest.syntaxparser.api.GraphicsProcessor
+import com.github.raininforest.syntaxparser.api.CommandProcessor
 import com.github.raininforest.syntaxparser.api.graphicsstate.CoordinateFormat
 import com.github.raininforest.syntaxparser.api.graphicsstate.enums.RegionMode
 import com.github.raininforest.syntaxparser.impl.CoordinateDataParsable
@@ -18,7 +18,7 @@ data class D02Command(
     override val lineNumber: Int
 ) : DOperationCommand(), GerberCommand {
 
-    override fun perform(processor: GraphicsProcessor) {
+    override fun perform(processor: CommandProcessor) {
         if (processor.regionMode == RegionMode.REGION) {
             processor.closeContourAndStartNewOne()
         }

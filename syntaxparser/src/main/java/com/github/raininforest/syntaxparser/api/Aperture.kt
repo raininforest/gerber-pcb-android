@@ -7,5 +7,5 @@ package com.github.raininforest.syntaxparser.api
  */
 interface Aperture {
     val apertureId: String
-    fun flash(processor: GraphicsProcessor)
+    fun flash(processor: CommandProcessor)
 }

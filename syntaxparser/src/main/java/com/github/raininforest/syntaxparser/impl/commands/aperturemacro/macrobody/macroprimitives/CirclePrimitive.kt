@@ -1,6 +1,6 @@
 package com.github.raininforest.syntaxparser.impl.commands.aperturemacro.macrobody.macroprimitives
 
-import com.github.raininforest.syntaxparser.api.GraphicsProcessor
+import com.github.raininforest.syntaxparser.api.CommandProcessor
 
 /**
  * Circle [MacroPrimitive]
@@ -15,7 +15,7 @@ data class CirclePrimitive(
     private val rotation: Double = 0.0
 ) : MacroPrimitive {
 
-    override fun draw(processor: GraphicsProcessor) {
+    override fun draw(processor: CommandProcessor) {
         processor.isExposure = exposure
         processor.macroRotation = rotation
         processor.addCircle(cX, cY, diameter / 2)

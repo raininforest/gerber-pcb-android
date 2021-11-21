@@ -1,7 +1,7 @@
 package com.github.raininforest.syntaxparser.impl.commands.aperturetransformation
 
 import com.github.raininforest.syntaxparser.api.GerberCommand
-import com.github.raininforest.syntaxparser.api.GraphicsProcessor
+import com.github.raininforest.syntaxparser.api.CommandProcessor
 import com.github.raininforest.syntaxparser.api.graphicsstate.enums.Polarity
 import com.github.raininforest.syntaxparser.impl.LineNumberHandler
 import com.github.raininforest.syntaxparser.impl.MultiStringParsable
@@ -18,7 +18,7 @@ data class LPCommand(
     override val lineNumber: Int
 ) : GerberCommand {
 
-    override fun perform(processor: GraphicsProcessor) {
+    override fun perform(processor: CommandProcessor) {
         processor.graphicsState.polarity = polarity
     }
 

@@ -1,7 +1,7 @@
 package com.github.raininforest.syntaxparser.impl.commands.aperturedefinition
 
 import com.github.raininforest.syntaxparser.api.GerberCommand
-import com.github.raininforest.syntaxparser.api.GraphicsProcessor
+import com.github.raininforest.syntaxparser.api.CommandProcessor
 import com.github.raininforest.syntaxparser.api.dictionary.ApertureDictionary
 import com.github.raininforest.syntaxparser.impl.LineNumberHandler
 import com.github.raininforest.syntaxparser.impl.MultiStringParsable
@@ -21,7 +21,7 @@ data class ADCommand(
     override val lineNumber: Int,
 ) : GerberCommand {
 
-    override fun perform(processor: GraphicsProcessor) {
+    override fun perform(processor: CommandProcessor) {
         val template = processor.templateDictionary.get(id = apertureTemplateName)
         val aperture = template.buildAperture(apertureId, parameters)
         processor.apertureDictionary.add(aperture)

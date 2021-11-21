@@ -1,7 +1,7 @@
 package com.github.raininforest.syntaxparser.impl.commands.operations
 
 import com.github.raininforest.syntaxparser.api.GerberCommand
-import com.github.raininforest.syntaxparser.api.GraphicsProcessor
+import com.github.raininforest.syntaxparser.api.CommandProcessor
 import com.github.raininforest.syntaxparser.api.graphicsstate.CoordinateFormat
 import com.github.raininforest.syntaxparser.impl.CoordinateDataParsable
 import com.github.raininforest.syntaxparser.impl.exceptions.WrongCommandFormatException
@@ -17,7 +17,7 @@ data class D03Command(
     override val lineNumber: Int
 ) : DOperationCommand(), GerberCommand {
 
-    override fun perform(processor: GraphicsProcessor) {
+    override fun perform(processor: CommandProcessor) {
         updateCurrentPoint(processor, x, y)
         processor.graphicsState.currentAperture.flash(processor)
     }

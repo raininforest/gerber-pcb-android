@@ -1,9 +1,8 @@
 package commands
 
 import com.github.raininforest.syntaxparser.api.Aperture
-import com.github.raininforest.syntaxparser.api.GraphicsProcessor
+import com.github.raininforest.syntaxparser.api.CommandProcessor
 import com.github.raininforest.syntaxparser.api.dictionary.ApertureDictionary
-import com.github.raininforest.syntaxparser.impl.LineNumberHandler
 import com.github.raininforest.syntaxparser.impl.commands.aperturedefinition.DnnCommand
 import com.github.raininforest.syntaxparser.impl.exceptions.WrongCommandFormatException
 import io.mockk.every
@@ -32,7 +31,7 @@ class DnnCommandTest {
     @Test
     fun `perform test`() {
         val apertureNumber = "122"
-        val processor = mockk<GraphicsProcessor>(relaxed = true)
+        val processor = mockk<CommandProcessor>(relaxed = true)
         val aperture = mockk<Aperture>(relaxed = true)
         val apertureDictionary = mockk<ApertureDictionary>(relaxed = true)
         val slot = slot<String>()

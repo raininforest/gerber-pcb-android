@@ -1,7 +1,7 @@
 package com.github.raininforest.syntaxparser.impl.commands.aperturedefinition.apertures
 
 import com.github.raininforest.syntaxparser.api.Aperture
-import com.github.raininforest.syntaxparser.api.GraphicsProcessor
+import com.github.raininforest.syntaxparser.api.CommandProcessor
 
 /**
  * Standard circle [Aperture]
@@ -14,7 +14,7 @@ data class CircleAperture(
     val holeDiameter: Double
 ) : Aperture {
 
-    override fun flash(processor: GraphicsProcessor) {
+    override fun flash(processor: CommandProcessor) {
         val center = processor.graphicsState.currentPoint
 
         // start
