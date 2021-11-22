@@ -53,6 +53,7 @@ dependencies {
     //modules
     implementation(project(":gerberfilereader"))
     implementation(project(":syntaxparser"))
+    implementation(project(":graphicsprocessor"))
 
     //koin
     implementation("io.insert-koin:koin-android:${Versions.koin}")

@@ -2,6 +2,6 @@ package com.github.raininforest
 
 import android.graphics.Canvas
 
-interface GraphicsCommand {
-    fun perform(canvas: Canvas)
+interface GraphicsObject {
+    infix fun draw(canvas: Canvas)
 }

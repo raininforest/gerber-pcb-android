@@ -1,5 +1,6 @@
 package com.github.raininforest.gerberpcb.model.entity
 
+import com.github.raininforest.GraphicsObject
 import java.util.*
 
 /**
@@ -9,5 +10,5 @@ data class Gerber(
     val id: String = UUID.randomUUID().toString(),
     val name: String,
     var isVisible: Boolean = false,
-    //val data: List<GraphicsObject>
+    val data: List<GraphicsObject>
 )
