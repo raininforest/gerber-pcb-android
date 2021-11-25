@@ -16,8 +16,8 @@ data class PolygonAperture(
     override val apertureId: String,
     val outerDiameter: Double,
     val vertices: Int,
-    val rotation: Double,
-    val holeDiameter: Double
+    val rotation: Double = 0.0,
+    val holeDiameter: Double = 0.0
 ) : Aperture {
 
     private val points: MutableList<PointD>

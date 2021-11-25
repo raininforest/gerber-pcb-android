@@ -11,7 +11,7 @@ import com.github.raininforest.syntaxparser.api.CommandProcessor
 data class CircleAperture(
     override val apertureId: String,
     val diameter: Double,
-    val holeDiameter: Double
+    val holeDiameter: Double = 0.0
 ) : Aperture {
 
     override fun flash(processor: CommandProcessor) {

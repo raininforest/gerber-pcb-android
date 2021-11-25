@@ -12,7 +12,7 @@ data class ObroundAperture(
     override val apertureId: String,
     val xSize: Double,
     val ySize: Double,
-    val holeDiameter: Double,
+    val holeDiameter: Double = 0.0,
 ) : Aperture {
 
     override fun flash(processor: CommandProcessor) {
