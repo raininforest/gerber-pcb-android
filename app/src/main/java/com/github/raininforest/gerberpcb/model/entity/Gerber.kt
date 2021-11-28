@@ -1,6 +1,6 @@
 package com.github.raininforest.gerberpcb.model.entity
 
-import com.github.raininforest.GraphicsObject
+import com.github.raininforest.graphicsobject.GraphicsObject
 import java.util.*
 
 /**
