@@ -1,23 +1,22 @@
 package com.github.raininforest.gerberpcb.ui.screens.graphicsscreen.gerberview
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Canvas
 import android.util.AttributeSet
 import android.view.View
-import com.github.raininforest.GraphicsObject
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-@SuppressLint("ViewConstructor")
 class GerberView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
+    defStyle: Int = 0
+) : View(context, attrs, defStyle), KoinComponent {
 
-    defStyle: Int = 0,
-    private val renderer: GerberRenderer
-) : View(context, attrs, defStyle) {
+    private val renderer: GerberRenderer by inject()
 
-    private val _data: MutableList<GraphicsObject> = mutableListOf()
-    var data: List<GraphicsObject>
+    private val _data: MutableList<GerberLayerUi> = mutableListOf()
+    var data: List<GerberLayerUi>
         set(value) {
             _data.clear()
             _data.addAll(value)
@@ -25,9 +24,10 @@ class GerberView @JvmOverloads constructor(
         get() = _data
 
     override fun onDraw(canvas: Canvas?) {
-        super.onDraw(canvas)
-        canvas?.let {
-            renderer.render(data = _data, canvas = it)
+        _data.forEach { gerberLayer ->
+            canvas?.let { canvas ->
+                renderer.render(data = gerberLayer.data, canvas = canvas, color = gerberLayer.color)
+            }
         }
     }
 }
