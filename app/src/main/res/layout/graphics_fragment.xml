@@ -5,9 +5,10 @@
     android:layout_height="match_parent"
     tools:context=".ui.screens.graphicsscreen.GraphicsFragment">
 
-    <TextView
+    <com.github.raininforest.gerberpcb.ui.screens.graphicsscreen.gerberview.GerberView
+        android:id="@+id/gerberView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="GraphicsFragment" />
+        android:background="@color/black" />
 
 </FrameLayout>

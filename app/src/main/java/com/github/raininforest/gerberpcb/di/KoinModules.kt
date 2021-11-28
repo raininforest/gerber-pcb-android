@@ -9,6 +9,9 @@ import com.github.raininforest.gerberpcb.app.logger.GerberReaderLogger
 import com.github.raininforest.gerberpcb.model.GerberProcessor
 import com.github.raininforest.gerberpcb.model.GerberRepository
 import com.github.raininforest.gerberpcb.model.GerberRepositoryImpl
+import com.github.raininforest.gerberpcb.ui.screens.graphicsscreen.GraphicsViewModel
+import com.github.raininforest.gerberpcb.ui.screens.graphicsscreen.gerberview.GerberRenderer
+import com.github.raininforest.gerberpcb.ui.screens.graphicsscreen.gerberview.GerberRendererImpl
 import com.github.raininforest.gerberpcb.ui.screens.layersscreen.LayersViewModel
 import com.github.raininforest.logger.ILogger
 import com.github.raininforest.syntaxparser.api.CommandProcessor
@@ -26,6 +29,7 @@ import org.koin.dsl.module
 val application = module {
     single<ILogger> { GerberReaderLogger() }
 
+    viewModel { LayersViewModel(gerberRepository = get()) }
     single<GerberFileReader> { GerberFileReaderImpl(context = get()) }
     single { GerberValidator() }
     single<SyntaxParser> { SyntaxParserImpl(gerberValidator = get()) }
@@ -34,5 +38,6 @@ val application = module {
     single { GerberProcessor(fileReader = get(), parser = get(), graphicsProcessor = get()) }
     single<GerberRepository> { GerberRepositoryImpl(gerberProcessor = get()) }
 
-    viewModel { LayersViewModel(gerberRepository = get()) }
+    viewModel { GraphicsViewModel(gerberRepository = get()) }
+    single<GerberRenderer> { GerberRendererImpl() }
 }
