@@ -30,6 +30,7 @@ dependencies {
 
     implementation("androidx.core:core-ktx:1.6.0")
     implementation(project(":syntaxparser"))
+    implementation(project(":logger"))
 
     //tests
     testImplementation("org.robolectric:robolectric:4.6.1")
