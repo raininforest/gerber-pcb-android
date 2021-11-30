@@ -20,7 +20,8 @@ data class D02Command(
 
     override fun perform(processor: CommandProcessor) {
         if (processor.regionMode == RegionMode.REGION) {
-            processor.closeContourAndStartNewOne()
+            processor.closeContour()
+            processor.startContour()
         }
         updateCurrentPoint(processor, x, y)
     }
