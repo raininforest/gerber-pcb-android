@@ -15,7 +15,7 @@ import java.util.regex.Pattern
 data class M02Command(override val lineNumber: Int) : GerberCommand {
 
     override fun perform(processor: CommandProcessor) {
-        processor.finishDrawing()
+        // ignore
     }
 
     internal companion object : MultiStringParsable {
