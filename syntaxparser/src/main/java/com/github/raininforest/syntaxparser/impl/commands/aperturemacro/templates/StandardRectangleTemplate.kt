@@ -9,7 +9,7 @@ import com.github.raininforest.syntaxparser.impl.utils.valueOrZero
  *
  * Created by Sergey Velesko on 16.10.2021
  */
-data class StandardRectangleTemplate(override val name: String) : ApertureTemplate {
+data class StandardRectangleTemplate(override val name: String = "R") : ApertureTemplate {
 
     override fun buildAperture(apertureId: String, parameters: List<Double>): Aperture =
         RectangleAperture(
