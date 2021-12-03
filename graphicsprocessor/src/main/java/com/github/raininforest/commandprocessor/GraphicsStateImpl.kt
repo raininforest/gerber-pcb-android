@@ -10,11 +10,17 @@ import com.github.raininforest.syntaxparser.api.graphicsstate.enums.Polarity
 import com.github.raininforest.syntaxparser.api.graphicsstate.enums.Units
 import com.github.raininforest.syntaxparser.impl.commands.aperturedefinition.apertures.CircleAperture
 
-class GraphicsStateImpl : GraphicsState {
+class GraphicsStateImpl(private val drawApertureListener: (Double) -> Unit) : GraphicsState {
 
     override val coordinateFormat: CoordinateFormat = DEFAULT_COORDINATE_FORMAT
     override var units: Units = DEFAULT_UNITS
-    override var currentAperture: Aperture = CircleAperture("DEFAULT", 0.1)
+    override var currentAperture: Aperture = DEFAULT_APERTURE
+        set(value) {
+            if (value is CircleAperture) {
+                drawApertureListener.invoke(value.diameter)
+            }
+            field = value
+        }
     override var currentPoint: PointD = DEFAULT_CURRENT_POINT
     override var interpolationState: InterpolationState = DEFAULT_INTERPOLATION_STATE
     override var polarity: Polarity = DEFAULT_POLARITY
@@ -32,7 +38,7 @@ class GraphicsStateImpl : GraphicsState {
         private val DEFAULT_UNITS = Units.MM
         private val DEFAULT_CURRENT_POINT = PointD(0.0, 0.0)
         private const val DEFAULT_APERTURE_ID = "DEFAULT"
-        private const val DEFAULT_APERTURE_DIA = 0.1
+        const val DEFAULT_APERTURE_DIA = 0.1
         private val DEFAULT_APERTURE = CircleAperture(
             DEFAULT_APERTURE_ID,
             DEFAULT_APERTURE_DIA
