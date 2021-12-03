@@ -14,7 +14,13 @@ class GerberProcessor(
 ) {
     fun process(uri: Uri, fileName: String): GerberResult {
         return try {
-            val graphicStream = graphicsProcessor.process(parser.parse(fileReader.read(uri)))
+            val graphicStream =
+                graphicsProcessor.process(
+                    parser.parse(
+                        stringList = fileReader.read(uri),
+                        name = fileName
+                    )
+                )
             GerberResult.Success(Gerber(name = fileName, data = graphicStream))
         } catch (e: Throwable) {
             GerberResult.Error(errorMessage = e.localizedMessage ?: "Reading file error: $fileName")
