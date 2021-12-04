@@ -16,7 +16,7 @@ data class StandardPolygonTemplate(override val name: String = "P") : ApertureTe
             apertureId = apertureId,
             outerDiameter = parameters.valueOrZero(0),
             vertices = parameters.valueOrZero(1).toInt(),
-            rotation = parameters.valueOrZero(3),
-            holeDiameter = parameters.valueOrZero(4)
+            rotation = parameters.valueOrZero(2),
+            holeDiameter = parameters.valueOrZero(3)
         )
 }
