@@ -16,6 +16,7 @@ interface GraphicsState {
     var currentPoint: PointD
     var currentAperture: Aperture
     var interpolationState: InterpolationState
+    var quadrantMode: QuadrantMode
 
     var polarity: Polarity
     var mirroring: Mirroring
