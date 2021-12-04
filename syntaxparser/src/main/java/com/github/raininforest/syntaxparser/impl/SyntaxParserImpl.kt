@@ -174,7 +174,7 @@ class SyntaxParserImpl(private val gerberValidator: GerberValidator) : SyntaxPar
             )
             else -> throw WrongCommandFormatException(
                 lineNumber,
-                "There is no valid D-code gerber command but 'D' || 'X' || 'Y' was found"
+                "There is no valid D-code gerber command but 'D' || 'X' || 'Y' was found on line $lineNumber"
             )
         }
 
