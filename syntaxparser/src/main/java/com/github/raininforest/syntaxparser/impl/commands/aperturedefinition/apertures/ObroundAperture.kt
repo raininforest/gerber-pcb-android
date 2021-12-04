@@ -19,7 +19,7 @@ data class ObroundAperture(
         val center = processor.graphicsState.currentPoint
 
         // start
-        processor.startPath()
+        processor.startFlash(isMacro = false)
 
         // drawRoundRect
         processor.addRoundedRect(
@@ -40,6 +40,6 @@ data class ObroundAperture(
         }
 
         // close
-        processor.closeAndFillPath()
+        processor.finishFlash(isMacro = false)
     }
 }

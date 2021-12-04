@@ -41,10 +41,13 @@ data class PolygonAperture(
         val center = processor.graphicsState.currentPoint
 
         // start
-        processor.startPath()
+        processor.startFlash(isMacro = false)
 
         // polygon
-        processor.drawPath(points)
+        processor.drawOutline(
+            points.map {
+                PointD(x = it.x + center.x, y = it.y + center.y)
+            })
 
         // hole
         if (holeDiameter != 0.0) {
@@ -55,7 +58,7 @@ data class PolygonAperture(
             )
         }
 
-        // close
-        processor.closeAndFillPath()
+        // finish
+        processor.finishFlash(isMacro = false)
     }
 }

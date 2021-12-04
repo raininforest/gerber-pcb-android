@@ -19,7 +19,7 @@ data class RectangleAperture(
         val center = processor.graphicsState.currentPoint
 
         // start
-        processor.startPath()
+        processor.startFlash(isMacro = false)
 
         // rectangle
         processor.addRect(
@@ -39,6 +39,6 @@ data class RectangleAperture(
         }
 
         // close
-        processor.closeAndFillPath()
+        processor.finishFlash(isMacro = false)
     }
 }

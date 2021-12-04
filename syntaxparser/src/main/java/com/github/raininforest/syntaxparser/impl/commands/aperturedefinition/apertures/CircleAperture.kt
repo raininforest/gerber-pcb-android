@@ -18,7 +18,7 @@ data class CircleAperture(
         val center = processor.graphicsState.currentPoint
 
         // start
-        processor.startPath()
+        processor.startFlash(isMacro = false)
 
         // circle
         processor.addCircle(
@@ -37,6 +37,6 @@ data class CircleAperture(
         }
 
         // close
-        processor.closeAndFillPath()
+        processor.finishFlash(isMacro = false)
     }
 }

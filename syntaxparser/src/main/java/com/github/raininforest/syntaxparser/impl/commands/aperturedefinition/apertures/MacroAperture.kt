@@ -12,11 +12,13 @@ import com.github.raininforest.syntaxparser.impl.commands.aperturemacro.macrobod
 data class MacroAperture(
     override val apertureId: String,
     val primitives: List<MacroPrimitive>
-): Aperture {
+) : Aperture {
 
     override fun flash(processor: CommandProcessor) {
+        processor.startFlash(isMacro = true)
         primitives.forEach {
             it.draw(processor)
         }
+        processor.finishFlash(isMacro = true)
     }
 }
