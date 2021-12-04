@@ -15,6 +15,8 @@ class GerberView @JvmOverloads constructor(
 
     private val renderer: GerberRenderer by inject()
 
+    private var isInitialized: Boolean = false
+
     private val _data: MutableList<GerberLayerUi> = mutableListOf()
     var data: List<GerberLayerUi>
         set(value) {
@@ -24,10 +26,23 @@ class GerberView @JvmOverloads constructor(
         get() = _data
 
     override fun onDraw(canvas: Canvas?) {
+        setupCanvas(canvas)
         _data.forEach { gerberLayer ->
             canvas?.let { canvas ->
                 renderer.render(data = gerberLayer.data, canvas = canvas, color = gerberLayer.color)
             }
         }
+    }
+
+    private fun setupCanvas(canvas: Canvas?) {
+        if (!isInitialized) {
+            canvas?.scale(1f, -1f, width / 2f, height / 2f)
+            canvas?.scale(DEFAULT_SCALE, DEFAULT_SCALE)
+            isInitialized = true
+        }
+    }
+
+    companion object {
+        private const val DEFAULT_SCALE = 50f
     }
 }
