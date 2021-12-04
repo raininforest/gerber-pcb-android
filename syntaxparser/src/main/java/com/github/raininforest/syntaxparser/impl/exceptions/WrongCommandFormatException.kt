@@ -7,5 +7,5 @@ package com.github.raininforest.syntaxparser.impl.exceptions
  */
 data class WrongCommandFormatException(
     private val line: Int? = null,
-    override val message: String = "Wrong command format",
+    override val message: String = "Wrong command format, line=$line",
 ) : Throwable()
