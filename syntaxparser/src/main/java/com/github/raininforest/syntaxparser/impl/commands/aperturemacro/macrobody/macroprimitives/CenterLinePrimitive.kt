@@ -17,7 +17,7 @@ data class CenterLinePrimitive(
 ) : MacroPrimitive {
 
     override fun draw(processor: CommandProcessor) {
-        processor.isExposure = exposure
+        processor.isErase = exposure
         processor.macroRotation = rotation
         processor.addRect(
             left = centerX - width / 2,

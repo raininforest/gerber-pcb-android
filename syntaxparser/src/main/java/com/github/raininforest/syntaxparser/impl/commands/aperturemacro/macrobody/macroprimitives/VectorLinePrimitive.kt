@@ -18,7 +18,7 @@ data class VectorLinePrimitive(
 ) : MacroPrimitive {
 
     override fun draw(processor: CommandProcessor) {
-        processor.isExposure = exposure
+        processor.isErase = exposure
         processor.macroRotation = rotation
         processor.addRect(
             left = startX,
