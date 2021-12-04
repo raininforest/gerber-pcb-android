@@ -1,16 +1,18 @@
 package com.github.raininforest.graphicsobject
 
 import android.graphics.Canvas
-import android.graphics.Paint
 import android.graphics.Path
+import com.github.raininforest.PenConfig
 
-data class GraphicsObjectPath(val path: Path) : GraphicsObject {
+data class GraphicsObjectPath(
+    private val path: Path
+) : GraphicsObject {
 
-    override fun draw(canvas: Canvas, paint: Paint) {
-        canvas.drawPath(path, paint)
+    override fun draw(canvas: Canvas, penConfig: PenConfig) {
+        canvas.drawPath(path, penConfig.paint)
     }
 
     companion object {
-        fun create(): GraphicsObject = GraphicsObjectPath(Path())
+        fun create(path: Path): GraphicsObject = GraphicsObjectPath(path)
     }
 }

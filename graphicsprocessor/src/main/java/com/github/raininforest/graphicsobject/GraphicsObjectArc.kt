@@ -1,7 +1,7 @@
 package com.github.raininforest.graphicsobject
 
 import android.graphics.Canvas
-import android.graphics.Paint
+import com.github.raininforest.PenConfig
 
 data class GraphicsObjectArc(
     private val left: Float,
@@ -12,7 +12,7 @@ data class GraphicsObjectArc(
     private val sweepAngle: Float
 ) : GraphicsObject {
 
-    override fun draw(canvas: Canvas, paint: Paint) {
+    override fun draw(canvas: Canvas, penConfig: PenConfig) {
         canvas.drawArc(
             left,
             top,
@@ -21,7 +21,7 @@ data class GraphicsObjectArc(
             startAngle,
             sweepAngle,
             false,
-            paint
+            penConfig.paint
         )
     }
 

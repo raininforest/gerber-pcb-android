@@ -1,7 +1,7 @@
 package com.github.raininforest.graphicsobject
 
 import android.graphics.Canvas
-import android.graphics.Paint
+import com.github.raininforest.PenConfig
 
 data class GraphicsObjectLine(
     private val x1: Float,
@@ -10,8 +10,8 @@ data class GraphicsObjectLine(
     private val y2: Float
 ) : GraphicsObject {
 
-    override fun draw(canvas: Canvas, paint: Paint) {
-        canvas.drawLine(x1, y1, x2, y2, paint)
+    override fun draw(canvas: Canvas, penConfig: PenConfig) {
+        canvas.drawLine(x1, y1, x2, y2, penConfig.paint)
     }
 
     companion object {
