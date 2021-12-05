@@ -4,10 +4,7 @@ import com.github.raininforest.syntaxparser.api.Aperture
 import com.github.raininforest.syntaxparser.api.PointD
 import com.github.raininforest.syntaxparser.api.graphicsstate.CoordinateFormat
 import com.github.raininforest.syntaxparser.api.graphicsstate.GraphicsState
-import com.github.raininforest.syntaxparser.api.graphicsstate.enums.InterpolationState
-import com.github.raininforest.syntaxparser.api.graphicsstate.enums.Mirroring
-import com.github.raininforest.syntaxparser.api.graphicsstate.enums.Polarity
-import com.github.raininforest.syntaxparser.api.graphicsstate.enums.Units
+import com.github.raininforest.syntaxparser.api.graphicsstate.enums.*
 import com.github.raininforest.syntaxparser.impl.commands.aperturedefinition.apertures.CircleAperture
 
 class GraphicsStateImpl(private val drawApertureListener: (Double) -> Unit) : GraphicsState {
@@ -23,6 +20,7 @@ class GraphicsStateImpl(private val drawApertureListener: (Double) -> Unit) : Gr
         }
     override var currentPoint: PointD = DEFAULT_CURRENT_POINT
     override var interpolationState: InterpolationState = DEFAULT_INTERPOLATION_STATE
+    override var quadrantMode: QuadrantMode = QuadrantMode.MULTI
     override var polarity: Polarity = DEFAULT_POLARITY
     override var mirroring: Mirroring = DEFAULT_MIRRORING
     override var rotation: Double = DEFAULT_ROTATION
