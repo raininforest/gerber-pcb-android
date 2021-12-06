@@ -16,9 +16,7 @@ data class OutlinePrimitive(
 ) : MacroPrimitive {
 
     override fun draw(processor: CommandProcessor) {
-        processor.isErase = exposure
-        processor.macroRotation = rotation
-        processor.drawOutline(points)
+        processor.addOutlinePrimitive(points, exposure, rotation)
     }
 
     companion object : MacroPrimitive.MacroPrimitiveFactory {

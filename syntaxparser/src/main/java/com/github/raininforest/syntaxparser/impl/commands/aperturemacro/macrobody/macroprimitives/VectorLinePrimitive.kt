@@ -18,14 +18,7 @@ data class VectorLinePrimitive(
 ) : MacroPrimitive {
 
     override fun draw(processor: CommandProcessor) {
-        processor.isErase = exposure
-        processor.macroRotation = rotation
-        processor.addRect(
-            left = startX,
-            top = startY + width / 2,
-            right = endX,
-            bottom = startY - width / 2
-        )
+        TODO("Not implemented yet")
     }
 
     companion object : MacroPrimitive.MacroPrimitiveFactory {

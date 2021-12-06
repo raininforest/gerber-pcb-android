@@ -28,8 +28,8 @@ data class PolygonPrimitive(
         for (i in 0 until vertices) {
             points.add(
                 PointD(
-                    x = (outerDiameter / 2) * cos(initAngle.toRadians()),
-                    y = (outerDiameter / 2) * sin(initAngle.toRadians())
+                    x = center.x + (outerDiameter / 2) * cos(initAngle.toRadians()),
+                    y = center.y + (outerDiameter / 2) * sin(initAngle.toRadians())
                 )
             )
             initAngle += deltaAngle
@@ -37,9 +37,7 @@ data class PolygonPrimitive(
     }
 
     override fun draw(processor: CommandProcessor) {
-        processor.isErase = exposure
-        processor.macroRotation = rotation
-        processor.drawOutline(points)
+        processor.addOutlinePrimitive(points, exposure, rotation)
     }
 
     companion object : MacroPrimitive.MacroPrimitiveFactory {

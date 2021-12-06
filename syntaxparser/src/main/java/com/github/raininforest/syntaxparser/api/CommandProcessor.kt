@@ -13,11 +13,7 @@ interface CommandProcessor {
     val graphicsState: GraphicsState
     val apertureDictionary: ApertureDictionary
     val templateDictionary: MacroTemplateDictionary
-
     var regionMode: RegionMode
-
-    var isErase: Boolean
-    var macroRotation: Double
 
     fun drawLine(x1: Double, y1: Double, x2: Double, y2: Double)
 
@@ -30,8 +26,49 @@ interface CommandProcessor {
         sweepAngle: Double
     )
 
-    fun startPath()
-    fun moveTo(x: Double, y: Double)
+    fun flashStandardCircle(center: PointD, diameter: Double, holeDiameter: Double)
+
+    fun flashStandardRect(
+        left: Double,
+        top: Double,
+        right: Double,
+        bottom: Double,
+        center: PointD,
+        holeDiameter: Double
+    )
+
+    fun flashStandardObround(
+        left: Double,
+        top: Double,
+        right: Double,
+        bottom: Double,
+        radius: Double,
+        center: PointD,
+        holeDiameter: Double
+    )
+
+    fun flashStandardPolygon(points: List<PointD>, center: PointD, holeDiameter: Double)
+
+    fun startMacroFlash()
+    fun finishMacroFlash()
+
+    fun addCirclePrimitive(cX: Double, cY: Double, r: Double, exposure: Boolean, rotation: Double)
+
+    fun addRectPrimitive(
+        left: Double,
+        top: Double,
+        right: Double,
+        bottom: Double,
+        exposure: Boolean,
+        rotation: Double
+    )
+
+    fun addOutlinePrimitive(points: List<PointD>, exposure: Boolean, rotation: Double)
+
+    // TODO
+    // REGION STATEMENT
+    //
+    fun startContour()
     fun lineTo(x: Double, y: Double)
     fun arcTo(
         left: Double,
@@ -41,25 +78,8 @@ interface CommandProcessor {
         startAngle: Double,
         sweepAngle: Double
     )
-    fun addCircle(cX: Double, cY: Double, r: Double)
-    fun addRect(
-        left: Double,
-        top: Double,
-        right: Double,
-        bottom: Double
-    )
-    fun addRoundedRect(
-        left: Double,
-        top: Double,
-        right: Double,
-        bottom: Double,
-        radius: Double
-    )
-    fun closeAndFillPath()
 
-    fun drawPath(points: List<PointD>)
-
-    fun closeContourAndStartNewOne()
-
-    fun finishDrawing()
+    fun closeContour()
+    //
+    // REGION STATEMENT
 }

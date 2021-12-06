@@ -2,6 +2,7 @@ package com.github.raininforest.syntaxparser.impl.commands.aperturedefinition.ap
 
 import com.github.raininforest.syntaxparser.api.Aperture
 import com.github.raininforest.syntaxparser.api.CommandProcessor
+import com.github.raininforest.syntaxparser.api.PointD
 
 /**
  * Standard circle [Aperture]
@@ -16,27 +17,6 @@ data class CircleAperture(
 
     override fun flash(processor: CommandProcessor) {
         val center = processor.graphicsState.currentPoint
-
-        // start
-        processor.startFlash(isMacro = false)
-
-        // circle
-        processor.addCircle(
-            cX = center.x,
-            cY = center.y,
-            r = diameter / 2
-        )
-
-        // hole
-        if (holeDiameter != 0.0) {
-            processor.addCircle(
-                cX = center.x,
-                cY = center.y,
-                r = holeDiameter / 2
-            )
-        }
-
-        // close
-        processor.finishFlash(isMacro = false)
+        processor.flashStandardCircle(center = PointD(center.x, center.y), diameter, holeDiameter)
     }
 }

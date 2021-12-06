@@ -16,9 +16,7 @@ data class CirclePrimitive(
 ) : MacroPrimitive {
 
     override fun draw(processor: CommandProcessor) {
-        processor.isErase = exposure
-        processor.macroRotation = rotation
-        processor.addCircle(cX, cY, diameter / 2)
+        processor.addCirclePrimitive(cX, cY, diameter / 2, exposure, rotation)
     }
 
     companion object : MacroPrimitive.MacroPrimitiveFactory {

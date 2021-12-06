@@ -15,10 +15,10 @@ data class MacroAperture(
 ) : Aperture {
 
     override fun flash(processor: CommandProcessor) {
-        processor.startFlash(isMacro = true)
+        processor.startMacroFlash()
         primitives.forEach {
             it.draw(processor)
         }
-        processor.finishFlash(isMacro = true)
+        processor.finishMacroFlash()
     }
 }

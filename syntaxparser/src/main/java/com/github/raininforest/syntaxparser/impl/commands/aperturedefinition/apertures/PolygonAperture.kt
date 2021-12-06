@@ -39,26 +39,12 @@ data class PolygonAperture(
 
     override fun flash(processor: CommandProcessor) {
         val center = processor.graphicsState.currentPoint
-
-        // start
-        processor.startFlash(isMacro = false)
-
-        // polygon
-        processor.drawOutline(
-            points.map {
-                PointD(x = it.x + center.x, y = it.y + center.y)
-            })
-
-        // hole
-        if (holeDiameter != 0.0) {
-            processor.addCircle(
-                cX = center.x,
-                cY = center.y,
-                r = holeDiameter / 2
-            )
-        }
-
-        // finish
-        processor.finishFlash(isMacro = false)
+        processor.flashStandardPolygon(
+            points = points.map {
+                PointD(it.x + center.x, it.y + center.y)
+            },
+            center = center,
+            holeDiameter = holeDiameter
+        )
     }
 }

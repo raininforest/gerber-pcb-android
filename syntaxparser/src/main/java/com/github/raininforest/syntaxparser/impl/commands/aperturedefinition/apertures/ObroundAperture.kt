@@ -17,29 +17,14 @@ data class ObroundAperture(
 
     override fun flash(processor: CommandProcessor) {
         val center = processor.graphicsState.currentPoint
-
-        // start
-        processor.startFlash(isMacro = false)
-
-        // drawRoundRect
-        processor.addRoundedRect(
+        processor.flashStandardObround(
             left = center.x - xSize / 2,
             top = center.y + ySize / 2,
             right = center.x + xSize / 2,
             bottom = center.y - ySize / 2,
-            radius = minOf(xSize, ySize)
+            radius = minOf(xSize, ySize),
+            center = center,
+            holeDiameter = holeDiameter
         )
-
-        // hole
-        if (holeDiameter != 0.0) {
-            processor.addCircle(
-                cX = center.x,
-                cY = center.y,
-                r = holeDiameter / 2
-            )
-        }
-
-        // close
-        processor.finishFlash(isMacro = false)
     }
 }
