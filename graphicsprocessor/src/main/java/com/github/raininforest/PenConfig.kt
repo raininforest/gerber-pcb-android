@@ -4,7 +4,7 @@ import android.graphics.Color
 import android.graphics.Paint
 import androidx.annotation.ColorInt
 
-class PenConfig(val paint: Paint) {
+class PenConfig(private val paint: Paint) {
     var thickness: Float = 0.0f
         set(value) {
             paint.strokeWidth = value
@@ -14,11 +14,21 @@ class PenConfig(val paint: Paint) {
     @ColorInt
     private val initColor: Int = paint.color
 
-    fun inverseColor() {
+    fun eraseMode() {
         paint.color = Color.BLACK
     }
 
-    fun resetColor() {
+    fun drawMode() {
         paint.color = initColor
     }
+
+    fun fillMode() {
+        paint.style = Paint.Style.FILL_AND_STROKE
+    }
+
+    fun strokeMode() {
+        paint.style = Paint.Style.STROKE
+    }
+
+    fun getPaint() = paint
 }
