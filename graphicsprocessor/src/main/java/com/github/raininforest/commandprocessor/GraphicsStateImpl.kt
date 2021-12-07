@@ -36,7 +36,7 @@ class GraphicsStateImpl(private val drawApertureListener: (Double) -> Unit) : Gr
         private val DEFAULT_UNITS = Units.MM
         private val DEFAULT_CURRENT_POINT = PointD(0.0, 0.0)
         private const val DEFAULT_APERTURE_ID = "DEFAULT"
-        const val DEFAULT_APERTURE_DIA = 0.1
+        const val DEFAULT_APERTURE_DIA = 0.0
         private val DEFAULT_APERTURE = CircleAperture(
             DEFAULT_APERTURE_ID,
             DEFAULT_APERTURE_DIA
