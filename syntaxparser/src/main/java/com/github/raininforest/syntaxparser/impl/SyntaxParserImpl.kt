@@ -54,7 +54,7 @@ class SyntaxParserImpl(private val gerberValidator: GerberValidator) : SyntaxPar
 
         val lineNumberHandler = LineNumberHandler(stringList.size - 1)
         try {
-            val coordinateFormat = CoordinateFormat(2, 4)
+            val coordinateFormat = CoordinateFormat(3, 6)
             val currentDCodeHolder = CurrentDCodeHolder()
 
             while (!lineNumberHandler.isEnd) {
