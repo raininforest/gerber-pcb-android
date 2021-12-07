@@ -4,12 +4,10 @@ import android.graphics.Canvas
 import com.github.raininforest.graphicsobject.GraphicsObject
 import com.github.raininforest.PenConfig
 
-data class ConfigExposureGraphicsObject(private val isErase: Boolean) : GraphicsObject {
+data class PenThicknessConfig(
+    private val thickness: Float,
+) : GraphicsObject {
     override fun draw(canvas: Canvas, penConfig: PenConfig) {
-        if (isErase) {
-            penConfig.inverseColor()
-        } else {
-            penConfig.resetColor()
-        }
+        penConfig.thickness = thickness
     }
 }

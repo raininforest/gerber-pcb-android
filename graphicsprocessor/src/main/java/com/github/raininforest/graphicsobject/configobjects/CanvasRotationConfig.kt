@@ -4,6 +4,8 @@ import android.graphics.Canvas
 import com.github.raininforest.graphicsobject.GraphicsObject
 import com.github.raininforest.PenConfig
 
-object ConfigRestoreGraphicsObject : GraphicsObject {
-    override fun draw(canvas: Canvas, penConfig: PenConfig) = canvas.restore()
+data class CanvasRotationConfig(private val rotation: Float): GraphicsObject {
+    override fun draw(canvas: Canvas, penConfig: PenConfig) {
+        canvas.rotate(rotation)
+    }
 }
