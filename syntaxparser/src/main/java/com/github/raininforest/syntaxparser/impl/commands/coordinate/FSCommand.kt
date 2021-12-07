@@ -5,6 +5,7 @@ import com.github.raininforest.syntaxparser.api.CommandProcessor
 import com.github.raininforest.syntaxparser.impl.LineNumberHandler
 import com.github.raininforest.syntaxparser.impl.MultiStringParsable
 import com.github.raininforest.syntaxparser.impl.exceptions.WrongCommandFormatException
+import com.github.raininforest.syntaxparser.impl.utils.supportMentorFormat
 import java.util.regex.Pattern
 
 /**
@@ -25,6 +26,8 @@ data class FSCommand(
         @JvmStatic
         val FS_PATTERN: Pattern by lazy { Pattern.compile("^%FSLAX(\\d)(\\d)Y\\d+\\*%") }
 
+        private const val MIN_INT_COUNT = 3
+
         override fun parse(
             stringList: List<String>,
             lineNumberHandler: LineNumberHandler
@@ -35,7 +38,7 @@ data class FSCommand(
                     val integerCount = matcher.group(1).toInt()
                     val decimalCount = matcher.group(2).toInt()
                     return FSCommand(
-                        numOfInteger = integerCount,
+                        numOfInteger = integerCount.supportMentorFormat(MIN_INT_COUNT),
                         numOfDecimal = decimalCount,
                         lineNumber = lineNumberHandler.lineNumber
                     )
