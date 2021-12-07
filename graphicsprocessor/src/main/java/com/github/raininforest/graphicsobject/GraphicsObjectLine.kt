@@ -11,7 +11,7 @@ data class GraphicsObjectLine(
 ) : GraphicsObject {
 
     override fun draw(canvas: Canvas, penConfig: PenConfig) {
-        canvas.drawLine(x1, y1, x2, y2, penConfig.paint)
+        canvas.drawLine(x1, y1, x2, y2, penConfig.getPaint())
     }
 
     companion object {

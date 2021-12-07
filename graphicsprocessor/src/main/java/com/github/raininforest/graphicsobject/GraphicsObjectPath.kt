@@ -9,7 +9,7 @@ data class GraphicsObjectPath(
 ) : GraphicsObject {
 
     override fun draw(canvas: Canvas, penConfig: PenConfig) {
-        canvas.drawPath(path, penConfig.paint)
+        canvas.drawPath(path, penConfig.getPaint())
     }
 
     companion object {

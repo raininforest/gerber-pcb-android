@@ -21,7 +21,7 @@ data class GraphicsObjectArc(
             startAngle,
             sweepAngle,
             false,
-            penConfig.paint
+            penConfig.getPaint()
         )
     }
 
