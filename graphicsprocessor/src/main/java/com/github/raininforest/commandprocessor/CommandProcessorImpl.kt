@@ -20,8 +20,7 @@ import com.github.raininforest.syntaxparser.impl.commands.aperturemacro.template
 
 class CommandProcessorImpl : CommandProcessor, GraphicsObjectsProvider {
 
-    private var currentRegionPath: Path? = null
-    private var currentFlashPath: Path? = null
+    private var currentPath: Path? = null
     private var currentCircleApertureSizeForDrawing: Double =
         GraphicsStateImpl.DEFAULT_APERTURE_DIA
 
@@ -79,14 +78,14 @@ class CommandProcessorImpl : CommandProcessor, GraphicsObjectsProvider {
 
     override fun flashStandardCircle(center: PointD, diameter: Double, holeDiameter: Double) {
         setStandardFlashConfigs()
-        currentFlashPath?.addCircle(
+        currentPath?.addCircle(
             center.x.toFloat(),
             center.y.toFloat(),
             (diameter / 2).toFloat(),
             Path.Direction.CW
         )
         if (holeDiameter != 0.0) {
-            currentFlashPath?.addCircle(
+            currentPath?.addCircle(
                 center.x.toFloat(),
                 center.y.toFloat(),
                 (holeDiameter / 2).toFloat(),
@@ -105,7 +104,7 @@ class CommandProcessorImpl : CommandProcessor, GraphicsObjectsProvider {
         holeDiameter: Double
     ) {
         setStandardFlashConfigs()
-        currentFlashPath?.addRect(
+        currentPath?.addRect(
             left.toFloat(),
             top.toFloat(),
             right.toFloat(),
@@ -113,7 +112,7 @@ class CommandProcessorImpl : CommandProcessor, GraphicsObjectsProvider {
             Path.Direction.CW
         )
         if (holeDiameter != 0.0) {
-            currentFlashPath?.addCircle(
+            currentPath?.addCircle(
                 center.x.toFloat(),
                 center.y.toFloat(),
                 (holeDiameter / 2).toFloat(),
@@ -133,7 +132,7 @@ class CommandProcessorImpl : CommandProcessor, GraphicsObjectsProvider {
         holeDiameter: Double
     ) {
         setStandardFlashConfigs()
-        currentFlashPath?.addRoundRect(
+        currentPath?.addRoundRect(
             left.toFloat(),
             top.toFloat(),
             right.toFloat(),
@@ -143,7 +142,7 @@ class CommandProcessorImpl : CommandProcessor, GraphicsObjectsProvider {
             Path.Direction.CW
         )
         if (holeDiameter != 0.0) {
-            currentFlashPath?.addCircle(
+            currentPath?.addCircle(
                 center.x.toFloat(),
                 center.y.toFloat(),
                 (holeDiameter / 2).toFloat(),
@@ -155,7 +154,7 @@ class CommandProcessorImpl : CommandProcessor, GraphicsObjectsProvider {
 
     override fun flashStandardPolygon(points: List<PointD>, center: PointD, holeDiameter: Double) {
         setStandardFlashConfigs()
-        val path = currentFlashPath
+        val path = currentPath
         path?.let { path ->
             path.moveTo(points[0].x.toFloat(), points[0].y.toFloat())
             for (i in points.indices) {
@@ -163,7 +162,7 @@ class CommandProcessorImpl : CommandProcessor, GraphicsObjectsProvider {
             }
         }
         if (holeDiameter != 0.0) {
-            currentFlashPath?.addCircle(
+            currentPath?.addCircle(
                 center.x.toFloat(),
                 center.y.toFloat(),
                 (holeDiameter / 2).toFloat(),
@@ -179,7 +178,7 @@ class CommandProcessorImpl : CommandProcessor, GraphicsObjectsProvider {
     }
 
     private fun initNewFlashPath() {
-        currentFlashPath = Path().apply { fillType = Path.FillType.EVEN_ODD }
+        currentPath = Path().apply { fillType = Path.FillType.EVEN_ODD }
     }
 
     private fun setStandardFlashPenConfigs() {
@@ -190,12 +189,12 @@ class CommandProcessorImpl : CommandProcessor, GraphicsObjectsProvider {
     private fun resetStandardFlashConfigs() {
         addPathWithAperture()
         resetStandardFlashPenConfigs()
-        currentFlashPath = null
+        currentPath = null
     }
 
     private fun addPathWithAperture() {
-        currentFlashPath?.close()
-        val path = currentFlashPath
+        currentPath?.close()
+        val path = currentPath
         path?.let {
             _data.add(GraphicsObjectPath(path))
         }
@@ -245,7 +244,7 @@ class CommandProcessorImpl : CommandProcessor, GraphicsObjectsProvider {
     ) {
         setMacroFlashConfigs(exposure, rotation)
 
-        currentFlashPath?.addCircle(cX.toFloat(), cY.toFloat(), r.toFloat(), Path.Direction.CW)
+        currentPath?.addCircle(cX.toFloat(), cY.toFloat(), r.toFloat(), Path.Direction.CW)
         addPathWithAperture()
 
         resetMacroFlashConfigs()
@@ -260,7 +259,7 @@ class CommandProcessorImpl : CommandProcessor, GraphicsObjectsProvider {
         rotation: Double
     ) {
         setMacroFlashConfigs(exposure, rotation)
-        currentFlashPath?.addRect(
+        currentPath?.addRect(
             left.toFloat(),
             bottom.toFloat(), //not top, because of inverted Y axis
             right.toFloat(),
@@ -273,7 +272,7 @@ class CommandProcessorImpl : CommandProcessor, GraphicsObjectsProvider {
 
     override fun addOutlinePrimitive(points: List<PointD>, exposure: Boolean, rotation: Double) {
         setMacroFlashConfigs(exposure, rotation)
-        val path = currentFlashPath
+        val path = currentPath
         path?.let { path ->
             path.moveTo(points[0].x.toFloat(), points[0].y.toFloat())
             for (i in points.indices) {
@@ -294,7 +293,7 @@ class CommandProcessorImpl : CommandProcessor, GraphicsObjectsProvider {
     private fun resetMacroFlashConfigs() {
         restoreCanvasSettings()
         resetMacroFlashPenConfigs()
-        currentFlashPath = null
+        currentPath = null
     }
 
     private fun setMacroFlashPenConfigs(exposure: Boolean) {
