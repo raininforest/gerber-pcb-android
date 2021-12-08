@@ -43,6 +43,6 @@ class GerberView @JvmOverloads constructor(
     }
 
     companion object {
-        private const val DEFAULT_SCALE = 50f
+        private const val DEFAULT_SCALE = 10f
     }
 }

@@ -67,7 +67,7 @@ class CommandProcessorImpl : CommandProcessor, GraphicsObjectsProvider {
         _data.add(
             GraphicsObjectArc.create(
                 left = left.toFloat(),
-                top = bottom.toFloat(),
+                top = bottom.toFloat(), //not top, because of inverted Y axis
                 right = right.toFloat(),
                 bottom = top.toFloat(),
                 startAngle = startAngle.toFloat(),
