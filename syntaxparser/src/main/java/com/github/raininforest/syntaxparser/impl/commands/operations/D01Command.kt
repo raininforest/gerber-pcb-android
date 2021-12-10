@@ -37,7 +37,7 @@ data class D01Command(
     }
 
     private fun drawLine(processor: CommandProcessor) {
-        if (processor.regionMode == RegionMode.REGION) {
+        if (processor.regionMode == RegionMode.REGION_STATEMENT) {
             processor.lineTo(
                 x = x ?: processor.graphicsState.currentPoint.x,
                 y = y ?: processor.graphicsState.currentPoint.y,
@@ -126,7 +126,7 @@ data class D01Command(
             sweepAngle = if (sweepAngle < 90.0) -90.0 else 90.0
         }
 
-        if (processor.regionMode == RegionMode.REGION) {
+        if (processor.regionMode == RegionMode.REGION_STATEMENT) {
             processor.arcTo(
                 left = center.x - radius,
                 top = center.y + radius,
@@ -203,7 +203,7 @@ data class D01Command(
             sweepAngle = if (sweepAngle < 90.0) -90.0 else 90.0
         }
 
-        if (processor.regionMode == RegionMode.REGION) {
+        if (processor.regionMode == RegionMode.REGION_STATEMENT) {
             processor.arcTo(
                 left = center.x - radius,
                 top = center.y + radius,
@@ -237,7 +237,7 @@ data class D01Command(
         val endAngle = atan2(yVal - center.y, xVal - center.x).toDegrees()
         val sweepAngle = calculateSweepAngle(startAngle, endAngle, isClockwise)
 
-        if (processor.regionMode == RegionMode.REGION) {
+        if (processor.regionMode == RegionMode.REGION_STATEMENT) {
             processor.arcTo(
                 left = center.x - radius,
                 top = center.y + radius,

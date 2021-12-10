@@ -54,7 +54,7 @@ class GCommandsTest {
         val command = G36Command(56)
         val processor = mockk<CommandProcessor>(relaxed = true)
         command.perform(processor)
-        verify { processor.regionMode = RegionMode.REGION }
+        verify { processor.regionMode = RegionMode.REGION_STATEMENT }
     }
 
     @Test
@@ -62,6 +62,6 @@ class GCommandsTest {
         val command = G37Command(56)
         val processor = mockk<CommandProcessor>(relaxed = true)
         command.perform(processor)
-        verify { processor.regionMode = RegionMode.NO_REGION }
+        verify { processor.regionMode = RegionMode.NOT_REGION }
     }
 }

@@ -12,7 +12,6 @@ import com.github.raininforest.syntaxparser.api.graphicsstate.enums.RegionMode
 data class G37Command(override val lineNumber: Int) : GerberCommand {
 
     override fun perform(processor: CommandProcessor) {
-        processor.closeContour()
-        processor.regionMode = RegionMode.NO_REGION
+        processor.regionMode = RegionMode.NOT_REGION
     }
 }

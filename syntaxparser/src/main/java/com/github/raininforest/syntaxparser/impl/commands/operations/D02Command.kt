@@ -19,7 +19,7 @@ data class D02Command(
 ) : DOperationCommand(), GerberCommand {
 
     override fun perform(processor: CommandProcessor) {
-        if (processor.regionMode == RegionMode.REGION) {
+        if (processor.regionMode == RegionMode.REGION_STATEMENT) {
             processor.closeContour()
             processor.startContour()
         }
