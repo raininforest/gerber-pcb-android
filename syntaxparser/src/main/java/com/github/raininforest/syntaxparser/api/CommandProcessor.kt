@@ -50,6 +50,7 @@ interface CommandProcessor {
     fun flashStandardPolygon(points: List<PointD>, center: PointD, holeDiameter: Double)
 
     fun startMacroFlash()
+
     fun finishMacroFlash()
 
     fun addCirclePrimitive(cX: Double, cY: Double, r: Double, exposure: Boolean, rotation: Double)
@@ -65,11 +66,10 @@ interface CommandProcessor {
 
     fun addOutlinePrimitive(points: List<PointD>, exposure: Boolean, rotation: Double)
 
-    // TODO
-    // REGION STATEMENT
-    //
-    fun startContour()
+    fun moveTo(x: Double, y: Double)
+
     fun lineTo(x: Double, y: Double)
+
     fun arcTo(
         left: Double,
         top: Double,
@@ -80,6 +80,4 @@ interface CommandProcessor {
     )
 
     fun closeContour()
-    //
-    // REGION STATEMENT
 }

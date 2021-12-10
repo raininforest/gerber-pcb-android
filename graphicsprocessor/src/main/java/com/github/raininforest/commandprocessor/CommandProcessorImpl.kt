@@ -43,7 +43,17 @@ class CommandProcessorImpl : CommandProcessor, GraphicsObjectsProvider {
         }
     }
 
-    override var regionMode: RegionMode = RegionMode.NO_REGION
+    override var regionMode: RegionMode = RegionMode.NON_INITIALIZED
+        set(value) {
+            when (value) {
+                RegionMode.REGION_STATEMENT -> startRegion()
+                RegionMode.NOT_REGION -> finishRegion()
+                else -> {
+                    // do nothing
+                }
+            }
+            field = value
+        }
 
     override fun drawLine(x1: Double, y1: Double, x2: Double, y2: Double) {
         _data.add(
@@ -173,12 +183,14 @@ class CommandProcessorImpl : CommandProcessor, GraphicsObjectsProvider {
     }
 
     private fun setStandardFlashConfigs() {
-        initNewFlashPath()
+        initNewFlashPath(isEvenOdd = true)
         setStandardFlashPenConfigs()
     }
 
-    private fun initNewFlashPath() {
-        currentPath = Path().apply { fillType = Path.FillType.EVEN_ODD }
+    private fun initNewFlashPath(isEvenOdd: Boolean) {
+        currentPath = Path().apply {
+            fillType = if (isEvenOdd) Path.FillType.EVEN_ODD else Path.FillType.WINDING
+        }
     }
 
     private fun setStandardFlashPenConfigs() {
@@ -187,12 +199,12 @@ class CommandProcessorImpl : CommandProcessor, GraphicsObjectsProvider {
     }
 
     private fun resetStandardFlashConfigs() {
-        addPathWithAperture()
+        addPath()
         resetStandardFlashPenConfigs()
         currentPath = null
     }
 
-    private fun addPathWithAperture() {
+    private fun addPath() {
         currentPath?.close()
         val path = currentPath
         path?.let {
@@ -245,7 +257,7 @@ class CommandProcessorImpl : CommandProcessor, GraphicsObjectsProvider {
         setMacroFlashConfigs(exposure, rotation)
 
         currentPath?.addCircle(cX.toFloat(), cY.toFloat(), r.toFloat(), Path.Direction.CW)
-        addPathWithAperture()
+        addPath()
 
         resetMacroFlashConfigs()
     }
@@ -266,7 +278,7 @@ class CommandProcessorImpl : CommandProcessor, GraphicsObjectsProvider {
             top.toFloat(),
             Path.Direction.CW
         )
-        addPathWithAperture()
+        addPath()
         resetMacroFlashConfigs()
     }
 
@@ -279,12 +291,12 @@ class CommandProcessorImpl : CommandProcessor, GraphicsObjectsProvider {
                 path.lineTo(points[i].x.toFloat(), points[i].y.toFloat())
             }
         }
-        addPathWithAperture()
+        addPath()
         resetMacroFlashConfigs()
     }
 
     private fun setMacroFlashConfigs(exposure: Boolean, rotation: Double) {
-        initNewFlashPath()
+        initNewFlashPath(isEvenOdd = true)
         setMacroFlashPenConfigs(exposure)
         saveCanvasSettings()
         setCanvasRotation(rotation)
@@ -322,12 +334,26 @@ class CommandProcessorImpl : CommandProcessor, GraphicsObjectsProvider {
         _data.add(CanvasRestoreConfig)
     }
 
-    override fun startContour() {
-        //TODO("Not yet implemented")
+    private fun startRegion() {
+        setRegionConfigs()
+    }
+
+    private fun setRegionConfigs() {
+        initNewFlashPath(isEvenOdd = false)
+        currentPath?.moveTo(
+            graphicsState.currentPoint.x.toFloat(),
+            graphicsState.currentPoint.y.toFloat()
+        )
+        _data.add(PenThicknessConfig(thickness = 0.0f))
+        _data.add(PenFillConfig(isFill = true))
+    }
+
+    override fun moveTo(x: Double, y: Double) {
+        currentPath?.moveTo(x.toFloat(), y.toFloat())
     }
 
     override fun lineTo(x: Double, y: Double) {
-        //TODO("Not yet implemented")
+        currentPath?.lineTo(x.toFloat(), y.toFloat())
     }
 
     override fun arcTo(
@@ -338,11 +364,29 @@ class CommandProcessorImpl : CommandProcessor, GraphicsObjectsProvider {
         startAngle: Double,
         sweepAngle: Double
     ) {
-        //TODO("Not yet implemented")
+        currentPath?.arcTo(
+            left.toFloat(),
+            bottom.toFloat(),
+            right.toFloat(),
+            top.toFloat(),
+            startAngle.toFloat(),
+            sweepAngle.toFloat(),
+            false
+        )
     }
 
     override fun closeContour() {
-        //TODO("Not yet implemented")
+        currentPath?.close()
+    }
+
+    private fun finishRegion() {
+        addPath()
+        resetRegionConfigs()
+    }
+
+    private fun resetRegionConfigs() {
+        _data.add(PenFillConfig(isFill = false))
+        _data.add(PenThicknessConfig(thickness = currentCircleApertureSizeForDrawing.toFloat()))
     }
 
     private fun onCircleApertureSet(diameter: Double) {
