@@ -25,7 +25,9 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class LayersFragment : Fragment(R.layout.layers_fragment) {
 
     private val binding by viewBinding(LayersFragmentBinding::bind)
-    private val listAdapter = GerberListAdapter()
+    private val listAdapter = GerberListAdapter { id, isChecked ->
+        layersViewModel.gerberVisibilityChanged(id, isChecked)
+    }
     private val layersViewModel: LayersViewModel by viewModel()
 
     private val openFileResult =

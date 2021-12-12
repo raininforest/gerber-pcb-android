@@ -6,9 +6,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.raininforest.gerberpcb.databinding.ItemViewBinding
 
 /**
+ * Adapter for recycler view list with gerber files
+ *
  * Created by Sergey Velesko on 18.07.2021
  */
-class GerberListAdapter : RecyclerView.Adapter<GerberListAdapter.GerberListViewHolder>() {
+class GerberListAdapter(
+    private val onItemChecked: (id: String, checked: Boolean) -> Unit
+) :
+    RecyclerView.Adapter<GerberListAdapter.GerberListViewHolder>() {
 
     private var gerberList = mutableListOf<GerberItemUi>()
 
@@ -39,7 +44,9 @@ class GerberListAdapter : RecyclerView.Adapter<GerberListAdapter.GerberListViewH
             val checkBox = itemBinding.itemCheckBox
             checkBox.text = gerberItem.name
             checkBox.isChecked = gerberItem.checked
-            //TODO set listener on checkbox
+            checkBox.setOnCheckedChangeListener { _, isChecked ->
+                onItemChecked.invoke(gerberItem.id, isChecked)
+            }
         }
     }
 }
