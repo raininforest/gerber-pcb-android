@@ -1,11 +1,14 @@
 package com.github.raininforest.gerberpcb.ui.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.github.raininforest.gerberpcb.R
 import com.github.raininforest.gerberpcb.databinding.ActivityMainBinding
+import com.github.raininforest.gerberpcb.ui.screens.graphicsscreen.GraphicsFragment
+import com.github.raininforest.gerberpcb.ui.screens.layersscreen.LayersFragment
 import com.github.raininforest.logger.Logger
 
 /**
@@ -20,6 +23,10 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initToolbar()
+
+        if (savedInstanceState == null) {
+            openFragment(LayersFragment())
+        }
     }
 
     private fun initToolbar() {
@@ -28,24 +35,24 @@ class MainActivity : AppCompatActivity() {
     }
 
     private val menuItemListener: (MenuItem) -> Boolean = {
-        val navController = findNavController(R.id.my_nav_host_fragment)
         when (it.itemId) {
             R.id.action_layers -> {
-                navController.navigate(R.id.layersFragment)
-                Logger.d("Navigate to Layers screen")
+                openFragment(LayersFragment())
                 true
             }
             R.id.action_graphics -> {
-                navController.navigate(R.id.graphicsFragment)
-                Logger.d("Navigate to Graphics screen")
-                true
-            }
-            R.id.action_help -> {
-                navController.navigate(R.id.helpFragment)
-                Logger.d("Navigate to Help screen")
+                openFragment(GraphicsFragment())
                 true
             }
             else -> false
         }
     }
+
+    private fun openFragment(fragment: Fragment) {
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+            .commit()
+    }
+
 }
