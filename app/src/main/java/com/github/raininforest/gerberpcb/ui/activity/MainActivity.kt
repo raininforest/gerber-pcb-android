@@ -12,6 +12,8 @@ import com.github.raininforest.gerberpcb.ui.screens.layersscreen.LayersFragment
 import com.github.raininforest.logger.Logger
 
 /**
+ * Main Activity
+ *
  * Created by Sergey Velesko on 18.07.2021
  */
 class MainActivity : AppCompatActivity() {
