@@ -23,8 +23,17 @@ class GerberView @JvmOverloads constructor(
     private var lastTouchX = 0.0f
     private var lastTouchY = 0.0f
 
-    private val _matrix: Matrix = Matrix()
-        .apply { setScale(INITIAL_SCALE_FACTOR, INITIAL_SCALE_FACTOR) }
+    private val drawMatrix: Matrix = Matrix()
+
+    private val renderer: GerberRenderer by inject()
+
+    private val _data: MutableList<GerberLayerUi> = mutableListOf()
+    var data: List<GerberLayerUi>
+        set(value) {
+            _data.clear()
+            _data.addAll(value)
+        }
+        get() = _data
 
     init {
         scaleGestureDetector = ScaleGestureDetector(context, object :
@@ -37,7 +46,7 @@ class GerberView @JvmOverloads constructor(
 
                 val focusX = detector.focusX
                 val focusY = detector.focusY
-                _matrix.postScale(scaleFactor, scaleFactor, focusX, focusY)
+                drawMatrix.postScale(scaleFactor, scaleFactor, focusX, focusY)
 
                 invalidate()
                 return true
@@ -54,24 +63,21 @@ class GerberView @JvmOverloads constructor(
         })
     }
 
-    private val renderer: GerberRenderer by inject()
+    override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
+        initDrawMatrix()
+    }
 
-    private val _data: MutableList<GerberLayerUi> = mutableListOf()
-    var data: List<GerberLayerUi>
-        set(value) {
-            _data.clear()
-            _data.addAll(value)
-        }
-        get() = _data
+    private fun initDrawMatrix() {
+        drawMatrix.setScale(1f, -1f, width / 2f, height / 2f)
+        drawMatrix.postScale(INITIAL_SCALE_FACTOR, INITIAL_SCALE_FACTOR, 0f, height.toFloat())
+    }
 
     override fun onDraw(canvas: Canvas?) {
         canvas?.let {
             with(canvas) {
                 save()
 
-                // invert y axis to place origin into bottom left corner
-                scale(1f, -1f, width / 2f, height / 2f)
-                setMatrix(_matrix)
+                setMatrix(drawMatrix)
                 drawData(canvas = this)
 
                 restore()
@@ -106,7 +112,7 @@ class GerberView @JvmOverloads constructor(
                                 val dx = x - lastTouchX
                                 val dy = y - lastTouchY
 
-                                _matrix.postTranslate(dx, dy)
+                                drawMatrix.postTranslate(dx, dy)
 
                                 invalidate()
                             }
