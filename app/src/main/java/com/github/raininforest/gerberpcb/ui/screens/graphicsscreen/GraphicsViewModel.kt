@@ -21,7 +21,7 @@ class GraphicsViewModel(
         get() = _data.apply {
             value = gerberRepository
                 .gerbers
-                //.filter { it.isVisible }
+                .filter { it.isVisible }
                 .map { GerberLayerUi(it.data, it.color) }
         }
 }
