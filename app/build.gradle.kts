@@ -39,42 +39,38 @@ android {
 
 dependencies {
 
-    implementation(project(mapOf("path" to ":logger")))
-
-    //lottie
-    implementation("com.airbnb.android:lottie:3.6.0")
-
-    //timber
-    implementation("com.jakewharton.timber:timber:5.0.1")
-
-    //ViewBindingPropertyDelegate
-    implementation("com.github.kirich1409:viewbindingpropertydelegate-noreflection:1.5.0-beta01")
-
     //modules
+    implementation(project(":logger"))
     implementation(project(":gerberfilereader"))
     implementation(project(":syntaxparser"))
     implementation(project(":graphicsprocessor"))
 
+    //lottie
+    implementation("com.airbnb.android:lottie:${Versions.lottie}")
+    //timber
+    implementation("com.jakewharton.timber:timber:${Versions.timber}")
+    //ViewBindingPropertyDelegate
+    implementation("com.github.kirich1409:viewbindingpropertydelegate-noreflection:${Versions.viewbindingpropertydelegate}")
     //koin
     implementation("io.insert-koin:koin-android:${Versions.koin}")
-
     //rxjava
     implementation("io.reactivex.rxjava3:rxandroid:${Versions.rxjava}")
     implementation("io.reactivex.rxjava3:rxjava:${Versions.rxjava}")
 
-    implementation("androidx.core:core-ktx:1.6.0")
-    implementation("androidx.appcompat:appcompat:1.3.1")
-    implementation("com.google.android.material:material:1.4.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.1")
-    implementation("androidx.legacy:legacy-support-v4:1.0.0")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.3.1")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1")
-    implementation("androidx.preference:preference-ktx:1.1.1")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.3.5")
-    implementation("androidx.navigation:navigation-ui-ktx:2.3.5")
+    //android
+    implementation("androidx.core:core-ktx:${Versions.coreKtx}")
+    implementation("androidx.appcompat:appcompat:${Versions.appCompat}")
+    implementation("com.google.android.material:material:${Versions.material}")
+    implementation("androidx.constraintlayout:constraintlayout:${Versions.constraintlayout}")
+    implementation("androidx.legacy:legacy-support-v4:${Versions.legacySupportV4}")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:${Versions.liveData}")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.viewModel}")
+    implementation("androidx.preference:preference-ktx:${Versions.preference}")
+    implementation("androidx.navigation:navigation-fragment-ktx:${Versions.navigationFragment}")
+    implementation("androidx.navigation:navigation-ui-ktx:${Versions.navigationUi}")
 
     //tests
-    testImplementation("junit:junit:${Versions.junit}")
-    androidTestImplementation("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
+    testImplementation("junit:junit:${Versions.testJUnit}")
+    androidTestImplementation("androidx.test.ext:junit:${Versions.androidTestJUnit}")
+    androidTestImplementation("androidx.test.espresso:espresso-core:${Versions.espresso}")
 }

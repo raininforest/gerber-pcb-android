@@ -7,9 +7,11 @@ java {
     targetCompatibility = JavaVersion.VERSION_1_8
 }
 dependencies {
-    implementation(project(mapOf("path" to ":logger")))
 
-    testImplementation("io.mockk:mockk:1.11.0")
-    implementation("junit:junit:${Versions.junit}")
-    implementation(project(mapOf("path" to ":core")))
+    //modules
+    implementation(project(":logger"))
+
+    //tests
+    testImplementation("io.mockk:mockk:${Versions.mockk}")
+    implementation("junit:junit:${Versions.testJUnit}")
 }

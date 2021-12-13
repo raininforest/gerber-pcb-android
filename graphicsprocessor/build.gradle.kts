@@ -28,14 +28,17 @@ android {
 
 dependencies {
 
-    implementation("androidx.core:core-ktx:1.6.0")
+    //modules
     implementation(project(":syntaxparser"))
     implementation(project(":logger"))
 
+    //android
+    implementation("androidx.core:core-ktx:${Versions.coreKtx}")
+
     //tests
-    testImplementation("org.robolectric:robolectric:4.6.1")
-    testImplementation("io.mockk:mockk:1.11.0")
-    testImplementation("junit:junit:${Versions.junit}")
-    androidTestImplementation("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
+    testImplementation("org.robolectric:robolectric:${Versions.robolectric}")
+    testImplementation("io.mockk:mockk:${Versions.mockk}")
+    testImplementation("junit:junit:${Versions.testJUnit}")
+    androidTestImplementation("androidx.test.ext:junit:${Versions.androidTestJUnit}")
+    androidTestImplementation("androidx.test.espresso:espresso-core:${Versions.espresso}")
 }
