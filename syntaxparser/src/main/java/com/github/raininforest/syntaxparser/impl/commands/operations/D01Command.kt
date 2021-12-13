@@ -79,7 +79,6 @@ data class D01Command(
         val isFirstQuadrant = (currentX < xVal) && (currentY > yVal)
         val isSecondQuadrant = (currentX < xVal) && (currentY < yVal)
         val isThirdQuadrant = (currentX > xVal) && (currentY < yVal)
-        val isFourthQuadrant = (currentX > xVal) && (currentY > yVal)
 
         val center: PointD
         val startAngle: Double
@@ -156,7 +155,6 @@ data class D01Command(
         val isFirstQuadrant = (currentX > xVal) && (currentY < yVal)
         val isSecondQuadrant = (currentX > xVal) && (currentY > yVal)
         val isThirdQuadrant = (currentX < xVal) && (currentY > yVal)
-        val isFourthQuadrant = (currentX < xVal) && (currentY < yVal)
 
         val center: PointD
         val startAngle: Double
