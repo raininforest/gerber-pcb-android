@@ -43,12 +43,4 @@ class M02CommandTest {
         val indexHandler = LineNumberHandler(listOfCommands.size - 1).apply { increment() }
         M02Command.parse(listOfCommands, indexHandler) as M02Command
     }
-
-    @Test
-    fun `perform test`() {
-        val command = M02Command(56)
-        val mockedProcessor = mockk<CommandProcessor>(relaxed = true)
-        command.perform(processor = mockedProcessor)
-        verify { mockedProcessor.finishDrawing() }
-    }
 }

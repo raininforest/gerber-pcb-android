@@ -24,7 +24,7 @@ class FSCommandTest {
         val command = FSCommand.parse(listOfCommands, indexHandler) as FSCommand
 
         assertEquals(command.lineNumber, 1)
-        assertEquals(command.numOfInteger, 2)
+        assertEquals(command.numOfInteger, 3) // 3 because of mentor support
         assertEquals(command.numOfDecimal, 4)
     }
 

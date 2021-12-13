@@ -3,6 +3,7 @@ package common
 import com.github.raininforest.syntaxparser.api.SyntaxParser
 import com.github.raininforest.syntaxparser.impl.GerberValidator
 import com.github.raininforest.syntaxparser.impl.SyntaxParserImpl
+import com.github.raininforest.syntaxparser.impl.exceptions.InvalidGerberException
 import com.github.raininforest.syntaxparser.impl.utils.readTestFile
 import org.junit.Assert
 import org.junit.Test
@@ -32,14 +33,13 @@ class SyntaxParserTest {
         }
     }
 
-    @Test
+    @Test(expected = InvalidGerberException::class)
     fun `should return empty list when parse invalid gerber`() {
         workingDir.listDirectoryEntries().filter{
             it.pathString.contains("notValidFile")
         }.forEach { path ->
             val list = readTestFile(path.toFile())
             val cmdList = syntaxParser.parse(list)
-            Assert.assertTrue(cmdList.isEmpty())
         }
     }
 }
