@@ -165,7 +165,7 @@ class CommandProcessorImpl : CommandProcessor, GraphicsObjectsProvider {
     override fun flashStandardPolygon(points: List<PointD>, center: PointD, holeDiameter: Double) {
         setStandardFlashConfigs()
         val path = currentPath
-        path?.let { path ->
+        path?.let {
             path.moveTo(points[0].x.toFloat(), points[0].y.toFloat())
             for (i in points.indices) {
                 path.lineTo(points[i].x.toFloat(), points[i].y.toFloat())
@@ -285,7 +285,7 @@ class CommandProcessorImpl : CommandProcessor, GraphicsObjectsProvider {
     override fun addOutlinePrimitive(points: List<PointD>, exposure: Boolean, rotation: Double) {
         setMacroFlashConfigs(exposure, rotation)
         val path = currentPath
-        path?.let { path ->
+        path?.let {
             path.moveTo(points[0].x.toFloat(), points[0].y.toFloat())
             for (i in points.indices) {
                 path.lineTo(points[i].x.toFloat(), points[i].y.toFloat())
