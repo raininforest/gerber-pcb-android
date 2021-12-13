@@ -33,8 +33,7 @@ val application = module {
     single<GerberFileReader> { GerberFileReaderImpl(context = get()) }
     single { GerberValidator() }
     single<SyntaxParser> { SyntaxParserImpl(gerberValidator = get()) }
-    factory<CommandProcessor> { CommandProcessorImpl() }
-    single<GraphicsProcessor> { GraphicsProcessorImpl(commandProcessor = get()) }
+    single<GraphicsProcessor> { GraphicsProcessorImpl() }
     single { GerberProcessor(fileReader = get(), parser = get(), graphicsProcessor = get()) }
     single<GerberRepository> { GerberRepositoryImpl(gerberProcessor = get()) }
 
