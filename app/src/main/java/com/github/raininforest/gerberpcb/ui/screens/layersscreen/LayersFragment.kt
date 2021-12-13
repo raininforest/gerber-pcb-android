@@ -9,7 +9,9 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isGone
 import androidx.documentfile.provider.DocumentFile
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.github.raininforest.gerberpcb.R
 import com.github.raininforest.gerberpcb.databinding.LayersFragmentBinding
@@ -56,13 +58,32 @@ class LayersFragment : Fragment(R.layout.layers_fragment) {
     }
 
     private fun initRecycler() {
-        binding.recyclerView.layoutManager = LinearLayoutManager(
-            context,
-            LinearLayoutManager.VERTICAL,
-            false
-        )
-        binding.recyclerView.addItemDecoration(SpaceDecorator(resources.getDimensionPixelSize(R.dimen.list_spacing)))
-        binding.recyclerView.adapter = listAdapter
+        with(binding) {
+            recyclerView.layoutManager = LinearLayoutManager(
+                context,
+                LinearLayoutManager.VERTICAL,
+                false
+            )
+            recyclerView.addItemDecoration(SpaceDecorator(resources.getDimensionPixelSize(R.dimen.list_spacing)))
+            recyclerView.adapter = listAdapter
+        }
+        initSwipe()
+    }
+
+    private fun initSwipe() {
+        val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean = false
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.absoluteAdapterPosition
+                layersViewModel.gerberRemoved(listAdapter.getGerberItemId(position))
+            }
+        })
+        itemTouchHelper.attachToRecyclerView(binding.recyclerView)
     }
 
     private fun initViewModel() {
@@ -78,7 +99,7 @@ class LayersFragment : Fragment(R.layout.layers_fragment) {
     private fun renderData(screenState: LayersScreenState) =
         when (screenState) {
             is LayersScreenState.Success -> {
-                listAdapter.setList(screenState.gerberList)
+                listAdapter.submitList(screenState.gerberList)
             }
             is LayersScreenState.Error -> {
                 showMessageDialog(message = getString(R.string.error_gerber), childFragmentManager)

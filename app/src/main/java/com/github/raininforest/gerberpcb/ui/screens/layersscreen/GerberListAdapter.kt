@@ -2,6 +2,8 @@ package com.github.raininforest.gerberpcb.ui.screens.layersscreen
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.github.raininforest.gerberpcb.databinding.ItemViewBinding
 
@@ -12,33 +14,24 @@ import com.github.raininforest.gerberpcb.databinding.ItemViewBinding
  */
 class GerberListAdapter(
     private val onItemChecked: (id: String, checked: Boolean) -> Unit
-) :
-    RecyclerView.Adapter<GerberListAdapter.GerberListViewHolder>() {
+) : ListAdapter<GerberItemUi, GerberListAdapter.GerberItemViewHolder>(GerberDiffCallback()) {
 
-    private var gerberList = mutableListOf<GerberItemUi>()
-
-    fun setList(list: List<GerberItemUi>) {
-        gerberList.clear()
-        gerberList.addAll(list)
-        notifyDataSetChanged()
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GerberListViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GerberItemViewHolder {
         val itemBinding = ItemViewBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
         )
-        return GerberListViewHolder(itemBinding)
+        return GerberItemViewHolder(itemBinding)
     }
 
-    override fun onBindViewHolder(holder: GerberListViewHolder, position: Int) {
-        holder.bind(gerberList[position])
+    override fun onBindViewHolder(holder: GerberItemViewHolder, position: Int) {
+        holder.bind(getItem(position))
     }
 
-    override fun getItemCount() = gerberList.size
+    fun getGerberItemId(position: Int): String = currentList[position].id
 
-    inner class GerberListViewHolder(private val itemBinding: ItemViewBinding) :
+    inner class GerberItemViewHolder(private val itemBinding: ItemViewBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
         fun bind(gerberItem: GerberItemUi) {
             val checkBox = itemBinding.itemCheckBox
@@ -50,5 +43,13 @@ class GerberListAdapter(
 
             itemBinding.itemColorButton.background.setTint(gerberItem.color)
         }
+    }
+
+    class GerberDiffCallback : DiffUtil.ItemCallback<GerberItemUi>() {
+        override fun areItemsTheSame(oldItem: GerberItemUi, newItem: GerberItemUi): Boolean =
+            oldItem.id == newItem.id
+
+        override fun areContentsTheSame(oldItem: GerberItemUi, newItem: GerberItemUi): Boolean =
+            oldItem.id == newItem.id && oldItem.name == newItem.name
     }
 }
