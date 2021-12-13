@@ -47,6 +47,8 @@ class GerberListAdapter(
             checkBox.setOnCheckedChangeListener { _, isChecked ->
                 onItemChecked.invoke(gerberItem.id, isChecked)
             }
+
+            itemBinding.itemColorButton.background.setTint(gerberItem.color)
         }
     }
 }

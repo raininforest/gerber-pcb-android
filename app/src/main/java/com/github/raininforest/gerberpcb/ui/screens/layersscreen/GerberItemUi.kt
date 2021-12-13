@@ -1,5 +1,6 @@
 package com.github.raininforest.gerberpcb.ui.screens.layersscreen
 
+import androidx.annotation.ColorInt
 import java.util.*
 
 /**
@@ -8,5 +9,6 @@ import java.util.*
 data class GerberItemUi(
     val id: String = UUID.randomUUID().toString(),
     val name: String = "<unknown name>",
-    val checked: Boolean = false
+    val checked: Boolean = false,
+    @ColorInt val color: Int
 )
