@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.view.animation.AnimationUtils
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isGone
 import androidx.documentfile.provider.DocumentFile
@@ -14,9 +15,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.github.raininforest.gerberpcb.R
+import com.github.raininforest.gerberpcb.app.SharedPrefManager
 import com.github.raininforest.gerberpcb.databinding.LayersFragmentBinding
 import com.github.raininforest.gerberpcb.ui.screens.messagedialog.showErrorDialog
 import com.github.raininforest.logger.Logger
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
@@ -31,6 +34,7 @@ class LayersFragment : Fragment(R.layout.layers_fragment) {
         layersViewModel.gerberVisibilityChanged(id, isChecked)
     }
     private val layersViewModel: LayersViewModel by viewModel()
+    private val sharedPrefManager: SharedPrefManager by inject()
 
     private val openFileResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -51,6 +55,13 @@ class LayersFragment : Fragment(R.layout.layers_fragment) {
     }
 
     private fun initButtons() {
+        val wasRun = sharedPrefManager.getRunFirst()
+        if (!wasRun) {
+            val anim = AnimationUtils.loadAnimation(context, R.anim.shake)
+            binding.fab.startAnimation(anim)
+            sharedPrefManager.setRunFirst(true)
+        }
+
         binding.fab.setOnClickListener {
             val intent = Intent(Intent.ACTION_GET_CONTENT).apply { type = "*/*" }
             openFileResult.launch(intent)
@@ -71,7 +82,8 @@ class LayersFragment : Fragment(R.layout.layers_fragment) {
     }
 
     private fun initSwipe() {
-        val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
+        val itemTouchHelper = ItemTouchHelper(object :
+            ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
             override fun onMove(
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder,
@@ -102,7 +114,11 @@ class LayersFragment : Fragment(R.layout.layers_fragment) {
                 listAdapter.submitList(screenState.gerberList)
             }
             is LayersScreenState.Error -> {
-                showErrorDialog(message = screenState.error, errorDetails = screenState.errorDetails, childFragmentManager)
+                showErrorDialog(
+                    message = screenState.error,
+                    errorDetails = screenState.errorDetails,
+                    childFragmentManager
+                )
             }
         }
 }
