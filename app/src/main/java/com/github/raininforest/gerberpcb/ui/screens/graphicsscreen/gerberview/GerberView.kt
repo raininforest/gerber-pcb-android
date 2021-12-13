@@ -53,13 +53,10 @@ class GerberView @JvmOverloads constructor(
             }
 
             override fun onScaleBegin(detector: ScaleGestureDetector): Boolean {
-                println("begin scale factor = ${detector.scaleFactor}")
                 return true
             }
 
-            override fun onScaleEnd(detector: ScaleGestureDetector) {
-                println("end scale factor = ${detector.scaleFactor}")
-            }
+            override fun onScaleEnd(detector: ScaleGestureDetector) {}
         })
     }
 
