@@ -2,6 +2,7 @@ package com.github.raininforest.gerberpcb.model
 
 import android.net.Uri
 import com.github.raininforest.gerberpcb.model.entity.Gerber
+import com.github.raininforest.gerberpcb.model.entity.GerberResult
 
 /**
  * Interface for [GerberRepository]
@@ -10,7 +11,7 @@ import com.github.raininforest.gerberpcb.model.entity.Gerber
  */
 interface GerberRepository {
     val gerbers: List<Gerber>
-    suspend fun addItem(fileUri: Uri, fileName: String): Boolean
+    suspend fun addItem(fileUri: Uri, fileName: String): GerberResult
     fun removeItem(id: String)
     fun changeItemVisibility(id: String, visibility: Boolean)
 }

@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.github.raininforest.gerberpcb.model.GerberRepository
+import com.github.raininforest.gerberpcb.model.entity.GerberResult
 import com.github.raininforest.logger.Logger
 import kotlinx.coroutines.*
 
@@ -40,14 +41,18 @@ class LayersViewModel(
     fun gerberAdded(fileUri: Uri, fileName: String) {
         _isLoading.value = true
         vmCoroutineScope.launch {
-            val processed = gerberRepository.addItem(fileUri, fileName)
+            val result = gerberRepository.addItem(fileUri, fileName)
             withContext(Dispatchers.Main) {
-                if (processed) {
-                    _data.value = gerberRepository.gerbers.toScreenState()
-                    _isLoading.value = false
-                } else {
-                    _data.value = LayersScreenState.Error("Can't process gerber!")
-                    _isLoading.value = false
+                when (result) {
+                    is GerberResult.Success -> {
+                        _data.value = gerberRepository.gerbers.toScreenState()
+                        _isLoading.value = false
+                    }
+                    is GerberResult.Error -> {
+                        _data.value =
+                            LayersScreenState.Error("Can't process gerber!", result.errorMessage)
+                        _isLoading.value = false
+                    }
                 }
             }
         }

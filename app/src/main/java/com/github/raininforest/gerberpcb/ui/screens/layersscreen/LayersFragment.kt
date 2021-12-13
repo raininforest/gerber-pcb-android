@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.github.raininforest.gerberpcb.R
 import com.github.raininforest.gerberpcb.databinding.LayersFragmentBinding
-import com.github.raininforest.gerberpcb.ui.screens.messagedialog.showMessageDialog
+import com.github.raininforest.gerberpcb.ui.screens.messagedialog.showErrorDialog
 import com.github.raininforest.logger.Logger
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -102,7 +102,7 @@ class LayersFragment : Fragment(R.layout.layers_fragment) {
                 listAdapter.submitList(screenState.gerberList)
             }
             is LayersScreenState.Error -> {
-                showMessageDialog(message = getString(R.string.error_gerber), childFragmentManager)
+                showErrorDialog(message = screenState.error, errorDetails = screenState.errorDetails, childFragmentManager)
             }
         }
 }

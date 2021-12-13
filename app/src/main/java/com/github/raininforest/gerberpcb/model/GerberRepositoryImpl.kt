@@ -24,12 +24,12 @@ class GerberRepositoryImpl(
         when (val result = gerberProcessor.process(fileUri, fileName)) {
             is GerberResult.Error -> {
                 Logger.e(result.errorMessage)
-                false
+                result
             }
             is GerberResult.Success -> {
                 _gerbersDictionary[result.gerber.id] = result.gerber
                 updateList()
-                true
+                result
             }
         }
 

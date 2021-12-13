@@ -7,6 +7,6 @@ import androidx.fragment.app.FragmentManager
  *
  * Created by Sergey Velesko on 18.07.2021
  */
-fun showMessageDialog(message: String, childFragmentManager: FragmentManager) {
-    MessageDialog.createDialog(message).show(childFragmentManager, null)
+fun showErrorDialog(message: String, errorDetails: String, childFragmentManager: FragmentManager) {
+    ErrorDialog.createDialog(message, errorDetails).show(childFragmentManager, null)
 }
