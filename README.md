@@ -1,7 +1,7 @@
 # Gerber PCB
 Simple Android application for Gerber files viewing<br/><br/><br/>
-<img src="https://github.com/raininforest/gerber-pcb-android/raw/develop/start_screen.png" alt="" width="300" height="533">
-<img src="https://github.com/raininforest/gerber-pcb-android/raw/develop/image_screen.png" alt="" width="300" height="533">
+<img src="https://github.com/raininforest/gerber-pcb-android/raw/develop/screenshots/start_screen.png" alt="" width="300" height="533">
+<img src="https://github.com/raininforest/gerber-pcb-android/raw/develop/screenshots/image_screen.png" alt="" width="300" height="533">
 <br/>
 
 ## How to use
