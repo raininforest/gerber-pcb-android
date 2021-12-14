@@ -21,9 +21,17 @@ class GraphicsStateImpl(private val drawApertureListener: (Double) -> Unit) : Gr
     override var currentPoint: PointD = DEFAULT_CURRENT_POINT
     override var interpolationState: InterpolationState = DEFAULT_INTERPOLATION_STATE
     override var quadrantMode: QuadrantMode = QuadrantMode.MULTI
+
+    //TODO send config GraphicsObject to change paint settings when set this property
     override var polarity: Polarity = DEFAULT_POLARITY
+
+    //TODO send config GraphicsObject to change paint settings when set this property
     override var mirroring: Mirroring = DEFAULT_MIRRORING
+
+    //TODO send config GraphicsObject to change paint settings when set this property
     override var rotation: Double = DEFAULT_ROTATION
+
+    //TODO send config GraphicsObject to change paint settings when set this property
     override var scaling: Double = DEFAULT_SCALING
 
     companion object {
