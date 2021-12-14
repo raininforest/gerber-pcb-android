@@ -1,4 +1,4 @@
-rootProject.name = "Gerber PCB"
+rootProject.name = "Gerber Viewer"
 include(":app")
 include(":gerberfilereader")
 include(":graphicsprocessor")

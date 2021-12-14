@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">GerberPCB</string>
+    <string name="app_name">Gerber Viewer</string>
     <string name="action_open">Open gerber</string>
     <string name="action_layers">Layers</string>
     <string name="action_graphics">Graphics</string>
