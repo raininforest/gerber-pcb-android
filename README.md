@@ -5,7 +5,7 @@ Simple Android application for Gerber files viewing<br/><br/><br/>
 <br/>
 
 ## How to use
-Just add gerber file (one or more) from your device with "+" button and set it visibility with checkbox. Then go to next screen (navigate to screens with two toolbar buttons at the top of screen) and use common gestures for zoom and pan.
+Just add gerber file (one or more) from your device with "+" button and set it visibility with checkbox. Swipe to delete. Then go to next screen (navigate to screens with two toolbar buttons at the top of screen) and use common gestures for zoom and pan.
 
 ## Roadmap
 Not implemented yet:
