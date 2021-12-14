@@ -29,7 +29,7 @@ data class ADCommand(
 
     internal companion object : MultiStringParsable {
 
-        private val AD_PATTERN: Pattern by lazy { Pattern.compile("^%ADD([1-9]\\d+)(\\w+),?(.*)?\\*%") }
+        private val AD_PATTERN: Pattern by lazy { Pattern.compile("^%ADD([1-9]\\d+)([\\w\\.]+),?(.*)?\\*%") }
 
         override fun parse(
             stringList: List<String>,

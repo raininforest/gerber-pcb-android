@@ -28,6 +28,7 @@ internal fun Char.toOperator(isUnary: Boolean = false) =
         }
         '/' -> MacroExpressionOperator(ArithmeticOperation.DIVIDE)
         'x' -> MacroExpressionOperator(ArithmeticOperation.MULTIPLY)
+        'X' -> MacroExpressionOperator(ArithmeticOperation.MULTIPLY)
         '(' -> MacroExpressionOperator(ArithmeticOperation.OPENING_PARENTHESIS)
         ')' -> MacroExpressionOperator(ArithmeticOperation.CLOSING_PARENTHESIS)
 
@@ -53,6 +54,7 @@ internal fun String.parseToExpression(): MacroExpression {
         val isItOperator = (currentChar == '-') ||
                 (currentChar == '+') ||
                 (currentChar == 'x') ||
+                (currentChar == 'X') ||
                 (currentChar == '/') ||
                 (currentChar == '(') ||
                 (currentChar == ')')

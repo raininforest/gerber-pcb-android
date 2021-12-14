@@ -15,21 +15,21 @@ data class MacroVariableDefinition(
 
     companion object {
         @JvmStatic
-        val VAR_DEF_PATTERN: Pattern by lazy { Pattern.compile("^\\$([1-9]*)=([.\\$0-9\\-x\\/\\+\\(\\)]*)") }
+        val VAR_DEF_PATTERN: Pattern by lazy { Pattern.compile("^\\$([1-9]*)=([.\\$0-9\\-xX\\/\\+\\(\\)]*)") }
 
         /**
          * Parses variable definition in macro body
          */
         fun parseVarDefinition(s: String): MacroVariableDefinition {
             try {
-                val matcher = VAR_DEF_PATTERN.matcher(s)
+                val matcher = VAR_DEF_PATTERN.matcher(s.replace("\\s".toRegex(), ""))
                 if (matcher.find()) {
                     val varName = matcher.group(1).toInt()
                     val expression = matcher.group(2).parseToExpression()
 
                     return MacroVariableDefinition(varName, expression)
                 } else {
-                    throw IllegalStateException("Macro variable definition parsing failed!")
+                    throw IllegalStateException("Macro variable definition parsing failed! $s")
                 }
             } catch (e: Throwable) {
                 throw e
