@@ -26,6 +26,9 @@ Potential features:
 - Grid with settings<br/>
 - File manager with multi selection for open<br/>
 
+## Donate
+My paypal: https://paypal.me/raininforest
+
 ## License
 Licensed with GNU General Public License v3.0.<br/>
 Copyright 2021 Sergey Velesko
