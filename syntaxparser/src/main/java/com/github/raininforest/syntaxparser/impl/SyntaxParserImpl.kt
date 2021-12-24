@@ -138,14 +138,14 @@ class SyntaxParserImpl(private val gerberValidator: GerberValidator) : SyntaxPar
             "G03" -> G03Command(lineNumber)
             "G36" -> G36Command(lineNumber)
             "G37" -> G37Command(lineNumber)
-            "G54" -> G54Command(lineNumber)
-            "G55" -> G55Command(lineNumber)
-            "G70" -> G70Command(lineNumber)
-            "G71" -> G71Command(lineNumber)
+            "G54" -> G54Command(lineNumber) // deprecated
+            "G55" -> G55Command(lineNumber) // deprecated
+            "G70" -> G70Command(lineNumber) // deprecated
+            "G71" -> G71Command(lineNumber) // deprecated
             "G74" -> G74Command(lineNumber)
             "G75" -> G75Command(lineNumber)
-            "G90" -> G90Command(lineNumber)
-            "G91" -> G91Command(lineNumber)
+            "G90" -> G90Command(lineNumber) // deprecated
+            "G91" -> G91Command(lineNumber) // deprecated
             else -> throw WrongCommandFormatException(
                 lineNumber,
                 "There is no valid G-code gerber command but 'G' was found on line $lineNumber"
