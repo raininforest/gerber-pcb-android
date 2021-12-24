@@ -148,7 +148,7 @@ class SyntaxParserImpl(private val gerberValidator: GerberValidator) : SyntaxPar
             "G91" -> G91Command(lineNumber)
             else -> throw WrongCommandFormatException(
                 lineNumber,
-                "There is no valid G-code gerber command but 'G' was found"
+                "There is no valid G-code gerber command but 'G' was found on line $lineNumber"
             )
         }
 
