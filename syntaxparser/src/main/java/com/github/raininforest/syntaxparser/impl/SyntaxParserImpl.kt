@@ -142,6 +142,7 @@ class SyntaxParserImpl(private val gerberValidator: GerberValidator) : SyntaxPar
             "G55" -> G55Command(lineNumber)
             "G70" -> G70Command(lineNumber)
             "G71" -> G71Command(lineNumber)
+            "G74" -> G74Command(lineNumber)
             "G75" -> G75Command(lineNumber)
             "G90" -> G90Command(lineNumber)
             "G91" -> G91Command(lineNumber)
@@ -212,7 +213,7 @@ class SyntaxParserImpl(private val gerberValidator: GerberValidator) : SyntaxPar
             "SF" -> SFCommand(lineNumberHandler.lineNumber)
             else -> throw WrongCommandFormatException(
                 lineNumberHandler.lineNumber,
-                "There is no valid extended gerber command but '%' was found"
+                "There is no valid extended gerber command but '%' was found on line ${lineNumberHandler.lineNumber}"
             )
         }
 
