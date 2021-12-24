@@ -30,6 +30,6 @@ class GerberRendererImpl : GerberRenderer {
         private val DEFAULT_STROKE_CAP = Paint.Cap.ROUND
         private val DEFAULT_STYLE = Paint.Style.STROKE
         private const val DEFAULT_ALPHA = 128
-        private const val DEFAULT_ANTIALIAS = true
+        private const val DEFAULT_ANTIALIAS = false
     }
 }
