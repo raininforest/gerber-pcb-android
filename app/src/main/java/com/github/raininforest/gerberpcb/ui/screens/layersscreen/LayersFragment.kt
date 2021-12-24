@@ -64,7 +64,15 @@ class LayersFragment : Fragment(R.layout.layers_fragment) {
 
         binding.fab.setOnClickListener {
             val intent = Intent(Intent.ACTION_GET_CONTENT).apply { type = "*/*" }
-            openFileResult.launch(intent)
+            try {
+                openFileResult.launch(intent)
+            } catch (e: Throwable) {
+                showErrorDialog(
+                    message = getString(R.string.error_open_dialog),
+                    errorDetails = e.localizedMessage ?: "",
+                    childFragmentManager = childFragmentManager
+                )
+            }
         }
     }
 
