@@ -1,4 +1,4 @@
-package com.github.raininforest.syntaxparser.impl.commands.unused
+package com.github.raininforest.syntaxparser.impl.commands.deprecated
 
 import com.github.raininforest.syntaxparser.api.GerberCommand
 import com.github.raininforest.syntaxparser.api.CommandProcessor
@@ -8,7 +8,7 @@ import com.github.raininforest.syntaxparser.api.CommandProcessor
  *
  * Created by Sergey Velesko on 02.11.2021
  */
-data class OFCommand(override val lineNumber: Int): GerberCommand {
+data class ICASCommand(override val lineNumber: Int) : GerberCommand {
     override fun perform(processor: CommandProcessor) {
         // ignore
     }

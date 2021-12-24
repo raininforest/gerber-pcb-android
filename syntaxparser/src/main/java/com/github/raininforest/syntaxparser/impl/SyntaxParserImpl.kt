@@ -4,8 +4,6 @@ import com.github.raininforest.logger.Logger
 import com.github.raininforest.syntaxparser.api.GerberCommand
 import com.github.raininforest.syntaxparser.api.SyntaxParser
 import com.github.raininforest.syntaxparser.api.graphicsstate.CoordinateFormat
-import com.github.raininforest.syntaxparser.impl.commands.unused.G90Command
-import com.github.raininforest.syntaxparser.impl.commands.unused.ICASCommand
 import com.github.raininforest.syntaxparser.impl.commands.M02Command
 import com.github.raininforest.syntaxparser.impl.commands.aperturedefinition.ADCommand
 import com.github.raininforest.syntaxparser.impl.commands.aperturedefinition.DnnCommand
@@ -16,6 +14,7 @@ import com.github.raininforest.syntaxparser.impl.commands.aperturetransformation
 import com.github.raininforest.syntaxparser.impl.commands.aperturetransformation.LSCommand
 import com.github.raininforest.syntaxparser.impl.commands.coordinate.FSCommand
 import com.github.raininforest.syntaxparser.impl.commands.coordinate.MOCommand
+import com.github.raininforest.syntaxparser.impl.commands.deprecated.*
 import com.github.raininforest.syntaxparser.impl.commands.inerpolationstate.*
 import com.github.raininforest.syntaxparser.impl.commands.operations.D01Command
 import com.github.raininforest.syntaxparser.impl.commands.operations.D02Command
@@ -23,7 +22,6 @@ import com.github.raininforest.syntaxparser.impl.commands.operations.D03Command
 import com.github.raininforest.syntaxparser.impl.commands.operations.DOperationCommand
 import com.github.raininforest.syntaxparser.impl.commands.regionstate.G36Command
 import com.github.raininforest.syntaxparser.impl.commands.regionstate.G37Command
-import com.github.raininforest.syntaxparser.impl.commands.unused.OFCommand
 import com.github.raininforest.syntaxparser.impl.exceptions.InvalidGerberException
 import com.github.raininforest.syntaxparser.impl.exceptions.WrongCommandFormatException
 import com.github.raininforest.syntaxparser.impl.utils.*
@@ -140,9 +138,13 @@ class SyntaxParserImpl(private val gerberValidator: GerberValidator) : SyntaxPar
             "G03" -> G03Command(lineNumber)
             "G36" -> G36Command(lineNumber)
             "G37" -> G37Command(lineNumber)
-            "G74" -> G74Command(lineNumber)
+            "G54" -> G54Command(lineNumber)
+            "G55" -> G55Command(lineNumber)
+            "G70" -> G70Command(lineNumber)
+            "G71" -> G71Command(lineNumber)
             "G75" -> G75Command(lineNumber)
             "G90" -> G90Command(lineNumber)
+            "G91" -> G91Command(lineNumber)
             else -> throw WrongCommandFormatException(
                 lineNumber,
                 "There is no valid G-code gerber command but 'G' was found"
@@ -198,8 +200,16 @@ class SyntaxParserImpl(private val gerberValidator: GerberValidator) : SyntaxPar
             "LS" -> LSCommand.parse(stringList, lineNumberHandler)
             "LR" -> LRCommand.parse(stringList, lineNumberHandler)
             "LM" -> LMCommand.parse(stringList, lineNumberHandler)
+            // deprecated
+            "AS" -> ASCommand(lineNumberHandler.lineNumber)
+            "IN" -> INCommand(lineNumberHandler.lineNumber)
+            "IP" -> IPCommand(lineNumberHandler.lineNumber)
+            "IR" -> IRCommand(lineNumberHandler.lineNumber)
+            "LN" -> LNCommand(lineNumberHandler.lineNumber)
             "IC" -> ICASCommand(lineNumberHandler.lineNumber)
             "OF" -> OFCommand(lineNumberHandler.lineNumber)
+            "MI" -> MICommand(lineNumberHandler.lineNumber)
+            "SF" -> SFCommand(lineNumberHandler.lineNumber)
             else -> throw WrongCommandFormatException(
                 lineNumberHandler.lineNumber,
                 "There is no valid extended gerber command but '%' was found"
