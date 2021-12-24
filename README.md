@@ -25,6 +25,8 @@ Potential features:
 - Set custom opacity for image<br/>
 - Grid with settings<br/>
 - File manager with multi selection for open<br/>
+- Posibility to open zip archive with gerbers<br/>
+- Fit image to display<br/>
 
 ## Play Market
 https://play.google.com/store/apps/details?id=com.github.raininforest.gerberpcb
