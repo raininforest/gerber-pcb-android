@@ -26,6 +26,12 @@ Potential features:
 - Grid with settings<br/>
 - File manager with multi selection for open<br/>
 
+## Play Market
+https://play.google.com/store/apps/details?id=com.github.raininforest.gerberpcb
+
+## Donate
+My paypal: https://paypal.me/raininforest
+
 ## License
 Licensed with GNU General Public License v3.0.<br/>
 Copyright 2021 Sergey Velesko
