@@ -11,7 +11,9 @@ object Versions {
     //tests
     const val testJUnit = "4.13.2"
     const val androidTestJUnit = "1.1.3"
-    const val espresso = "3.4.0"
+    const val espresso = "3.3.0"
+    const val kaspresso = "1.3.0"
+    const val fragmentTesting = "1.3.0"
     const val mockk = "1.11.0"
     const val robolectric = "4.6.1"
 

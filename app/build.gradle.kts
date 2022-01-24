@@ -72,5 +72,7 @@ dependencies {
     //tests
     testImplementation("junit:junit:${Versions.testJUnit}")
     androidTestImplementation("androidx.test.ext:junit:${Versions.androidTestJUnit}")
-    androidTestImplementation("androidx.test.espresso:espresso-core:${Versions.espresso}")
+    debugImplementation("androidx.fragment:fragment-testing:${Versions.fragmentTesting}")
+    androidTestImplementation("com.kaspersky.android-components:kaspresso:${Versions.kaspresso}")
+    androidTestImplementation("com.kaspersky.android-components:kaspresso-allure-support:${Versions.kaspresso}")
 }
