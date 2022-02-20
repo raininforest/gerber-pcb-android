@@ -3,6 +3,7 @@ package com.github.raininforest.gerberpcb.model
 import android.net.Uri
 import com.github.raininforest.gerberpcb.model.entity.Gerber
 import com.github.raininforest.gerberpcb.model.entity.GerberResult
+import com.github.raininforest.gerberpcb.model.entity.LoadingResult
 import com.github.raininforest.logger.Logger
 
 /**
@@ -20,16 +21,16 @@ class GerberRepositoryImpl(
     override val gerbers: List<Gerber>
         get() = _gerbers
 
-    override suspend fun addItem(fileUri: Uri, fileName: String) =
+    override suspend fun addItem(fileUri: Uri, fileName: String): LoadingResult =
         when (val result = gerberProcessor.process(fileUri, fileName)) {
             is GerberResult.Error -> {
                 Logger.e(result.errorMessage)
-                result
+                LoadingResult.Error(result.errorMessage)
             }
             is GerberResult.Success -> {
                 _gerbersDictionary[result.gerber.id] = result.gerber
                 updateList()
-                result
+                LoadingResult.Success
             }
         }
 
