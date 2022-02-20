@@ -20,6 +20,7 @@ Potential optimizations:
 - Using SurfaceView instead of custom View<br/>
 
 Potential features:
+- Build-in gerber samples<br/>
 - Set any color for layer<br/>
 - Set custom colors for flash and draw operations<br/>
 - Set custom opacity for image<br/>
