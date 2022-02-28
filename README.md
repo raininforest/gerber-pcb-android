@@ -20,14 +20,11 @@ Potential optimizations:
 - Using SurfaceView instead of custom View<br/>
 
 Potential features:
-- Build-in gerber samples<br/>
+- Fit image to display<br/>
 - Set any color for layer<br/>
 - Set custom colors for flash and draw operations<br/>
 - Set custom opacity for image<br/>
 - Grid with settings<br/>
-- File manager with multi selection for open<br/>
-- Posibility to open zip archive with gerbers<br/>
-- Fit image to display<br/>
 
 ## Play Market
 https://play.google.com/store/apps/details?id=com.github.raininforest.gerberpcb
