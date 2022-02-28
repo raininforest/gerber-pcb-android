@@ -2,8 +2,7 @@ package com.github.raininforest.gerberpcb.di
 
 import com.github.raininforest.GraphicsProcessor
 import com.github.raininforest.GraphicsProcessorImpl
-import com.github.raininforest.gerberfilereader.GerberFileReader
-import com.github.raininforest.gerberfilereader.GerberFileReaderImpl
+import com.github.raininforest.gerberfilereader.*
 import com.github.raininforest.gerberpcb.app.SharedPrefManager
 import com.github.raininforest.gerberpcb.app.logger.GerberReaderLogger
 import com.github.raininforest.gerberpcb.model.GerberProcessor
@@ -29,16 +28,26 @@ import org.koin.dsl.module
 val application = module {
     single<ILogger> { GerberReaderLogger() }
 
-    single<GerberFileReader> { GerberFileReaderImpl(context = get()) }
+    single<GerberFileReader> { GerberFileReaderImpl() }
     single { GerberValidator() }
     single<SyntaxParser> { SyntaxParserImpl(gerberValidator = get()) }
     single<GraphicsProcessor> { GraphicsProcessorImpl() }
     single { GerberProcessor(fileReader = get(), parser = get(), graphicsProcessor = get()) }
-    single<GerberRepository> { GerberRepositoryImpl(gerberProcessor = get()) }
+    single<ZipUriResolver> { ZipUriResolverImpl(context = androidContext()) }
+    single<FileUriResolver> { FileUriResolverImpl(context = androidContext()) }
+    single<FileAssetResolver> { FileAssetResolverImpl(context = androidContext()) }
+    single<GerberRepository> {
+        GerberRepositoryImpl(
+            gerberProcessor = get(),
+            zipUriResolver = get(),
+            fileUriResolver = get(),
+            fileAssetResolver = get()
+        )
+    }
     single<GerberRenderer> { GerberRendererImpl() }
 
     viewModel { LayersViewModel(gerberRepository = get()) }
     viewModel { GraphicsViewModel(gerberRepository = get()) }
 
-    single{ SharedPrefManager(context = androidContext()) }
+    single { SharedPrefManager(context = androidContext()) }
 }

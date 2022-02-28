@@ -1,31 +1,23 @@
 package com.github.raininforest.gerberfilereader
 
-import android.content.Context
-import android.net.Uri
 import com.github.raininforest.logger.Logger
+import java.io.File
 
 /**
  * Reads gerber file and return list of strings
  *
  * Created by Sergey Velesko on 19.09.2021
  */
-class GerberFileReaderImpl(
-    private val context: Context
-) : GerberFileReader {
+class GerberFileReaderImpl : GerberFileReader {
 
-    override fun read(uri: Uri): List<String> {
+    override fun read(file: File): List<String> {
         val result = mutableListOf<String>()
         try {
-            context.contentResolver
-                ?.openInputStream(uri)
-                ?.bufferedReader()
-                .use { bufferedReader ->
-                    bufferedReader
-                        ?.readLines()
-                        ?.let { list -> result.addAll(list) }
-                }
+            file.bufferedReader().useLines {
+                result.addAll(it.toList())
+            }
         } catch (e: Throwable) {
-            Logger.e("File reading error!")
+            Logger.e("Error when read file: ${file.name}!")
             Logger.e(e.message ?: "")
         }
         return result

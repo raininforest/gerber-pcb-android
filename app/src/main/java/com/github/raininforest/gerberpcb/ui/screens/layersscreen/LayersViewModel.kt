@@ -38,6 +38,14 @@ class LayersViewModel(
         _data.value = gerberRepository.gerbers.toScreenState()
     }
 
+    fun loadSamples() {
+        _isLoading.value = true
+        vmCoroutineScope.launch {
+            val result = gerberRepository.loadSamples()
+            handleResult(result)
+        }
+    }
+
     fun gerberAdded(fileUri: Uri, fileName: String) {
         _isLoading.value = true
         vmCoroutineScope.launch {

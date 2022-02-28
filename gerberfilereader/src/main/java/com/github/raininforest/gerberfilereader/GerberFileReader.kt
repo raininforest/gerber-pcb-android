@@ -1,6 +1,6 @@
 package com.github.raininforest.gerberfilereader
 
-import android.net.Uri
+import java.io.File
 
 /**
  * Reads gerber file and return list of strings
@@ -8,5 +8,5 @@ import android.net.Uri
  * Created by Sergey Velesko on 19.09.2021
  */
 interface GerberFileReader {
-    fun read(uri: Uri): List<String>
+    fun read(file: File): List<String>
 }

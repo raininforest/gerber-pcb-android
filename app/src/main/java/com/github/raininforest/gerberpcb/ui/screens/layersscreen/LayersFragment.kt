@@ -49,16 +49,16 @@ class LayersFragment : Fragment(R.layout.layers_fragment) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initViewModel()
         initButtons()
         initRecycler()
-        initViewModel()
     }
 
     private fun initButtons() {
-        val wasRun = sharedPrefManager.getRunFirst()
-        if (!wasRun) {
-            val anim = AnimationUtils.loadAnimation(context, R.anim.shake)
-            binding.fab.startAnimation(anim)
+        val runFirst = !sharedPrefManager.getRunFirst()
+        if (runFirst) {
+            animateFab()
+            loadSamples()
             sharedPrefManager.setRunFirst(true)
         }
 
@@ -74,6 +74,15 @@ class LayersFragment : Fragment(R.layout.layers_fragment) {
                 )
             }
         }
+    }
+
+    private fun animateFab() {
+        val anim = AnimationUtils.loadAnimation(context, R.anim.shake)
+        binding.fab.startAnimation(anim)
+    }
+
+    private fun loadSamples() {
+        layersViewModel.loadSamples()
     }
 
     private fun initRecycler() {
