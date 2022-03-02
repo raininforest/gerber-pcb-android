@@ -8,7 +8,8 @@ import com.github.raininforest.graphicsobject.GraphicsObjectLine
 import com.github.raininforest.graphicsobject.GraphicsObjectPath
 import com.github.raininforest.graphicsobject.configobjects.*
 import com.github.raininforest.syntaxparser.api.CommandProcessor
-import com.github.raininforest.syntaxparser.api.PointD
+import com.github.raininforest.syntaxparser.api.models.Coordinate
+import com.github.raininforest.syntaxparser.api.models.PointD
 import com.github.raininforest.syntaxparser.api.dictionary.ApertureDictionary
 import com.github.raininforest.syntaxparser.api.dictionary.MacroTemplateDictionary
 import com.github.raininforest.syntaxparser.api.graphicsstate.GraphicsState
@@ -18,7 +19,9 @@ import com.github.raininforest.syntaxparser.impl.commands.aperturemacro.template
 import com.github.raininforest.syntaxparser.impl.commands.aperturemacro.templates.StandardPolygonTemplate
 import com.github.raininforest.syntaxparser.impl.commands.aperturemacro.templates.StandardRectangleTemplate
 
-class CommandProcessorImpl : CommandProcessor, GraphicsObjectsProvider {
+class CommandProcessorImpl(
+    private val coordinateListener: (coordinate: Coordinate) -> Unit = {}
+) : CommandProcessor, GraphicsObjectsProvider {
 
     private var currentPath: Path? = null
     private var currentCircleApertureSizeForDrawing: Double =
@@ -377,6 +380,10 @@ class CommandProcessorImpl : CommandProcessor, GraphicsObjectsProvider {
 
     override fun closeContour() {
         currentPath?.close()
+    }
+
+    override fun sendCoordinate(coordinate: Coordinate) {
+        coordinateListener.invoke(coordinate)
     }
 
     private fun finishRegion() {

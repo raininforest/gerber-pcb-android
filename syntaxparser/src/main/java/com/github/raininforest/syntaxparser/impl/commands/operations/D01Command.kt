@@ -2,11 +2,13 @@ package com.github.raininforest.syntaxparser.impl.commands.operations
 
 import com.github.raininforest.syntaxparser.api.CommandProcessor
 import com.github.raininforest.syntaxparser.api.GerberCommand
-import com.github.raininforest.syntaxparser.api.PointD
+import com.github.raininforest.syntaxparser.api.models.PointD
 import com.github.raininforest.syntaxparser.api.graphicsstate.CoordinateFormat
 import com.github.raininforest.syntaxparser.api.graphicsstate.enums.InterpolationState
 import com.github.raininforest.syntaxparser.api.graphicsstate.enums.QuadrantMode
 import com.github.raininforest.syntaxparser.api.graphicsstate.enums.RegionMode
+import com.github.raininforest.syntaxparser.api.models.Coordinate
+import com.github.raininforest.syntaxparser.api.models.CoordinateType
 import com.github.raininforest.syntaxparser.impl.CoordinateDataParsable
 import com.github.raininforest.syntaxparser.impl.exceptions.WrongCommandFormatException
 import com.github.raininforest.syntaxparser.impl.utils.toDegrees
@@ -29,11 +31,17 @@ data class D01Command(
 ) : DOperationCommand(), GerberCommand {
 
     override fun perform(processor: CommandProcessor) {
+        sendCoordinates(processor)
         when (processor.graphicsState.interpolationState) {
             InterpolationState.LINEAR -> drawLine(processor)
             InterpolationState.CLOCKWISE_CIRCULAR -> drawArc(processor, isClockwise = true)
             InterpolationState.COUNTERCLOCKWISE_CIRCULAR -> drawArc(processor, isClockwise = false)
         }
+    }
+
+    private fun sendCoordinates(processor: CommandProcessor) {
+        x?.let { sendCoordinate(processor, Coordinate(CoordinateType.X, x.toFloat())) }
+        y?.let { sendCoordinate(processor, Coordinate(CoordinateType.Y, y.toFloat())) }
     }
 
     private fun drawLine(processor: CommandProcessor) {

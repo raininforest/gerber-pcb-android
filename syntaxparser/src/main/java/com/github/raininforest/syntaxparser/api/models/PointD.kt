@@ -1,4 +1,4 @@
-package com.github.raininforest.syntaxparser.api
+package com.github.raininforest.syntaxparser.api.models
 
 /**
  * Describes coordinate point

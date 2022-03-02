@@ -1,7 +1,7 @@
 package commands
 
 import com.github.raininforest.syntaxparser.api.CommandProcessor
-import com.github.raininforest.syntaxparser.api.PointD
+import com.github.raininforest.syntaxparser.api.models.PointD
 import com.github.raininforest.syntaxparser.api.graphicsstate.CoordinateFormat
 import com.github.raininforest.syntaxparser.impl.commands.operations.D03Command
 import io.mockk.every

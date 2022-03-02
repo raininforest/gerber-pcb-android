@@ -1,7 +1,8 @@
 package com.github.raininforest.syntaxparser.impl.commands.operations
 
 import com.github.raininforest.syntaxparser.api.CommandProcessor
-import com.github.raininforest.syntaxparser.api.PointD
+import com.github.raininforest.syntaxparser.api.models.Coordinate
+import com.github.raininforest.syntaxparser.api.models.PointD
 import com.github.raininforest.syntaxparser.impl.utils.fromCoordinateToDouble
 import java.util.regex.Pattern
 
@@ -18,6 +19,10 @@ abstract class DOperationCommand {
                 x ?: processor.graphicsState.currentPoint.x,
                 y ?: processor.graphicsState.currentPoint.y
             )
+    }
+
+    protected fun sendCoordinate(processor: CommandProcessor, coordinate: Coordinate) {
+        processor.sendCoordinate(coordinate)
     }
 
     internal companion object {

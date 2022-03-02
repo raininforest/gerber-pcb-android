@@ -1,5 +1,6 @@
 package com.github.raininforest.gerberpcb.model.entity
 
+import com.github.raininforest.GerberImageResult
 import com.github.raininforest.graphicsobject.GraphicsObject
 import java.util.*
 
@@ -11,7 +12,7 @@ data class Gerber(
     val name: String,
     val color: String = DEFAULT_COLOR,
     var isVisible: Boolean = false,
-    val data: List<GraphicsObject>
+    val data: GerberImageResult
 ) {
     companion object {
         private const val DEFAULT_COLOR = "#ffffff"

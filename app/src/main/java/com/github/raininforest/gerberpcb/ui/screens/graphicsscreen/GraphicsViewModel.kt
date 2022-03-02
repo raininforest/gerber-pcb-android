@@ -22,6 +22,12 @@ class GraphicsViewModel(
             value = gerberRepository
                 .gerbers
                 .filter { it.isVisible }
-                .map { GerberLayerUi(it.data, it.color) }
+                .map { gerber ->
+                    GerberLayerUi(
+                        data = gerber.data.graphicsObjects,
+                        gerberImageSize = gerber.data.gerberImageSizeInfo,
+                        color = gerber.color
+                    )
+                }
         }
 }

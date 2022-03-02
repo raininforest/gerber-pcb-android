@@ -1,7 +1,7 @@
 package com.github.raininforest.syntaxparser.impl.commands.aperturemacro.macrobody.macroprimitives
 
 import com.github.raininforest.syntaxparser.api.CommandProcessor
-import com.github.raininforest.syntaxparser.api.PointD
+import com.github.raininforest.syntaxparser.api.models.PointD
 import com.github.raininforest.syntaxparser.impl.utils.toRadians
 import kotlin.math.cos
 import kotlin.math.sin

@@ -3,6 +3,8 @@ package com.github.raininforest.syntaxparser.impl.commands.operations
 import com.github.raininforest.syntaxparser.api.GerberCommand
 import com.github.raininforest.syntaxparser.api.CommandProcessor
 import com.github.raininforest.syntaxparser.api.graphicsstate.CoordinateFormat
+import com.github.raininforest.syntaxparser.api.models.Coordinate
+import com.github.raininforest.syntaxparser.api.models.CoordinateType
 import com.github.raininforest.syntaxparser.impl.CoordinateDataParsable
 import com.github.raininforest.syntaxparser.impl.exceptions.WrongCommandFormatException
 
@@ -18,8 +20,14 @@ data class D03Command(
 ) : DOperationCommand(), GerberCommand {
 
     override fun perform(processor: CommandProcessor) {
+        sendCoordinates(processor)
         updateCurrentPoint(processor, x, y)
         processor.graphicsState.currentAperture.flash(processor)
+    }
+
+    private fun sendCoordinates(processor: CommandProcessor) {
+        x?.let { sendCoordinate(processor, Coordinate(CoordinateType.X, x.toFloat())) }
+        y?.let { sendCoordinate(processor, Coordinate(CoordinateType.Y, y.toFloat())) }
     }
 
     internal companion object : CoordinateDataParsable {

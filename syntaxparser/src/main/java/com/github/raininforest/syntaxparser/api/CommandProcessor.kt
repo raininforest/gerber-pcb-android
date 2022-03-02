@@ -4,6 +4,8 @@ import com.github.raininforest.syntaxparser.api.dictionary.ApertureDictionary
 import com.github.raininforest.syntaxparser.api.dictionary.MacroTemplateDictionary
 import com.github.raininforest.syntaxparser.api.graphicsstate.GraphicsState
 import com.github.raininforest.syntaxparser.api.graphicsstate.enums.RegionMode
+import com.github.raininforest.syntaxparser.api.models.Coordinate
+import com.github.raininforest.syntaxparser.api.models.PointD
 
 /**
  * Created by Sergey Velesko on 19.09.2021
@@ -80,4 +82,6 @@ interface CommandProcessor {
     )
 
     fun closeContour()
+
+    fun sendCoordinate(coordinate: Coordinate)
 }

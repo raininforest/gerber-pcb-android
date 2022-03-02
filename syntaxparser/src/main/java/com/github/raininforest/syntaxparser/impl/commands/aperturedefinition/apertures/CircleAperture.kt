@@ -2,7 +2,7 @@ package com.github.raininforest.syntaxparser.impl.commands.aperturedefinition.ap
 
 import com.github.raininforest.syntaxparser.api.Aperture
 import com.github.raininforest.syntaxparser.api.CommandProcessor
-import com.github.raininforest.syntaxparser.api.PointD
+import com.github.raininforest.syntaxparser.api.models.PointD
 
 /**
  * Standard circle [Aperture]

@@ -1,7 +1,7 @@
 package com.github.raininforest.commandprocessor
 
 import com.github.raininforest.syntaxparser.api.Aperture
-import com.github.raininforest.syntaxparser.api.PointD
+import com.github.raininforest.syntaxparser.api.models.PointD
 import com.github.raininforest.syntaxparser.api.graphicsstate.CoordinateFormat
 import com.github.raininforest.syntaxparser.api.graphicsstate.GraphicsState
 import com.github.raininforest.syntaxparser.api.graphicsstate.enums.*

@@ -1,7 +1,7 @@
 package com.github.raininforest.syntaxparser.impl.commands.aperturemacro.macrobody.macroprimitives
 
 import com.github.raininforest.syntaxparser.api.CommandProcessor
-import com.github.raininforest.syntaxparser.api.PointD
+import com.github.raininforest.syntaxparser.api.models.PointD
 
 /**
  * Outline [MacroPrimitive]
