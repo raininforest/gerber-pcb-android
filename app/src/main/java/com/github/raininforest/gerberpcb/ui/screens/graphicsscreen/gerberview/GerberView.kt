@@ -43,18 +43,14 @@ class GerberView @JvmOverloads constructor(
                 scaleFactor = MIN_SCALE_FACTOR.coerceAtLeast(
                     scaleFactor.coerceAtMost(MAX_SCALE_FACTOR)
                 )
-
                 val focusX = detector.focusX
                 val focusY = detector.focusY
                 drawMatrix.postScale(scaleFactor, scaleFactor, focusX, focusY)
-
                 invalidate()
                 return true
             }
 
-            override fun onScaleBegin(detector: ScaleGestureDetector): Boolean {
-                return true
-            }
+            override fun onScaleBegin(detector: ScaleGestureDetector) = true
 
             override fun onScaleEnd(detector: ScaleGestureDetector) {}
         })
@@ -65,18 +61,42 @@ class GerberView @JvmOverloads constructor(
     }
 
     private fun initDrawMatrix() {
-        drawMatrix.setScale(1f, -1f, width / 2f, height / 2f)
-        drawMatrix.postScale(INITIAL_SCALE_FACTOR, INITIAL_SCALE_FACTOR, 0f, height.toFloat())
+        if (_data.isNotEmpty()) {
+            val minX = _data.minOf { it.gerberImageSize.minX }
+            val minY = _data.minOf { it.gerberImageSize.minY }
+            val maxX = _data.maxOf { it.gerberImageSize.maxX }
+            val maxY = _data.maxOf { it.gerberImageSize.maxY }
+
+            val xSize = maxX - minX
+            val ySize = maxY - minY
+
+            val xScaleFactor = width / xSize
+            val yScaleFactor = height / ySize
+            val scaleFactor: Float
+            val dx: Float
+            val dy: Float
+            if (xScaleFactor < yScaleFactor) {
+                scaleFactor = xScaleFactor
+                dx = -minX * scaleFactor
+                dy = height.toFloat() / 2 - (ySize / 2 + minY) * scaleFactor
+            } else {
+                scaleFactor = yScaleFactor
+                dx = width.toFloat() / 2 - (xSize / 2 + minX) * scaleFactor
+                dy = minY * scaleFactor
+            }
+
+            drawMatrix.setScale(1f, -1f, width / 2f, height / 2f)
+            drawMatrix.postScale(scaleFactor, scaleFactor, 0f, height.toFloat())
+            drawMatrix.postTranslate(dx, -dy)
+        }
     }
 
     override fun onDraw(canvas: Canvas?) {
         canvas?.let {
             with(canvas) {
                 save()
-
                 setMatrix(drawMatrix)
                 drawData(canvas = this)
-
                 restore()
             }
         }
@@ -108,9 +128,7 @@ class GerberView @JvmOverloads constructor(
                             if (!scaleGestureDetector.isInProgress) {
                                 val dx = x - lastTouchX
                                 val dy = y - lastTouchY
-
                                 drawMatrix.postTranslate(dx, dy)
-
                                 invalidate()
                             }
                         }
@@ -140,7 +158,7 @@ class GerberView @JvmOverloads constructor(
     }
 
     companion object {
-        private const val INITIAL_SCALE_FACTOR = 10f
+        private const val FIT_TO_WINDOW_SCALE_FACTOR = 0.95f
         private const val MIN_SCALE_FACTOR = 0.01f
         private const val MAX_SCALE_FACTOR = 100.0f
     }
