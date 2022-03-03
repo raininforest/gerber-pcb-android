@@ -33,11 +33,13 @@
             android:id="@+id/itemColorButton"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginRight="16dp"
+            android:layout_marginEnd="16dp"
             android:background="@drawable/color_select_button_background"
+            android:clickable="true"
+            android:focusable="true"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/itemCheckBox"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/itemCheckBox"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
