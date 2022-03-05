@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ColorItemView">
+        <attr name="color" format="color" />
+        <attr name="checked_background" format="reference" />
+        <attr name="unchecked_background" format="reference" />
+    </declare-styleable>
+</resources>

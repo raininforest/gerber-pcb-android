@@ -8,4 +8,15 @@
     <color name="secondaryDarkColor">#1c313a</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Colors for layers -->
+    <color name="color1">#E52B50</color>
+    <color name="color2">#FFBF00</color>
+    <color name="color3">#8DB600</color>
+    <color name="color4">#9966CC</color>
+    <color name="color5">#00BFFF</color>
+    <color name="color6">#FF4F00</color>
+    <color name="color7">#FF00FF</color>
+    <color name="color8">#F5F5DC</color>
+
 </resources>

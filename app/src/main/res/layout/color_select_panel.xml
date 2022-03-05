@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/startGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="16dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/endGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="16dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/topGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="16dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/bottomGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="16dp" />
+
+    <com.github.raininforest.gerberpcb.ui.components.ColorItemView
+        android:id="@+id/color1"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        app:color="@color/color1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/color2"
+        app:layout_constraintStart_toStartOf="@id/startGuideline"
+        app:layout_constraintTop_toTopOf="@id/topGuideline" />
+
+    <com.github.raininforest.gerberpcb.ui.components.ColorItemView
+        android:id="@+id/color2"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        app:color="@color/color2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/color3"
+        app:layout_constraintStart_toEndOf="@id/color1"
+        app:layout_constraintTop_toTopOf="@id/topGuideline" />
+
+    <com.github.raininforest.gerberpcb.ui.components.ColorItemView
+        android:id="@+id/color3"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        app:color="@color/color3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/color4"
+        app:layout_constraintStart_toEndOf="@id/color2"
+        app:layout_constraintTop_toTopOf="@id/topGuideline" />
+
+    <com.github.raininforest.gerberpcb.ui.components.ColorItemView
+        android:id="@+id/color4"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        app:color="@color/color4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/color5"
+        app:layout_constraintStart_toEndOf="@id/color3"
+        app:layout_constraintTop_toTopOf="@id/topGuideline" />
+
+    <com.github.raininforest.gerberpcb.ui.components.ColorItemView
+        android:id="@+id/color5"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        app:color="@color/color5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/color6"
+        app:layout_constraintStart_toEndOf="@id/color4"
+        app:layout_constraintTop_toTopOf="@id/topGuideline" />
+
+    <com.github.raininforest.gerberpcb.ui.components.ColorItemView
+        android:id="@+id/color6"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        app:color="@color/color6"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/color7"
+        app:layout_constraintStart_toEndOf="@id/color5"
+        app:layout_constraintTop_toTopOf="@id/topGuideline" />
+
+    <com.github.raininforest.gerberpcb.ui.components.ColorItemView
+        android:id="@+id/color7"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        app:color="@color/color7"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/color8"
+        app:layout_constraintStart_toEndOf="@id/color6"
+        app:layout_constraintTop_toTopOf="@id/topGuideline" />
+
+    <com.github.raininforest.gerberpcb.ui.components.ColorItemView
+        android:id="@+id/color8"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginBottom="16dp"
+        app:color="@color/color8"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/endGuideline"
+        app:layout_constraintStart_toEndOf="@id/color7"
+        app:layout_constraintTop_toTopOf="@id/topGuideline" />
+
+</merge>
