@@ -20,9 +20,6 @@ Potential optimizations:
 - Using SurfaceView instead of custom View<br/>
 
 Potential features:
-- Set any color for layer<br/>
-- Set custom colors for flash and draw operations<br/>
-- Set custom opacity for image<br/>
 - Grid with settings<br/>
 
 ## Play Market
