@@ -163,7 +163,6 @@ class GerberView @JvmOverloads constructor(
     }
 
     companion object {
-        private const val FIT_TO_WINDOW_SCALE_FACTOR = 0.95f
         private const val MIN_SCALE_FACTOR = 0.01f
         private const val MAX_SCALE_FACTOR = 100.0f
     }
