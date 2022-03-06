@@ -10,8 +10,8 @@ android {
         applicationId = "com.github.raininforest.gerberpcb"
         minSdk = 21
         targetSdk = 30
-        versionCode = 10
-        versionName = "1.0.1"
+        versionCode = 20
+        versionName = "1.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
