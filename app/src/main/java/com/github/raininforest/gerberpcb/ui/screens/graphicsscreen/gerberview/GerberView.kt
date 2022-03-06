@@ -104,7 +104,12 @@ class GerberView @JvmOverloads constructor(
 
     private fun drawData(canvas: Canvas) {
         _data.forEach { gerberLayer ->
-            renderer.render(data = gerberLayer.data, canvas = canvas, color = gerberLayer.color)
+            renderer.render(
+                data = gerberLayer.data,
+                canvas = canvas,
+                color = gerberLayer.color,
+                opacity = gerberLayer.opacity
+            )
         }
     }
 

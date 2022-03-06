@@ -1,7 +1,8 @@
 package com.github.raininforest.gerberpcb.model.entity
 
+import android.graphics.Color
+import androidx.annotation.ColorInt
 import com.github.raininforest.GerberImageResult
-import com.github.raininforest.graphicsobject.GraphicsObject
 import java.util.*
 
 /**
@@ -10,11 +11,14 @@ import java.util.*
 data class Gerber(
     val id: String = UUID.randomUUID().toString(),
     val name: String,
-    val color: String = DEFAULT_COLOR,
+    @ColorInt
+    var color: Int = DEFAULT_COLOR,
+    var opacity: Float = DEFAULT_OPACITY,
     var isVisible: Boolean = false,
     val data: GerberImageResult
 ) {
     companion object {
-        private const val DEFAULT_COLOR = "#ffffff"
+        const val DEFAULT_OPACITY = 1.0f
+        const val DEFAULT_COLOR = Color.WHITE
     }
 }

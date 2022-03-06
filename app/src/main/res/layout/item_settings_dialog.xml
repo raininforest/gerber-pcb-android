@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primaryDarkColor">
+    android:background="@color/primaryDarkColor"
+    android:paddingBottom="@dimen/margin_regular">
 
     <com.github.raininforest.gerberpcb.ui.components.ColorSelectPanel
         android:id="@+id/colorPanel"
@@ -20,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_regular"
         android:text="@string/opacity_label"
-        android:textColor="@color/primaryLightColor"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/opacitySeekbar"
         app:layout_constraintEnd_toStartOf="@id/opacitySeekbar"
         app:layout_constraintStart_toStartOf="parent"

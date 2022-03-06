@@ -17,6 +17,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.github.raininforest.gerberpcb.R
 import com.github.raininforest.gerberpcb.app.SharedPrefManager
 import com.github.raininforest.gerberpcb.databinding.LayersFragmentBinding
+import com.github.raininforest.gerberpcb.ui.screens.layersettingsdialog.LayerSettingsBottomSheetDialog
 import com.github.raininforest.gerberpcb.ui.screens.messagedialog.showErrorDialog
 import com.github.raininforest.logger.Logger
 import org.koin.android.ext.android.inject
@@ -30,9 +31,15 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class LayersFragment : Fragment(R.layout.layers_fragment) {
 
     private val binding by viewBinding(LayersFragmentBinding::bind)
-    private val listAdapter = GerberListAdapter { id, isChecked ->
-        layersViewModel.gerberVisibilityChanged(id, isChecked)
-    }
+    private val listAdapter = GerberListAdapter(
+        onItemChecked = { id, isChecked ->
+            layersViewModel.gerberVisibilityChanged(id, isChecked)
+        },
+        onItemColorClick = { id ->
+            val bottomSheetDialogFragment = LayerSettingsBottomSheetDialog.create(gerberId = id)
+            bottomSheetDialogFragment.show(parentFragmentManager, LayerSettingsBottomSheetDialog.TAG)
+        }
+    )
     private val layersViewModel: LayersViewModel by viewModel()
     private val sharedPrefManager: SharedPrefManager by inject()
 
@@ -117,7 +124,9 @@ class LayersFragment : Fragment(R.layout.layers_fragment) {
 
     private fun initViewModel() {
         layersViewModel.init()
-        layersViewModel.data.observe(viewLifecycleOwner) { screenState -> renderData(screenState) }
+        layersViewModel.data.observe(viewLifecycleOwner) { screenState ->
+            renderData(screenState)
+        }
         layersViewModel.isLoading.observe(viewLifecycleOwner) { showLoading(it) }
     }
 

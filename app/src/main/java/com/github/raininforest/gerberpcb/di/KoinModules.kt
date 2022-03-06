@@ -12,6 +12,7 @@ import com.github.raininforest.gerberpcb.ui.screens.graphicsscreen.GraphicsViewM
 import com.github.raininforest.gerberpcb.ui.screens.graphicsscreen.gerberview.GerberRenderer
 import com.github.raininforest.gerberpcb.ui.screens.graphicsscreen.gerberview.GerberRendererImpl
 import com.github.raininforest.gerberpcb.ui.screens.layersscreen.LayersViewModel
+import com.github.raininforest.gerberpcb.ui.utils.ColorGenerator
 import com.github.raininforest.logger.ILogger
 import com.github.raininforest.syntaxparser.api.SyntaxParser
 import com.github.raininforest.syntaxparser.impl.GerberValidator
@@ -32,7 +33,14 @@ val application = module {
     single { GerberValidator() }
     single<SyntaxParser> { SyntaxParserImpl(gerberValidator = get()) }
     single<GraphicsProcessor> { GraphicsProcessorImpl() }
-    single { GerberProcessor(fileReader = get(), parser = get(), graphicsProcessor = get()) }
+    single {
+        GerberProcessor(
+            fileReader = get(),
+            parser = get(),
+            graphicsProcessor = get(),
+            colorGenerator = ColorGenerator(androidContext())
+        )
+    }
     single<ZipUriResolver> { ZipUriResolverImpl(context = androidContext()) }
     single<FileUriResolver> { FileUriResolverImpl(context = androidContext()) }
     single<FileAssetResolver> { FileAssetResolverImpl(context = androidContext()) }

@@ -4,10 +4,12 @@ import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.github.raininforest.gerberpcb.model.GerberRepository
 import com.github.raininforest.gerberpcb.model.entity.LoadingResult
 import com.github.raininforest.logger.Logger
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.collect
 
 /**
  * [ViewModel] for [LayersFragment]
@@ -35,7 +37,13 @@ class LayersViewModel(
 
     fun init() {
         cancelJob()
-        _data.value = gerberRepository.gerbers.toScreenState()
+        viewModelScope.launch {
+            gerberRepository
+                .gerbers
+                .collect { gerbers ->
+                    _data.value = gerbers.list.toScreenState()
+                }
+        }
     }
 
     fun loadSamples() {
@@ -58,7 +66,6 @@ class LayersViewModel(
         withContext(Dispatchers.Main) {
             when (result) {
                 is LoadingResult.Success -> {
-                    _data.value = gerberRepository.gerbers.toScreenState()
                     _isLoading.value = false
                 }
                 is LoadingResult.Error -> {
@@ -72,13 +79,13 @@ class LayersViewModel(
 
     fun gerberRemoved(id: String) {
         gerberRepository.removeItem(id)
-        _data.value = gerberRepository.gerbers.toScreenState()
     }
 
     fun gerberVisibilityChanged(id: String, visibility: Boolean) {
         gerberRepository.changeItemVisibility(id, visibility)
-        _data.value = gerberRepository.gerbers.toScreenState()
     }
+
+    fun update() {}
 
     override fun onCleared() {
         super.onCleared()

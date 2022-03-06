@@ -6,8 +6,11 @@ import com.github.raininforest.gerberfilereader.FileUriResolver
 import com.github.raininforest.gerberfilereader.ZipUriResolver
 import com.github.raininforest.gerberpcb.model.entity.Gerber
 import com.github.raininforest.gerberpcb.model.entity.GerberResult
+import com.github.raininforest.gerberpcb.model.entity.Gerbers
 import com.github.raininforest.gerberpcb.model.entity.LoadingResult
 import com.github.raininforest.logger.Logger
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 
 /**
  * [GerberRepository] implementation
@@ -22,9 +25,9 @@ class GerberRepositoryImpl(
 ) : GerberRepository {
 
     private val _gerbersDictionary: MutableMap<String, Gerber> = mutableMapOf()
-    private val _gerbers = mutableListOf<Gerber>()
+    private val _gerbers = MutableStateFlow<Gerbers>(Gerbers(list = listOf()))
 
-    override val gerbers: List<Gerber>
+    override val gerbers: StateFlow<Gerbers>
         get() = _gerbers
 
     override suspend fun addItem(fileUri: Uri, fileName: String): LoadingResult {
@@ -94,9 +97,21 @@ class GerberRepositoryImpl(
         updateList()
     }
 
+    override fun getColor(id: String): Int = _gerbersDictionary[id]?.color ?: Gerber.DEFAULT_COLOR
+
+    override fun setColor(id: String, color: Int) {
+        _gerbersDictionary[id]?.color = color
+        updateList()
+    }
+
+    override fun getOpacity(id: String): Float = _gerbersDictionary[id]?.opacity ?: Gerber.DEFAULT_OPACITY
+
+    override fun setOpacity(id: String, opacity: Float) {
+        _gerbersDictionary[id]?.opacity = opacity
+    }
+
     private fun updateList() {
-        _gerbers.clear()
-        _gerbers.addAll(_gerbersDictionary.values.toList())
+        _gerbers.value = Gerbers(_gerbersDictionary.values.toList())
     }
 
     companion object {

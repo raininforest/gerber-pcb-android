@@ -21,12 +21,15 @@ class GraphicsViewModel(
         get() = _data.apply {
             value = gerberRepository
                 .gerbers
+                .value
+                .list
                 .filter { it.isVisible }
                 .map { gerber ->
                     GerberLayerUi(
                         data = gerber.data.graphicsObjects,
                         gerberImageSize = gerber.data.gerberImageSizeInfo,
-                        color = gerber.color
+                        color = gerber.color,
+                        opacity = gerber.opacity
                     )
                 }
         }

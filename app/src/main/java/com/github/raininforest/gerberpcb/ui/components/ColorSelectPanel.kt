@@ -29,4 +29,12 @@ class ColorSelectPanel @JvmOverloads constructor(
         }
 
     var onColorSelected: (colorInt: Int) -> Unit = {}
+
+    fun setInitialColor(colorInt: Int) {
+        itemList.find { it.color == colorInt }?.let {
+            it.isChecked = true
+            currentSelectedItemView?.toggle()
+            currentSelectedItemView = it
+        }
+    }
 }

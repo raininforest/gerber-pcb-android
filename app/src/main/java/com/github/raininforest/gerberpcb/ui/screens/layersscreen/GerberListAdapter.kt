@@ -13,7 +13,8 @@ import com.github.raininforest.gerberpcb.databinding.ItemViewBinding
  * Created by Sergey Velesko on 18.07.2021
  */
 class GerberListAdapter(
-    private val onItemChecked: (id: String, checked: Boolean) -> Unit
+    private val onItemChecked: (id: String, checked: Boolean) -> Unit,
+    private val onItemColorClick: (id: String) -> Unit
 ) : ListAdapter<GerberItemUi, GerberListAdapter.GerberItemViewHolder>(GerberDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GerberItemViewHolder {
@@ -42,6 +43,9 @@ class GerberListAdapter(
             }
 
             itemBinding.itemColorButton.background.setTint(gerberItem.color)
+            itemBinding.itemColorButton.setOnClickListener {
+                onItemColorClick.invoke(gerberItem.id)
+            }
         }
     }
 
@@ -50,6 +54,6 @@ class GerberListAdapter(
             oldItem.id == newItem.id
 
         override fun areContentsTheSame(oldItem: GerberItemUi, newItem: GerberItemUi): Boolean =
-            oldItem.id == newItem.id && oldItem.name == newItem.name
+            oldItem.id == newItem.id && oldItem.name == newItem.name && oldItem.color == newItem.color
     }
 }
