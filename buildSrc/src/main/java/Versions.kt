@@ -8,7 +8,7 @@ object Versions {
     const val detekt = "1.21.0"
 
     //lang
-    const val gradle = "7.0.3"
+    const val gradle = "7.2.1"
     const val kotlin = "1.6.0"
 
     //tests
