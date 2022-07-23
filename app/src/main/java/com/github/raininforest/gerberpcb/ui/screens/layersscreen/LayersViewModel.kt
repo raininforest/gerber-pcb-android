@@ -85,8 +85,6 @@ class LayersViewModel(
         gerberRepository.changeItemVisibility(id, visibility)
     }
 
-    fun update() {}
-
     override fun onCleared() {
         super.onCleared()
         cancelJob()

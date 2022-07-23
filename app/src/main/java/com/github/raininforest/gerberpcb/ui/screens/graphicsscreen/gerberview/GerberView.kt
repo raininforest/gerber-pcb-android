@@ -52,7 +52,9 @@ class GerberView @JvmOverloads constructor(
 
             override fun onScaleBegin(detector: ScaleGestureDetector) = true
 
-            override fun onScaleEnd(detector: ScaleGestureDetector) {}
+            override fun onScaleEnd(detector: ScaleGestureDetector) {
+                // ignore
+            }
         })
     }
 
@@ -145,7 +147,8 @@ class GerberView @JvmOverloads constructor(
                 MotionEvent.ACTION_CANCEL -> activePointerId = INVALID_POINTER_ID
                 MotionEvent.ACTION_POINTER_UP -> {
                     val pointerIndex =
-                        (event.action and MotionEvent.ACTION_POINTER_INDEX_MASK) shr MotionEvent.ACTION_POINTER_INDEX_SHIFT
+                        (event.action and MotionEvent.ACTION_POINTER_INDEX_MASK) shr
+                                MotionEvent.ACTION_POINTER_INDEX_SHIFT
                     val pointerId = event.getPointerId(pointerIndex)
                     if (pointerId == activePointerId) {
                         val newPointerIndex = if (pointerIndex == 0) 1 else 0

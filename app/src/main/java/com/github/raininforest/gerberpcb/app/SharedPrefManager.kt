@@ -3,7 +3,7 @@ package com.github.raininforest.gerberpcb.app
 import android.content.Context
 import android.content.SharedPreferences
 
-class SharedPrefManager(private val context: Context) {
+class SharedPrefManager(context: Context) {
 
     private val prefs = context.getSharedPreferences(PREF_NAME, 0)
     private val editor: SharedPreferences.Editor = prefs.edit()

@@ -34,13 +34,17 @@ class LayerSettingsBottomSheetDialog : BottomSheetDialogFragment() {
         gerberId?.let {
             @ColorInt val color = gerberRepository.getColor(gerberId)
             val opacity = gerberRepository.getOpacity(gerberId)
-            binding.opacitySeekbar.progress = (opacity * 100).toInt()
+            binding.opacitySeekbar.progress = (opacity * PERCENT_100).toInt()
             binding.opacitySeekbar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-                override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {}
-                override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+                override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                    // ignore
+                }
+                override fun onStartTrackingTouch(seekBar: SeekBar?) {
+                    // ignore
+                }
 
                 override fun onStopTrackingTouch(seekBar: SeekBar) {
-                    gerberRepository.setOpacity(gerberId, seekBar.progress / 100f)
+                    gerberRepository.setOpacity(gerberId, seekBar.progress / PERCENT_100)
                 }
             })
             binding.colorPanel.setInitialColor(color)
@@ -63,6 +67,7 @@ class LayerSettingsBottomSheetDialog : BottomSheetDialogFragment() {
 
         const val GERBER_ID_KEY = "gerber_id_key"
         const val TAG = "ModalBottomSheet"
+        private const val PERCENT_100 = 100f
     }
 
 }

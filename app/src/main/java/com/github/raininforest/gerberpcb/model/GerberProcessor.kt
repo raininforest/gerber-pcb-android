@@ -23,7 +23,13 @@ class GerberProcessor(
                         name = file.name
                     )
                 )
-            GerberResult.Success(Gerber(name = file.name, data = graphicStream, color = colorGenerator.generateInitialLayerColor()))
+            GerberResult.Success(
+                Gerber(
+                    name = file.name,
+                    data = graphicStream,
+                    color = colorGenerator.generateInitialLayerColor()
+                )
+            )
         } catch (e: Throwable) {
             GerberResult.Error(errorMessage = e.localizedMessage ?: "Reading file error: ${file.name}")
         }
