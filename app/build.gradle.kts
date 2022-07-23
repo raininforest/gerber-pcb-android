@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     kotlin("android")
+    id("io.gitlab.arturbosch.detekt").version(Versions.detekt)
 }
 
 android {

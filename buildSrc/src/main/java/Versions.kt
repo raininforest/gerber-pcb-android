@@ -4,6 +4,9 @@
  * Created by Sergey Velesko on 09.09.2021
  */
 object Versions {
+    //detekt
+    const val detekt = "1.21.0"
+
     //lang
     const val gradle = "7.0.3"
     const val kotlin = "1.6.0"
